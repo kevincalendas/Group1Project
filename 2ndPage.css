@@ -99,6 +99,20 @@
     border-radius: 5px;
 }
 
+/* Theme Option Menu */
+.ThemeOptionsMenu {
+    position: absolute;
+    top: 60px;
+    left: 0px;
+    width: 200px;
+    height: 200px;
+    background-color: lightgoldenrodyellow;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+}
+
 /* Animations: */
 
 @keyframes TabOpening {
