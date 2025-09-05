@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Home | Note#Code </title>
+        <link rel="stylesheet" href="../MainOptions/MainHomeSection.css">
+    </head>
+    <body>
+        <!--Main Dock at the top of the Main webpage--> 
+        <div class="MainHomeDockSection">
+            <!--MainTopDockSections-->
+            <img class="MainLogoo" src="MainOptionIcons/noteIcon.png">
+            <h1 class="TitleMain">Note#Code</h1>
+
+            <!--CreateFileSectionButton(Critical)-->
+            <button class="MainButtonCreateFileExecute"> + </button>
+            <!--MainRightOptionSettings-->
+            <div class="MainRightOptionSettings" id="MainRightOptionSettings">
+                <button class="OptionsButton" id="OptionsButton" onclick="showOptions()">
+                    <img class="ICONoption" 
+                    src="/MainOptions/MainOptionIcons/ThreeDots.png" 
+                    height="30"
+                    width="30"></img>
+                </button>
+            </div>
+            <div id="OptionFrame" class="OptionFrame">
+                    <button class="OptionButton1">
+                        <img class="ButtonImg1" src="../2ndpageIcons/ThemeIcon.png" width="40" height="40">
+                        <p>Profile</p>
+                    </button>
+                    <button class="OptionButton2">
+                        <img class="ButtonImg1" src="../2ndpageIcons/ThemeIcon.png" width="40" height="40">
+                        <p>Theme</p>
+                    </button>
+                    <button class="OptionButton3">
+                        <img class="ButtonImg1" src="../2ndpageIcons/ThemeIcon.png" width="40" height="40">
+                        <p>Organize Files</p>
+                    </button>
+        </div>
+        <!--For JAVA -->
+        <script>
+            function showOptions() {
+                const ButtonAnim = document.getElementById('MainRightOptionSettings');
+                MainRightOptionSettings.classList.toggle('OptionButtonAnimate');
+                MainRightOptionSettings.classList.toggle('OptionButtonAnimateClose');
+                const options = document.getElementById('OptionFrame');
+                OptionFrame.classList.toggle('optionSettings-Open');
+                OptionFrame.classList.toggle('optionSettings-Hide');
+            }
+        </script>
+        <!--NoteTabMainSections(Critical)-->
+    </body>
+</html>

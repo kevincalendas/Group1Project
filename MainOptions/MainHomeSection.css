@@ -1,0 +1,237 @@
+
+.MainLogoo {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+}
+
+.TitleMain {
+    position: fixed;
+    left: 60px;
+    top: 3px;
+    font-family: Arial;
+    font-size: 25px;
+}
+
+/*For Options CSS*/
+.MainRightOptionSettings {
+    position: absolute;
+    right: 10px;
+    width: 45px;
+    height: 50px;
+    background-color: rgb(255, 249, 161);
+    border: none;
+    border-radius: 10px;
+    font-size: 30px;
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+}
+    
+
+.OptionsButton {
+    position: absolute;
+    right: 10px;
+    width: 40px;
+    height: 50px;
+    background-color: rgb(255, 249, 161);
+    border: none;
+    border-radius: 10px;
+    font-size: 30px;
+    text-align: center;
+    
+}
+.ICONoption {
+    position: relative;
+    left: 4px;
+    top: 2px;
+}
+
+/*Option Framez*/
+.OptionFrame {
+    position: fixed;
+    top: 70px;
+    right: -300px;
+    width: 300px;
+    height: 300px;
+    background-color: rgb(255, 254, 196);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 10px;
+    filter: blur(10px);
+    transform: translate(-175px, -200px) scale(0);
+    transition: opacity 0.2s, transform 0.5s;
+    opacity: 0;
+}
+
+
+.OptionButton1 {
+    display: absolute;
+    translate: 3% 10px;
+    width:95%;
+    height: 50px;
+    font-size: 25px;
+    text-align: right;
+    padding-right: 10px;
+    font-family: Arial;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+}
+
+.OptionButton1 {
+    display: absolute;
+    translate: 3% 5px;
+    width:95%;
+    height: 50px;
+    font-size: 25px;
+    text-align: right;
+    padding-right: 10px;
+    font-family: Arial;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+}
+
+.OptionButton2 {
+    display: absolute;
+    translate: 3% 10px;
+    width:95%;
+    height: 50px;
+    font-size: 25px;
+    text-align: right;
+    padding-right: 10px;
+    font-family: Arial;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+}
+
+.OptionButton3 {
+    display: absolute;
+    translate: 3% 15px;
+    width:95%;
+    height: 50px;
+    font-size: 25px;
+    text-align: right;
+    padding-right: 10px;
+    font-family: Arial;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+p {
+    top: -15px;
+    right: 30px;
+    position: absolute;
+    font-size: 25px;
+    font-family: Arial;
+}
+
+.ButtonImg1 {
+    display: absolute;
+    translate: -225px 3px;
+}
+
+
+/*Hover Effect for Options Button*/
+.MainRightOptionSettings:hover {
+    cursor: pointer;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+/*For Animation for Opening Options and button*/
+.optionSettings-Open {
+    opacity: 0; 
+    transform:  translate(120px) scale(1.0);
+    transition: translate 0.5s, scale 0.3s cubic-bezier(.34,1.56,.64,1), filter 0.3s;
+    filter: blur(0px);
+}
+
+.optionSettings-Hide {
+    opacity: 1;
+    transform:  translate(-320px) scale(1.0);
+    transition: all 0.5s cubic-bezier(0.34, 1.40, 0.40, 1);
+    transition-delay: 0.1s;
+}
+
+.OptionButtonAnimate {
+    animation-name: Open-CloseButton;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    transition: all 0.5s ease-in-out;
+}
+
+.OptionButtonAnimateClose {
+    animation-name: Open-CloseButton;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    transition: all 0.5s ease-in-out;
+}
+
+@keyframes Open-CloseButton {
+        0% {
+            transform: scale(1.0);
+            translate: -3px, 3px;
+        }
+        50% {
+            transform: scale(0.8);
+            translate: -3px, 3px;
+        }
+        100% {
+            transform: scale(1.0);
+            translate: -3px, 3px;
+        }
+    }
+
+/*MainFileNoteCreationSetup*/
+.MainButtonCreateFileExecute {
+    height: 45px;
+    width: 45px;
+    left: 205px;
+    top: 10px;
+    position: absolute;
+    border: none;
+    border-radius: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    background-color: rgb(255, 249, 161);
+    transition: all 0.3s ease-in-out;
+    content: 'Create New Note';
+}
+.MainButtonCreateFileExecute::after {
+    content: 'Create New Note';
+    position: absolute;
+    left: 0px;
+    top: 30px;
+    background: rgb(255, 251, 201);
+    color: #333;
+    font-size: 18px;
+    font-family: Arial;
+    padding: 5px 10px;
+    border-radius: 8px;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    filter: blur(5px);
+    transition: all 0.3s ease-in;
+}
+
+.MainButtonCreateFileExecute:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+.MainButtonCreateFileExecute:hover::after {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transform: translateY(20px);
+    filter: blur(0px);
+    transition: all 0.3s ease-out;
+
+}
