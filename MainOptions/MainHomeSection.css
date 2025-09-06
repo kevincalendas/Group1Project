@@ -23,7 +23,7 @@
     width: 100%;
     height: 65px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    background-image: linear-gradient(to right, rgb(255, 250, 184, 0.3), rgb(233, 222, 70, 0.3));
+    background-image: linear-gradient(to right, rgb(255, 250, 184, 0.3), rgba(255, 241, 42, 0.3));
 }
 
 /*For Options CSS*/
@@ -39,6 +39,7 @@
     border-radius: 10px;
     font-size: 30px;
     z-index: 2;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 .ICONoption {
     position: relative;
@@ -184,6 +185,7 @@ p {
     font-weight: bold;
     background-color: rgb(255, 249, 161);
     transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     content: 'Create New Note';
 }
 .MainButtonCreateFileExecute::after {
@@ -270,10 +272,13 @@ p {
 }
 
 .NoteNameInput {
-    translate: 5% 5%;
+    position: absolute;
+    left: -50px;
+    translate: 0 25px;
     position: absolute;
     width: 90%;
     height: 30px;
     background-color: light;
-    border: none;
+    border: 1px solid gray;
+    border-radius: 7px;
 }
