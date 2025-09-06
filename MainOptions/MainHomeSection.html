@@ -18,36 +18,48 @@
 
 
             <!--MainRightOptionSettings-->
-            <div class="MainRightOptionSettings" id="MainRightOptionSettings">
                 <button class="OptionsButton" id="OptionsButton" onclick="showOptions()">
                     <img class="ICONoption" 
                     src="/MainOptions/MainOptionIcons/ThreeDots.png" 
                     height="30"
-                    width="30"></img>
+                    width="30">
                 </button>
-            </div>
 
 
             <div id="OptionFrame" class="OptionFrame">
                     <button class="OptionButton1">
                         <img class="ButtonImg1" src="../2ndpageIcons/ThemeIcon.png" width="40" height="40">
-                        <p>Profile</p>
                     </button>
                     <button class="OptionButton2">
-                        <img class="ButtonImg1" src="../2ndpageIcons/ThemeIcon.png" width="40" height="40">
-                        <p>Theme</p>
+                        <img class="ButtonImg2" src="../2ndpageIcons/ThemeIcon.png" width="40" height="40">
                     </button>
                     <button class="OptionButton3">
-                        <img class="ButtonImg1" src="../2ndpageIcons/ThemeIcon.png" width="40" height="40">
-                        <p>Organize Files</p>
+                        <img class="ButtonImg3" src="../2ndpageIcons/ThemeIcon.png" width="40" height="40">
                     </button>
+                </div>         
         </div>
+
+        <!--Create new Note Setup Elements🥰-->
+        <div class="NewNoteSetupWindow">
+            <h1 class="SetupTitle">Create a new #NoteCode</h1>
+            <button class="NewNoteSetupExitButton">&times</button>
+            <div class="NewNoteSetupMain1Window">
+                <!--This is for setup 1: Name of the Note and programming type file-->
+                <h1 class="TitleNoteH1">
+                    Input your NoteCode name:
+                   </h1>
+                <input class="NoteNameInput" type="Insert your desire name for your note"></input>
+
+            </div>
+        </div>
+
 
 
         <!--For JAVA -->
         <script>
+            // This function is for show/hide the more options with animations.//
             function showOptions() {
-                const ButtonAnim = document.getElementById('MainRightOptionSettings');
+                const ButtonAnim = document.getElementById('OptionsButton');
                 MainRightOptionSettings.classList.toggle('OptionButtonAnimate');
                 MainRightOptionSettings.classList.toggle('OptionButtonAnimateClose');
                 const options = document.getElementById('OptionFrame');
@@ -58,5 +70,6 @@
 
         
         <!--NoteTabMainSections(Critical)-->
+        
     </body>
 </html>
