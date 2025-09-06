@@ -15,7 +15,7 @@
             <h1 class="TitleMain">Note#Code</h1>
 
             <!--CreateFileSectionButton(Critical)-->
-            <button class="MainButtonCreateFileExecute"> + </button>
+            <button class="MainButtonCreateFileExecute" id="MainButtonCreateFileExecute" onclick="showNewNoteSetup()"> + </button>
 
 
             <!--MainRightOptionSettings-->
@@ -41,21 +41,26 @@
         </div>
 
         <!--Create new Note Setup Elements🥰-->
-        <div class="NewNoteSetupWindow">
+        <div class="NewNoteSetupWindow" id="NewNoteSetupWindow">
             <h1 class="SetupTitle">Create a new #NoteCode</h1>
-            <button class="NewNoteSetupExitButton">&times</button>
+            <button class="NewNoteSetupExitButton" onclick="showNewNoteSetup()">&times</button>
             <div class="NewNoteSetupMain1Window">
                 <!--This is for setup 1: Name of the Note and programming type file-->
-                <i class="material-icons">file</i>
+                <img class="IconNewNoteSetup1" src="../2ndpageIcons/NoImgdetected.png" style="
+                position: absolute;
+                width: 150px;
+                height: 150px;
+                left: -50px;
+                border: none;
+                border-radius: 10px;
+                "></img>
                 <h1 class="TitleNoteH1"
                 style="
+                position: fixed;
                 font-family: Arial;
-                min-width: 100px;
-                max-width: 450px;
-                min-height: 20px;
-                max-height: 20px;
                 text-size-adjust: auto;
-                "> Input your NoteCode name: </h1>
+                left: 120px;
+                ">| Input your NoteCode name: </h1>
                 <input class="NoteNameInput" placeholder="Name your note"></input>
 
             </div>
