@@ -3,6 +3,7 @@
     <head>
         <title> Home | Note#Code </title>
         <link rel="stylesheet" href="../MainOptions/MainHomeSection.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     </head>
     <body>
 
@@ -10,7 +11,7 @@
         <div class="MainHomeDockSection">
 
             <!--MainTopDockSections-->
-            <img class="MainLogoo" src="MainOptionIcons/noteIcon.png">
+            <img class="MainLogoo" src="..\2ndpageIcons\LogoIcon.png">
             <h1 class="TitleMain">Note#Code</h1>
 
             <!--CreateFileSectionButton(Critical)-->
@@ -45,28 +46,24 @@
             <button class="NewNoteSetupExitButton">&times</button>
             <div class="NewNoteSetupMain1Window">
                 <!--This is for setup 1: Name of the Note and programming type file-->
-                <h1 class="TitleNoteH1">
+                <h1 class="TitleNoteH1"
+                style="
+                font-family: Arial;
+                min-width: 100px;
+                max-width: 450px;
+                min-height: 20px;
+                max-height: 20px;
+                text-size-adjust: auto;
+                ">
                     Input your NoteCode name:
                    </h1>
-                <input class="NoteNameInput" type="Insert your desire name for your note"></input>
+                <input class="NoteNameInput" placeholder="Name your note"></input>
 
             </div>
         </div>
 
-
-
         <!--For JAVA -->
-        <script>
-            // This function is for show/hide the more options with animations.//
-            function showOptions() {
-                const ButtonAnim = document.getElementById('OptionsButton');
-                MainRightOptionSettings.classList.toggle('OptionButtonAnimate');
-                MainRightOptionSettings.classList.toggle('OptionButtonAnimateClose');
-                const options = document.getElementById('OptionFrame');
-                OptionFrame.classList.toggle('optionSettings-Open');
-                OptionFrame.classList.toggle('optionSettings-Hide');
-            }
-        </script>
+        <script src="../MainOptions/MainHomeSection.js"></script>
 
         
         <!--NoteTabMainSections(Critical)-->
