@@ -67,5 +67,8 @@ function NoteCodeNotCreatedYetYesandNOButton() {
         NoNoteCreatedyetwindow.style.opacity = "0";
         NoNoteCreatedyetwindow.style.transition = "all 0.4s cubic-bezier(0.100, 0.82, 0.110, 1.2)";
         NoNoteCreatedyetwindow.style.scale = "0.8";
+        NoNoteCreatedyetwindowIMG.style.top = "30%";
+        NoNoteCreatedyetwindowIMG.style.opacity = "0";
+        NoNoteCreatedyetwindowIMG.style.transition = "all 1s cubic-bezier(0,-0.01,0,1)";
     }
 }
