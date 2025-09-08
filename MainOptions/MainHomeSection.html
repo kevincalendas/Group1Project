@@ -15,7 +15,7 @@
             <h1 class="TitleMain">Note#Code</h1>
 
             <!--CreateFileSectionButton(Critical)-->
-            <button class="MainButtonCreateFileExecute" id="MainButtonCreateFileExecute" onclick="showNewNoteSetup()"> + </button>
+            <button class="MainButtonCreateFileExecute" id="MainButtonCreateFileExecute" onclick="NoteCodeNotCreatedYet()"> + </button>
 
 
             <!--MainRightOptionSettings-->
@@ -46,7 +46,7 @@
             <button class="NewNoteSetupExitButton" onclick="showNewNoteSetup()">&times</button>
             <div class="NewNoteSetupMain1Window">
                 <!--This is for setup 1: Name of the Note and programming type file-->
-                <img class="IconNewNoteSetup1" src="../2ndpageIcons/NoImgdetected.png" style="
+                <img class="IconNewNoteSetup1" id="IconNewNoteSetup1" src="../2ndpageIcons/NoImgdetected.png" style="
                 position: absolute;
                 width: 150px;
                 height: 150px;
@@ -66,6 +66,13 @@
             </div>
         </div>
 
+        <div class="NoNoteCreatedyetwindow" id="NoNoteCreatedyetwindow">
+                <img class="NoNoteCreatedyetwindowIMG" src="../2ndpageIcons/NoImgdetected.png">
+                <h1 class="NoNoteCreatedText"> No files or notes have been created. Create a new code with a tutorial? </h1>
+                <p class="NoNoteCreatedTextPara">If you don't want Tutoral, you can create a note without a tutorial. Continue?</p>
+                <button class="NoNoteCreatedyetwindowYesButton" onclick="NoteCodeNotCreatedYetYesandNOButton()"> Yes </button>
+        </div>
+
 
         <!--For JAVA -->
         <script src="../MainOptions/MainHomeSection.js"></script>
@@ -73,5 +80,9 @@
         
         <!--NoteTabMainSections(Critical)-->
         
+        <div class="NoteTabMainSection" id="NoteTabMainSection">
+            <h1 class="NoNoteCreatedText"> No #NoteCode created yet! </h1>
+        </div>
+
     </body>
 </html>
