@@ -1,0 +1,91 @@
+.NoteTabThemeSectionWindow {
+    left: 50%;
+    top: 54%;
+    width: 800px;
+    height: 450px;
+    background-color: white;
+    position: absolute;
+    translate: -50% -50%;
+    z-index: 20;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.MainTitleThemeSection {
+    position: fixed;
+    top: 3px;
+    left: 10px;
+    font-size: 20px;
+    font-family: Arial;
+}
+
+.ThemeSection1IMG1 {
+    position: fixed;
+    margin-top: 50px;
+    left: 10px;
+    width: 150px;
+    height: 100px;
+    border: 3px solid black;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.ThemeSection1IMG2 {
+    position: fixed;
+    margin-top: 50px;
+    left: 180px;
+    width: 150px;
+    height: 100px;
+    border: 3px solid black;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.ThemeSection1IMG3 {
+    position: fixed;
+    margin-top: 50px;
+    left: 350px;
+    width: 150px;
+    height: 100px;
+    border: 3px solid black;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.ThemeSection1IMG1:hover, .ThemeSection1IMG2:hover, .ThemeSection1IMG3:hover {
+    position: fixed;
+    width: 150px;
+    height: 100px;
+    border: 3px solid black;
+    border-radius: 10px;
+    scale: 1.05;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-out;   
+}
+.ThemeSection1Text1 {
+    position: fixed;
+    margin-top: 165px;
+    font-size: 20px;
+    font-family: Arial;
+    left: 10px;
+    text-align: center;
+}
+
+.ThemeSection1Text2 {
+    position: fixed;
+    margin-top: 165px;
+    font-size: 20px;
+    font-family: Arial;
+    left: 200px;
+    text-align: center;
+}
+
+.ThemeSection1Text3 {
+    position: fixed;
+    margin-top: 165px;
+    font-size: 20px;
+    font-family: Arial;
+    left: 405px;
+    text-align: center;
+}
