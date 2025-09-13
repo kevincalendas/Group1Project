@@ -1,91 +1,138 @@
-.NoteTabThemeSectionWindow {
+.NoteThemeHomeWindowElements {
+    position: fixed;
+    width: 650px;
+    height: 500px;
+    background-color: rgba(255, 255, 255, 0.5);
+    top: 53%;
     left: 50%;
-    top: 54%;
-    width: 800px;
-    height: 450px;
-    background-color: white;
-    position: absolute;
     translate: -50% -50%;
-    z-index: 20;
     border: none;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    overflow-y: auto;
+    opacity: 1;
 }
 
-.MainTitleThemeSection {
+/* Main Heading Text */
+.ThemeWindowh1 {
     position: fixed;
+    margin-bottom: 10px;
+    font-size: 20px;
+    width: 225px;
+    font-family: Arial;
     top: 3px;
-    left: 10px;
-    font-size: 20px;
-    font-family: Arial;
-}
-
-.ThemeSection1IMG1 {
-    position: fixed;
-    margin-top: 50px;
-    left: 10px;
-    width: 150px;
-    height: 100px;
-    border: 3px solid black;
-    border-radius: 10px;
-    transition: all 0.3s ease-in-out;
-}
-
-.ThemeSection1IMG2 {
-    position: fixed;
-    margin-top: 50px;
-    left: 180px;
-    width: 150px;
-    height: 100px;
-    border: 3px solid black;
-    border-radius: 10px;
-    transition: all 0.3s ease-in-out;
-}
-
-.ThemeSection1IMG3 {
-    position: fixed;
-    margin-top: 50px;
-    left: 350px;
-    width: 150px;
-    height: 100px;
-    border: 3px solid black;
-    border-radius: 10px;
-    transition: all 0.3s ease-in-out;
-}
-
-.ThemeSection1IMG1:hover, .ThemeSection1IMG2:hover, .ThemeSection1IMG3:hover {
-    position: fixed;
-    width: 150px;
-    height: 100px;
-    border: 3px solid black;
-    border-radius: 10px;
-    scale: 1.05;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease-out;   
-}
-.ThemeSection1Text1 {
-    position: fixed;
-    margin-top: 165px;
-    font-size: 20px;
-    font-family: Arial;
-    left: 10px;
+    left: 5px;
     text-align: center;
+    border: none;
+    border-radius: 10px;
 }
 
-.ThemeSection1Text2 {
+.GobackOptionButton1 {
     position: fixed;
-    margin-top: 165px;
+    width: 30px;
+    height: 30px;
+    top: 10px;
+    right: 10px;
     font-size: 20px;
+    font-weight: bold;
     font-family: Arial;
-    left: 200px;
-    text-align: center;
+    background-color: rgba(255, 0, 0, 1);
+    box-shadow: 0 0 3px rgb(0, 0, 0);
+    border: none;
+    border-radius: 100px;
 }
 
-.ThemeSection1Text3 {
-    position: fixed;
-    margin-top: 165px;
+
+.Theme1 {
+    position: absolute;
+    height: 250px;
+    width: 180px;
+    top: 50px;
+    left: 20px;
+    background-color: rgba(255, 0, 0,0);
+}
+
+.Theme2 {
+    position: absolute;
+    height: 250px;
+    width: 180px;
+    top: 50px;
+    left: 230px;
+    background-color: rgba(255, 0, 0,0);
+}
+
+.Theme3 {
+    position: absolute;
+    height: 250px;
+    width: 180px;
+    top: 50px;
+    right: 20px;
+    background-color: rgba(255, 0, 0,0);
+}
+
+.ThemeButton1, .ThemeButton2, .ThemeButton3{
+    position: relative;
+    width: 95%;
+    height: 35px;
+    border: none;
+    border-radius: 10px;
+    translate: 3% 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    font-family: Arial;
+    font-size: 17px;
+    font-weight: bold;
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.ThemeButton1:hover:not(.ButtonClicked),
+.ThemeButton2:hover:not(.ButtonClicked),
+.ThemeButton3:hover:not(.ButtonClicked) {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    scale: 1.1;
+    background-color: rgba(255, 255, 255);
+    border: 1px solid black;
+    font-size: 15px;
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.Theme1IMG, .Theme2IMG, .Theme3IMG {
+    position: relative;
+    height: 125px;
+    width: 175px;
+    background-color: pink;
+    border: 3px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.ThemeWindowh2 {
+    position: absolute;
+    margin-bottom: 10px;
     font-size: 20px;
     font-family: Arial;
-    left: 405px;
+    left: 20px;
+    top: 230px;
     text-align: center;
+    border: none;
+    border-radius: 10px;
+}
+
+.ButtonClicked {
+    animation: ButtonClickedAnimation 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes ButtonClickedAnimation {
+    0% {
+        scale: 1.0;
+    }
+
+    50% {
+        scale: 0.9;
+    }
+
+    100% {
+        scale: 1.0;
+    }
 }

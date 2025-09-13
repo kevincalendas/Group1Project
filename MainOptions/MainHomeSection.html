@@ -3,11 +3,14 @@
     <head>
         <title> Home | Note#Code </title>
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeSection.css">
+        <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeThemeCSS.css">
     </head>
-    <body>
+    <body id="pagebody">
+        <!--For JAVA-->
+        <script src="../MainOptions/MainHomeJava/MainHomeSection.js"></script>
+        <script src="../MainOptions/MainHomeJava/MainHomeThemeChange.js"></script>
         <!--Main Dock at the top of the Main webpage--> 
         <div class="MainHomeDockSection">
-
             <!--MainTopDockSections-->
             <img class="MainLogoo" src="..\2ndpageIcons\LogoIcon.png">
             <h1 class="TitleMain">Note#Code</h1>
@@ -36,7 +39,7 @@
                         <img class="OptionIcon2" src="../2ndpageIcons/NoImgdetected.png" height="30px" width="30px">
                         <img class="OptionIcon3" src="../2ndpageIcons/NoImgdetected.png" height="30px" width="30px">
                         <img class="OptionIcon4" src="../2ndpageIcons/NoImgdetected.png" height="30px" width="30px">
-                        <button class="OptionButton1"> Theme </button>
+                        <button class="OptionButton1" id="OptionButton1" onclick="ThemeChoose()"> Theme </button>
                         <button class="OptionButton2"> Organize Note#Code </button>
                         <button class="OptionButton3"> Checklist </button>
                         <button class="OptionButton4"> About </button>
@@ -77,15 +80,37 @@
                 <img class="NoNoteCreatedyetwindowIMG" id="NoNoteCreatedyetwindowIMG" src="../2ndpageIcons/NoImgdetected.png">
                 <h1 class="NoNoteCreatedText"> No files or notes have been created. Create a new code with a tutorial? </h1>
                 <p class="NoNoteCreatedTextPara">If you don't want Tutoral, you can create a note without a tutorial. Continue?</p>
-                <button class="NoNoteCreatedyetwindowYesButton" onclick="NoteCodeNotCreatedYetYesandNOButton()"> Yes </button>
-                <button class="NoNoteCreatedyetwindowNoButton" onclick="NoteCodeNotCreatedYetYesandNOButton()"> Yes but continue with a Tutorial </button>
+                <button class="NoNoteCreatedyetwindowYesButton" id="NoNoteCreatedyetwindowYesButton" onclick="NoteCodeNotCreatedYetYesButton()"> Yes </button>
+                <button class="NoNoteCreatedyetwindowNoButton" id="NoNoteCreatedyetwindowNoButton" onclick="NoteCodeNotCreatedYetNoButton()"> Yes but continue with a Tutorial </button>
         </div>
 
+        <!--NoteThemeHomeWindow-->
+        <div class="NoteThemeHomeWindowElements" id="NoteThemeHomeWindowElements">
+            <button class="GobackOptionButton1" id="GobackOptionButton1" onclick="ThemeChoose()">  </button>
+            <h1 class="ThemeWindowh1">Choose your Themes</h1>
+            <div class="Theme1">
+                <img class="Theme1IMG" src="https://i.pinimg.com/736x/b2/bc/13/b2bc13d8b2d37fbaee9c503d0d6c1279.jpg">
+                <button class="ThemeButton1" id="ThemeButton1" onclick="ThemeChoose()">Select Theme</button>
+            </div>
 
-        <!--For JAVA -->
-        <script src="../MainOptions/MainHomeSection.js"></script>
+            <div class="Theme2">
+                <img class="Theme2IMG" src="https://i.pinimg.com/1200x/4f/d7/ce/4fd7ce13e677485ec2849de64473c258.jpg">
+                <button class="ThemeButton2" id="ThemeButton2" onclick="ThemeChoose()">Select Theme</button>
+            </div>
+
+            <div class="Theme3">
+                <img class="Theme3IMG" src="https://i.pinimg.com/1200x/76/64/1b/76641b53502d4ca601ecd3c240ad6245.jpg">
+                <button class="ThemeButton3" id="ThemeButton3" onclick="ThemeChoose()">Select Theme</button>
+            </div>
+
+            <!--ThemeStyle-->
+
+            <h1 class="ThemeWindowh2"> More Customized Themes (Ongoing) </h1>
+
+        </div>
 
         
+
         <!--NoteTabMainSections(Critical)-->
         
         <div class="NoteTabMainSection" id="NoteTabMainSection">
