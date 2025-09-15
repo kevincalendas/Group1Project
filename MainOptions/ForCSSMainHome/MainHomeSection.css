@@ -386,6 +386,20 @@ p {
     z-index: 100;
 }
 
+.FileTypeOptionPanel {
+    position: absolute;
+    translate: -3% 150px;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 650px;
+    height: 250px;
+}
+
+.NoteFileFormat1 {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+}
+
 
 /*Animate Setup New File 1*/
 

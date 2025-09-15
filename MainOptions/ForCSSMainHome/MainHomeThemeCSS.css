@@ -72,7 +72,16 @@
     background-color: rgba(255, 0, 0,0);
 }
 
-.ThemeButton1, .ThemeButton2, .ThemeButton3{
+.Theme4 {
+    position: absolute;
+    height: 350px;
+    width: 180px;
+    top: 250px;
+    left: 20px;
+    background-color: rgba(255, 0, 0,0);
+}
+
+.ThemeButton1, .ThemeButton2, .ThemeButton3, .ThemeButton4{
     position: relative;
     width: 95%;
     height: 35px;
@@ -89,7 +98,8 @@
 
 .ThemeButton1:hover:not(.ButtonClicked),
 .ThemeButton2:hover:not(.ButtonClicked),
-.ThemeButton3:hover:not(.ButtonClicked) {
+.ThemeButton3:hover:not(.ButtonClicked),
+.ThemeButton4:hover:not(.ButtonClicked) {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     scale: 1.1;
     background-color: rgba(255, 255, 255);
@@ -98,7 +108,7 @@
     transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.Theme1IMG, .Theme2IMG, .Theme3IMG {
+.Theme1IMG, .Theme2IMG, .Theme3IMG, .Theme4IMG {
     position: relative;
     height: 125px;
     width: 175px;
@@ -113,7 +123,7 @@
     font-size: 20px;
     font-family: Arial;
     left: 20px;
-    top: 230px;
+    top: 440px;
     text-align: center;
     border: none;
     border-radius: 10px;

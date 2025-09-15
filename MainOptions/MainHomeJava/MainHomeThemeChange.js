@@ -3,6 +3,7 @@ function ThemeChoose() {
     const ThemeButtonChange1 = document.getElementById('ThemeButton1');
     const ThemeButtonChange2 = document.getElementById('ThemeButton2');
     const ThemeButtonChange3 = document.getElementById('ThemeButton3');
+    const ThemeButtonChange4 = document.getElementById('ThemeButton4')
     const ThemeWindowOpenButton = document.getElementById('OptionButton1');
     const ThemeWindow = document.getElementById('NoteThemeHomeWindowElements');
     const ThemeWindowCloseButton = document.getElementById('GobackOptionButton1');
@@ -16,11 +17,19 @@ function ThemeChoose() {
     }
 
     ThemeWindowOpenButton.addEventListener("click", () => {
-        ThemeWindow.style.transform = "scale(1.0)";
-        ThemeWindow.style.opacity = "1";
-        ThemeWindow.style.zIndex = "13";
-        ThemeWindow.style.filter = "blur(0px)";
-        ThemeWindow.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.2)"
+        if (ThemeWindow.style.opacity === "1") {
+            ThemeWindow.style.transform = "scale(0.5)";
+            ThemeWindow.style.opacity = "0";
+            ThemeWindow.style.zIndex = "1";
+            ThemeWindow.style.filter = "blur(30px)";
+            ThemeWindow.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.2)";
+        } else {
+            ThemeWindow.style.transform = "scale(1.0)";
+            ThemeWindow.style.opacity = "1";
+            ThemeWindow.style.zIndex = "13";
+            ThemeWindow.style.filter = "blur(0px)";
+            ThemeWindow.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.2)";
+        }
     });
 
     ThemeWindowCloseButton.addEventListener("click", () => {
@@ -41,11 +50,12 @@ function ThemeChoose() {
         ThemeButtonChange1.innerText = "In use ✅";
         ThemeButtonChange2.innerText = "Select Theme";
         ThemeButtonChange3.innerText = "Select Theme";
+        ThemeButtonChange4.innerText = "Select Theme";
 
         ThemeButtonChange1.disabled = true;
         ThemeButtonChange2.disabled = false;
         ThemeButtonChange3.disabled = false;
-        ThemeButtonChange1.innerText = "In use ✅";
+        ThemeButtonChange4.disabled = false;
 
         ThemeButtonChange1.classList.toggle("ButtonClicked");
 
@@ -75,10 +85,12 @@ function ThemeChoose() {
         ThemeButtonChange1.innerText = "Select Theme";
         ThemeButtonChange2.innerText = "In use ✅";
         ThemeButtonChange3.innerText = "Select Theme";
+        ThemeButtonChange4.innerText = "Select Theme";
 
         ThemeButtonChange1.disabled = false;
         ThemeButtonChange2.disabled = true;
         ThemeButtonChange3.disabled = false;
+        ThemeButtonChange4.disabled = false;
     });
 
     ThemeButtonChange3.addEventListener("click", () => {
@@ -100,10 +112,39 @@ function ThemeChoose() {
         ThemeButtonChange1.innerText = "Select Theme";
         ThemeButtonChange2.innerText = "Select Theme";
         ThemeButtonChange3.innerText = "In use ✅";
+        ThemeButtonChange4.innerText = "Select Theme";
 
         ThemeButtonChange1.disabled = false;
         ThemeButtonChange2.disabled = false;
         ThemeButtonChange3.disabled = true;
+        ThemeButtonChange4.disabled = false;
+    });
+
+    ThemeButtonChange4.addEventListener("click", () => {
+        BodyoftheMainHome.style.backgroundImage = "url('https://i.pinimg.com/1200x/47/82/3a/47823a30f1bba5c3a9351e2bc137b9b2.jpg')";
+        BodyoftheMainHome.style.backgroundSize = "cover";
+        BodyoftheMainHome.style.backgroundAttachment = "fixed";
+        BodyoftheMainHome.style.backgroundPosition = "center";
+        BodyoftheMainHome.style.transition = "all 0.4s cubic-bezier(0.100, 0.82, 0.110, 1.1)";
+
+        ThemeButtonChange4.classList.toggle("ButtonClicked");
+
+        setTimeout(() => {
+            ThemeButtonChange4.classList.remove("ButtonClicked");
+            void ThemeButtonChange4.offsetWidth;
+            ThemeButtonChange4.classList.add("ButtonClicked");
+        }, 100)
+
+        
+        ThemeButtonChange1.innerText = "Select Theme";
+        ThemeButtonChange2.innerText = "Select Theme";
+        ThemeButtonChange3.innerText = "Select Themes";
+        ThemeButtonChange4.innerText = "In use ✅"
+
+        ThemeButtonChange1.disabled = false;
+        ThemeButtonChange2.disabled = false;
+        ThemeButtonChange3.disabled = false;
+        ThemeButtonChange4.disabled = true;
     });
 
 
