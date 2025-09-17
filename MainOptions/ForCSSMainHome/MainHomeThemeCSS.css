@@ -12,7 +12,8 @@
     backdrop-filter: blur(10px);
     z-index: 100;
     overflow-y: auto;
-    opacity: 1;
+    opacity: 0;
+    scale: 1.0;
 }
 
 /* Main Heading Text */

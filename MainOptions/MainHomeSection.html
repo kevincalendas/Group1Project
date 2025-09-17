@@ -5,11 +5,13 @@
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeSection.css">
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeThemeCSS.css">
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainNotesList.css">
+        <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainNoteCreationCSS.css">
     </head>
     <body id="pagebody">
         <!--For JAVA-->
         <script src="../MainOptions/MainHomeJava/MainHomeSection.js"></script>
         <script src="../MainOptions/MainHomeJava/MainHomeThemeChange.js"></script>
+        <script src="../MainOptions/MainHomeJava/MainHomeNoteCreation.js"></script>
         <!--Main Dock at the top of the Main webpage--> 
         <div class="MainHomeDockSection">
             <!--MainTopDockSections-->
@@ -17,7 +19,7 @@
             <h1 class="TitleMain">Note#Code</h1>
 
             <!--CreateFileSectionButton(Critical)-->
-            <button class="MainButtonCreateFileExecute" id="MainButtonCreateFileExecute" onclick="NoteCodeNotCreatedYet()"> + </button>
+            <button class="MainButtonCreateFileExecute" id="MainButtonCreateFileExecute" onclick="NoteOpenCreationSetup()"> + </button>
 
 
             <!--MainRightOptionSettings-->
@@ -50,47 +52,13 @@
         </div>
 
         <!--Create new Note Setup Elements🥰-->
-        <div class="NewNoteSetupWindow" id="NewNoteSetupWindow">
-            <h1 class="SetupTitle">Create a new #NoteCode</h1>
-            <button class="NewNoteSetupExitButton" onclick="showNewNoteSetupExit()">&times</button>
-            <div class="NewNoteSetupMain1Window">
-                <!--This is for setup 1: Name of the Note and programming type file-->
-                <img class="IconNewNoteSetup1" id="IconNewNoteSetup1" src="../2ndpageIcons/NoImgdetected.png" style="
-                position: absolute;
-                width: 100px;
-                height: 100px;
-                left: -50px;
-                border: none;
-                border-radius: 10px;
-                top: 20px;
-                "></img>
-                <h1 class="TitleNoteH1"
-                style="
-                position: fixed;
-                top: 10px;
-                font-family: Arial;
-                font-size: 25px;
-                left: 120px;
-                ">| Input your NoteCode name: </h1>
-                <input class="NoteNameInput" placeholder="Name your note"></input>
-                <h1 style="
-                position: absolute;
-                text-align: left;
-                font-size: 25px;
-                translate: 120px 150px;
-                font-family: Arial;
-                ">Select File Type:</h1>
+        <div class="NoteCreationWindowSetup" id="NoteCreationWindowSetup">
+            <div class="NoteNameCreationSetup1A">
+                <h1 class="NoteInputHeading1" id="NoteInputHeading1">Name your Note:</h1>
+                <input class="NoteInputSaveData">
+                <button class="NoteCreationSetupNext1"> Next </button>
             </div>
         </div>
-
-        <div class="NoNoteCreatedyetwindow" id="NoNoteCreatedyetwindow">
-                <img class="NoNoteCreatedyetwindowIMG" id="NoNoteCreatedyetwindowIMG" src="../2ndpageIcons/NoImgdetected.png">
-                <h1 class="NoNoteCreatedText"> No files or notes have been created. Create a new code with a tutorial? </h1>
-                <p class="NoNoteCreatedTextPara">If you don't want Tutoral, you can create a note without a tutorial. Continue?</p>
-                <button class="NoNoteCreatedyetwindowYesButton" id="NoNoteCreatedyetwindowYesButton" onclick="NoteCodeNotCreatedYetYesButton()"> Yes </button>
-                <button class="NoNoteCreatedyetwindowNoButton" id="NoNoteCreatedyetwindowNoButton" onclick="NoteCodeNotCreatedYetNoButton()"> Yes but continue with a Tutorial </button>
-        </div>
-
         <!--NoteThemeHomeWindow-->
         <div class="NoteThemeHomeWindowElements" id="NoteThemeHomeWindowElements">
             <button class="GobackOptionButton1" id="GobackOptionButton1" onclick="ThemeChoose()">  </button>
@@ -120,7 +88,7 @@
 
         </div>
 
-        <div class="MainNoteCreationframe">
+        <div class="MainNoteCreationframe" >
             <div class="NoteTab1">
                 <h1 class="MainNoteName1">Note Title</h1>
             </div>
