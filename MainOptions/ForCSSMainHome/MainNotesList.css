@@ -10,14 +10,13 @@
     background-color: rgb(46, 123, 190, 0);
     grid-template-columns: repeat( 3, 415px);
     grid-template-rows: repeat(3, auto);
-    column-gap: 30px;
     row-gap: 10px;
     justify-content: center;
 }
 
 .NoteTab1 {
-    width: 400px;
-    height: 300px;
+    width: 350px;
+    height: 275px;
     translate: 0 100px;
     background-color: rgb(255, 255, 255, 0.5);
     text-align: center;
@@ -30,7 +29,7 @@
 
 .MainNoteName1 {
     font-family: Arial;
-    font-size: 25px;
+    font-size: 20px;
     text-align: left;
     padding-left: 30px;
 }
