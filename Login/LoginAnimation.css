@@ -1,0 +1,169 @@
+.LOGOICON21 {
+    position: fixed;
+    animation-name: FadeinGoingUPAnimation;
+    animation-duration: 10s;
+    top: 0;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    z-index: 5;
+    animation-delay: 0.2s;
+}
+
+.box {
+    animation-name: FadeinGoingUPAnimation1;
+    animation-duration: 0.7s;
+    animation-iteration-count: 1;
+    z-index: 5;
+}
+
+.InsideImagesPreviews {
+    position: absolute;
+    top: 50%;
+    bottom: 100%;
+    translate: -50% -50%;
+    z-index: 5;
+    width: 500px;
+    height: 500px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+
+
+.IMGPREVIEW2 {
+    position: fixed;
+    top: 30%;
+    left: 30%;
+    width: 225px;
+    height: 250px;
+    opacity: 0;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(124, 112, 0, 0.7);
+    animation-name: FadeGOUP;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    animation-duration: 10s;
+    z-index: 4;
+    animation-delay: 0.2s;
+}
+
+.IMGPREVIEW3 {
+    position: absolute;
+    opacity: 0;
+    min-width: 150px;
+    min-height: 150px;
+    max-width: 150px;
+    max-height: 150px;
+    top: 13%;
+    left: 13%;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(124, 112, 0, 0.7);
+    z-index: 1;
+
+    animation-name: FadeGOUP;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    animation-duration: 10s;
+    animation-delay: 0.3s;
+}
+
+.IMGPREVIEW4 {
+    position: fixed;
+    opacity: 0;
+    width: 150px;
+    height: 150px;
+    top: 63%;
+    left: 63%;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(124, 112, 0, 0.7);
+    z-index: 2;
+
+    animation-name: FadeGOUP;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    animation-duration: 10s;
+    animation-delay: 0.4s;
+
+}
+
+
+@keyframes FadeinGoingUPAnimation1 {
+    0% {
+        transform: translateY(100px);
+        filter: blur(10px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+
+@keyframes FadeinGoingUPAnimation {
+    0% {
+        top: 100px;
+        opacity: 0;
+    }
+
+    10% {
+        top: 0;
+        opacity: 1;
+        animation-timing-function: ease-out;
+    }
+
+    35% {
+        scale: 1;
+        opacity: 1;
+        filter: blur(0px);
+    }
+    
+    40% {
+        scale: 0.7;
+        opacity: 0;
+        filter: blur(10px);
+        animation-timing-function: ease-in;
+    }
+
+    100% {
+        scale: 0.7;
+        opacity: 0;
+        filter: blur(10px);
+        animation-timing-function: ease-in;
+    }
+}
+
+@keyframes FadeGOUP {
+    0% {
+        scale: 0.5;
+        opacity: 0;
+    }
+    37% {
+        scale: 0.4;
+        opacity: 0;
+        animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.2);
+        filter: blur(10px);
+    }
+
+    40% {
+        scale: 1;
+        opacity: 1;
+        animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.2);
+        filter: blur(0);
+    }
+
+    95% {
+        transform: translateY(0);
+        opacity: 1;
+        animation-timing-function: ease-in;
+        filter: blur(0);
+    }
+    100% {
+        transform: translateY(-50px);
+        opacity: 0;
+        animation-timing-function: ease-in;
+        filter: blur(10px);
+    }
+}
