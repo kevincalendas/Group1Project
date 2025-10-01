@@ -12,7 +12,6 @@ function ThemeChoose() {
         ThemeWindow.style.transform = "scale(0.5)";
         ThemeWindow.style.opacity = "0";
         ThemeWindow.style.zIndex = "1";
-        ThemeWindow.style.filter = "blur(30px)";
         ThemeWindow.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.2)"
     }
 
@@ -21,7 +20,6 @@ function ThemeChoose() {
             ThemeWindow.style.transform = "scale(0.5)";
             ThemeWindow.style.opacity = "0";
             ThemeWindow.style.zIndex = "1";
-            ThemeWindow.style.filter = "blur(30px)";
             ThemeWindow.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.2)";
         } else {
             ThemeWindow.style.transform = "scale(1.0)";
@@ -36,7 +34,6 @@ function ThemeChoose() {
         ThemeWindow.style.transform = "scale(0.5)";
         ThemeWindow.style.opacity = "0";
         ThemeWindow.style.zIndex = "1";
-        ThemeWindow.style.filter = "blur(30px)";
         ThemeWindow.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.2)"
     })
 
