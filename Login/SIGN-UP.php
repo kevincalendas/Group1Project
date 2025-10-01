@@ -1,9 +1,7 @@
 <?php
 $conn = mysqli_connect("localhost", "root", "", "note code");
 
-if ($conn) {
-    echo "Connected";
-} else {
+if (!$conn) {
     die("Failed to connect: " . mysqli_connect_error());
 }
 
@@ -17,13 +15,15 @@ if ($password !== $confirmpassword) {
     die("Passwords do not match!");
 }
 
-$stmt = $conn->prepare("INSERT INTO sign_up (fullname, username, email, password, confirmpassword) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("sssss", $fullname, $username, $email, $password, $confirmpassword);
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+$stmt = $conn->prepare("INSERT INTO sign_up (fullname, username, email, password) VALUES (?, ?, ?, ?)");
+$stmt->bind_param("ssss", $fullname, $username, $email, $hashedPassword);
 
 if ($stmt->execute()) {
-    echo "Data inserted successfully!";
+    echo "Account created successfully!";
 } else {
-    echo "Data not sent: " . $stmt->error;
+    echo "Error: " . $stmt->error;
 }
 
 $stmt->close();
