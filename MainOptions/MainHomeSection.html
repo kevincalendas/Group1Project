@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeThemeCSS.css">
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainNotesList.css">
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainNoteCreationCSS.css">
+        <meta name="viewport" content="width=device-width, initial-scale=0.5"
     </head>
     <body id="pagebody">
         <!--For JAVA-->
@@ -50,14 +51,23 @@
                 </div>         
         </div>
 
+
+
+
         <!--Create new Note Setup Elements🥰-->
         <div class="NoteCreationWindowSetup" id="NoteCreationWindowSetup">
-            <div class="NoteNameCreationSetup1A">
+            <div class="noteCreationWindowSetup1">
+                <img class="NoteIconPreviewCreationNote" src="..\..\Login\LoginIcons\NOTEICON1.png" alt="">
                 <h1 class="NoteInputHeading1" id="NoteInputHeading1">Name your Note:</h1>
-                <input class="NoteInputSaveData">
-                <button class="NoteCreationSetupNext1"> Next </button>
+                <input type="text" placeholder="Input here" class="NoteInputSaveData">
+                <button class="NoteCreationSetupButton1"> Cancel this Setup </button>
+                <button class="NoteCreationSetupButton2"> Create Note </button>
             </div>
         </div>
+
+
+
+
         <!--NoteThemeHomeWindow-->
         <div class="NoteThemeHomeWindowElements" id="NoteThemeHomeWindowElements">
             <button class="GobackOptionButton1" id="GobackOptionButton1" onclick="ThemeChoose()">  </button>
