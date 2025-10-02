@@ -78,6 +78,7 @@ function GettingINFOEntered() {
 
         setTimeout(() => {
             window.location.href="https://keep.google.com"
+            
         }, 2400);
     }
 }

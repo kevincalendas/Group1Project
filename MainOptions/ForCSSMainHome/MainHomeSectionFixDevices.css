@@ -164,25 +164,30 @@
 @media(max-width: 500px) {
     .OptionFrame {
         top: 75px;
-        right: -275px;
-        width: 420px;
+        right: -290px;
+        width: 395px;
         z-index: 100;
     }
 
     .OptionButton1, .OptionButton2, .OptionButton3, .OptionButton4, .OptionButton5 {
-        width: 385px;
+        width: 350px;
     }
 }
 
-@media(max-width: 400px) {
+@media(max-width: 350px) {
     .OptionFrame {
         top: 75px;
-        right: -295px;
-        width: 375px;
+        right: -290px;
+        width: 300px;
         z-index: 100;
     }
 
     .OptionButton1, .OptionButton2, .OptionButton3, .OptionButton4, .OptionButton5 {
-        width: 335px;
+        width: 265px;
+    }
+
+    .OptionIcon1, .OptionIcon2, .OptionIcon3, .OptionIcon4 {
+        opacity: 0;
+        transition: all 0.5s ease-in-out;
     }
 }
