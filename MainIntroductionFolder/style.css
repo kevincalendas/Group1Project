@@ -1,0 +1,79 @@
+body {
+background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIALcAwQMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAAAQb/xAAXEAEBAQEAAAAAAAAAAAAAAAAAATER/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAECBv/EABgRAQEBAQEAAAAAAAAAAAAAAAABETEh/9oADAMBAAIRAxEAPwDWgOGdUAAAAAAAAAAAAAAAAAAAAAAAAoCgAAAAAAAAAAAAAAAAAAAAigAAEVFhAAUADAAMAAwAAAAAAAAADAAASqlQQAFixFhAAaAAABKACAioAioAAgAAAJRYqTVbnASqlQQAFWIsIADQAAAJQAQEVAKiogAAAAAJRZqpNVucBFRBAAWLEiwgANAAAAlABARUAqKiAAAAAAlFmqk1W5wEqoggAKsRYQAGgAAASgAgIqAVFqIAAAAACUWaqTVbnARUqCAAsWIsIADQAAAJQAQEVAEWogAAAAAJRZqpNVucBFSoIACrEWEABQAXQAQAAAAOJxQ8E4cUMgnDihkE4cUMgnFBQRUZEABYqAKIAogCiAKIAogCiAKIAogCiAKIAqACCgIAgAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAP/9k=);
+}
+
+
+
+
+
+.carousel {
+    margin: 3em auto;
+    overflow-x: auto;
+    display: flex;
+    gap: 1em;
+    scroll-behavior: smooth;
+    anchor-name: --carousel;
+    scroll-snap-type: x mandatory;
+    scroll-marker-group: after;
+}
+
+.carousel::scroll-marker-group{
+    display: flex;
+    justify-content: center;
+    gap: .5em;
+}
+
+.card::scroll-marker {
+    content: '';
+    height: 1em;
+    width: 1em;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+}
+
+.card::scroll-marker:target-current{
+    background-color: var(--brand-color);
+}
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel::scroll-button(right), .carousel::scroll-button(left) {
+    content: '→';
+    border: none;
+    background-color: var(white);
+     font-family: Consolas;
+     font-size: 3rem;
+     color: black;
+     height: 60px;
+     width: 60px;
+     border-radius: 50%;
+     padding-bottom: .1em;
+     cursor: pointer;
+     position: fixed;
+     position-anchor: --carousel;
+     position-area: right center;
+     translate: -50%;
+}
+ 
+.carousel::scroll-button(left) {
+    content: '←';
+    position-area: left center;
+    translate: 50%;
+}
+
+.carousel::scroll-button(right):disabled, .carousel::scroll-button(left):disabled {
+    opacity: 0.5;
+    cursor: auto;
+}
+
+.card {
+    scroll-snap-align: start;
+    flex: 0 0 20em;  
+    height: 450px;
+    background-color: var(--primary-color);
+    padding: 1em;
+    border-radius: 8%;
+    text-align: center;
+    align-content: center;
+}
