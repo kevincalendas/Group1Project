@@ -1,0 +1,162 @@
+
+@media(max-width: 625px) {
+    /*For Options CSS*/
+    .NoteCreationWindowSetup {
+        z-index: 1;
+    }
+    
+    .OptionFrame {
+        top: 75px;
+        right: -275px;
+        width: 450px;
+        z-index: 100;
+    }
+
+    .OptionSection {
+        z-index: 100;
+    }
+    .OptionButton1 {
+        position: absolute;
+        top: 85px;
+        height: 45px;
+        width: 405px;
+        translate: 3%;
+        text-align: right;
+        left: 10px;
+        margin-bottom: 10px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border: 2px solid rgba(129, 129, 129, 0.5);
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: Arial;
+        transition: all 0.3s ease-in-out;
+        z-index: 300;
+    }
+    .OptionButton2 {
+        position: absolute;
+        top: 140px;
+        height: 45px;
+        width: 405px;
+        translate: 3%;
+        text-align: right;
+        left: 10px;
+        margin-bottom: 10px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border: 2px solid rgba(129, 129, 129, 0.5);
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: Arial;
+        transition: all 0.3s ease-in-out;
+        z-index: 300;
+    }
+    .OptionButton3 {
+        position: absolute;
+        top: 195px;
+        height: 45px;
+        width: 405px;
+        translate: 3%;
+        text-align: right;
+        left: 10px;
+        margin-bottom: 10px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border: 2px solid rgba(129, 129, 129, 0.5);
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: Arial;
+        transition: all 0.3s ease-in-out;
+        z-index: 300;
+    }
+
+    .OptionButton4 {
+        position: absolute;
+        top: 250px;
+        height: 45px;
+        width: 405px;
+        translate: 3%;
+        text-align: right;
+        left: 10px;
+        margin-bottom: 10px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border: 2px solid rgba(129, 129, 129, 0.5);
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: Arial;
+        transition: all 0.3s ease-in-out;
+        z-index: 300;
+    }
+
+    .OptionButton5 {
+        position: absolute;
+        top: 305px;
+        height: 45px;
+        width: 405px;
+        translate: 3%;
+        text-align: center;
+        left: 10px;
+        margin-bottom: 10px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border: 2px solid rgba(129, 129, 129, 0.5);
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: Arial;
+        transition: all 0.3s ease-in-out;
+        z-index: 300;
+    }
+
+    .OptionButton1:hover, .OptionButton2:hover, .OptionButton3:hover, .OptionButton4:hover {
+        position: relative;
+        box-shadow: 0 0 10px rgba(129, 129, 129, 0.5);
+        border: 2px solid rgba(129, 129, 129, 0.5);
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: Arial;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .OptionIcon1, .OptionIcon2, .OptionIcon3, .OptionIcon4 {
+        z-index: 1;
+    }
+
+    .OptionIcon1 {
+        position: absolute;
+        top: 88px;
+        left: 30px;
+        height: 40px;
+        width: 40px;
+        border: none;
+        border-radius: 10px;
+    }
+    .OptionIcon2 {
+        position: absolute;
+        top: 143px;
+        left: 30px;
+        height: 40px;
+        width: 40px;
+        border-radius: 10px;
+    }
+    .OptionIcon3 {
+        position: absolute;
+        top: 198px;
+        left: 30px;
+        margin-bottom: 5px;
+        height: 40px;
+        width: 40px;
+        border-radius: 10px;
+    }
+    .OptionIcon4 {
+        position: absolute;
+        top: 253px;
+        left: 30px;
+        margin-bottom: 5px;
+        height: 40px;
+        width: 40px;
+        border-radius: 10px;
+    }
+
+}

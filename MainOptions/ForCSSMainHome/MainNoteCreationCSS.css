@@ -1,15 +1,14 @@
 .NoteCreationWindowSetup {
     position: fixed;
-    min-width: 500px;
-    max-width: 600px;
-    min-height: 225px;
-    max-height: 350px;
+    width: 500px;
+    height: 225px;
     top: 50%;
     left: 50%;
     translate: -50% -50%;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255, 0.3);
+    backdrop-filter: blur(25px);
     z-index: 300;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     scale: 0.7;
     opacity: 0;
@@ -48,6 +47,7 @@
     transition: all 0.3s ease-out;
     font-size: 16px;
     font-weight: bold;
+    background-color: white;
 }
 
 .NoteInputSaveData:hover {
@@ -107,6 +107,22 @@
     animation-fill-mode: forwards;
 }
 
+.TagsFadingoutAnimation {
+    animation-name: TagsFadingoutAnimation;
+    animation-duration: 1s;
+    animation-delay: 0.3s;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    animation-fill-mode: forwards;
+}
+
+.TagsFadingINAnimation {
+    animation-name: TagsFadingINAnimation;
+    animation-duration: 1s;
+    animation-delay: 0.3s;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    animation-fill-mode: forwards;
+}
+
 @keyframes NoteIconPreviewAnimationGoUP {
     0% {
         opacity: 0;
@@ -115,5 +131,168 @@
     100% {
         opacity: 1;
         transform: translateY(0px);
+    }
+}
+
+@keyframes TagsFadingoutAnimation {
+    0% {
+        opacity: 1;
+        filter: blur(0px);
+        scale: 1.0;
+    }
+
+    100% {
+        opacity: 0;
+        filter: blur(20px);
+        scale: 0.7;
+    }
+}
+
+@keyframes TagsFadingINAnimation {
+    0% {
+        opacity: 0;
+        filter: blur(20px);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0px);
+    }
+}
+
+@keyframes spinning {
+    0% {
+        transform: rotateX('0');
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+
+.noteCreationWindowSetup1 {
+    opacity: 1;
+    z-index: 1;
+    transition: all 0.3s ease-in;
+}
+
+/* Creating Window Tags CSS */
+.NoteCreatingQuene {
+    position: fixed;
+    width: 450px;
+    height: 320px;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: 1;
+    scale: 0;
+    opacity: 0;
+    transition: all 0.5s ease-out;
+}
+
+.LoadingIconPreview {
+    position: fixed;
+    top: 13%;
+    left: 30%;
+    width: 175px;
+    height: 175px;
+    scale: 1.6;
+    border: none;
+    border-radius: 25%;
+    animation-name: spinning;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.infoCreationSetupH1 {
+    position: fixed;
+    bottom: 10px;
+    text-align: center;
+    justify-content: center;
+    width: 450px;
+    font-family: Arial;
+    font-size: 30px;
+}
+
+@media (max-width: 625px) {
+    .NoteCreationWindowSetup {
+        position: fixed;
+        width: 400px;
+        height: 450px;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        background-color: rgb(255, 255, 255, 0.3);
+        backdrop-filter: blur(25px);
+        z-index: 300;
+        border: 2px solid rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        scale: 1.0;
+        opacity: 0;
+        transition: all 0.5s ease-out;
+        filter: blur(5px);
+    }
+
+    .NoteCreationSetupButton1 {
+        background-color: white;
+        position: fixed;
+        width: 90%;
+        height: 40px;
+        left: 5%;
+        bottom: 60px;
+        background-color: rgb(255, 230, 0);
+        border: none;
+        border-radius: 15px;
+        font-size: 15px;
+        font-weight: bold;
+        transition: all 0.3s ease-out;
+    }
+
+    .NoteCreationSetupButton2 {
+        background-color: white;
+        position: fixed;
+        width: 90%;
+        height: 40px;
+        left: 5%;
+        bottom: 10px;
+        border: 2px solid rgba(0, 0, 0, 0.5);
+        border-radius: 15px;
+        transition: all 0.3s ease-out;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .NoteIconPreviewCreationNote {
+        position: fixed;
+        top: 7%;
+        left: 30%;
+        width: 150px;
+        height: 150px;
+        border-radius: 20px;
+        box-shadow: 5px 5px 5px rgb(243, 219, 1);
+    }
+    .NoteInputHeading1 {
+        position: relative;
+        font-size: 28px;
+        font-family: Arial;
+        font-weight: bold;
+        left: 23%;
+        top: 190px;
+    }
+    .NoteInputSaveData {
+        position: relative;
+        width: 80%;
+        height: 35px;
+        border: 2px solid rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        z-index: 1000;
+        left: 10%;
+        top: 200px;
+        transition: all 0.3s ease-out;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: white;
     }
 }

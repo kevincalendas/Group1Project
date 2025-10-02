@@ -6,7 +6,8 @@
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeThemeCSS.css">
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainNotesList.css">
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainNoteCreationCSS.css">
-        <meta name="viewport" content="width=device-width, initial-scale=0.5"
+        <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeSectionFixDevices.css">
+        <meta name="viewport" content="width=device-width, initial-scale=0.9"
     </head>
     <body id="pagebody">
         <!--For JAVA-->
@@ -56,12 +57,16 @@
 
         <!--Create new Note Setup Elements🥰-->
         <div class="NoteCreationWindowSetup" id="NoteCreationWindowSetup">
-            <div class="noteCreationWindowSetup1">
-                <img class="NoteIconPreviewCreationNote" id="NoteIconPreviewCreationNoteID" src="../Login/LoginIcons/NOTEICON1.png" alt="">
+            <div class="noteCreationWindowSetup1" id="noteCreationWindowSetup1ID">
+                <img class="NoteIconPreviewCreationNote" id="NoteIconPreviewCreationNoteID" src="../Login/LoginIcons/NOTEICON1.png" alt="note icon with pencil on it">
                 <h1 class="NoteInputHeading1" id="NoteInputHeading1">Name your Note:</h1>
                 <input type="text" placeholder="   Input here" class="NoteInputSaveData" id="NoteInputSaveDataID">
-                <button class="NoteCreationSetupButton1"> Create Note </button>
+                <button class="NoteCreationSetupButton1" onclick="GettingINFOEntered()"> Create Note </button>
                 <button class="NoteCreationSetupButton2" onclick="CloseCreationSETUP()"> Cancel </button>
+            </div>                
+            <div class="NoteCreatingQuene" id="NoteCreatingQueneID">
+                <img class="LoadingIconPreview" id="LoadingIconPreview" src="../2ndpageIcons/LoadingIcon.png" alt="spinning loading icon">
+                <h1 class="infoCreationSetupH1" id="infoCreationSetupH1ID">Text here</h1>
             </div>
         </div>
 
@@ -72,23 +77,25 @@
         <div class="NoteThemeHomeWindowElements" id="NoteThemeHomeWindowElements">
             <button class="GobackOptionButton1" id="GobackOptionButton1" onclick="ThemeChoose()">  </button>
             <h1 class="ThemeWindowh1">Choose your Themes</h1>
-            <div class="Theme1">
-                <img class="Theme1IMG" src="https://i.pinimg.com/736x/b2/bc/13/b2bc13d8b2d37fbaee9c503d0d6c1279.jpg">
-                <button class="ThemeButton1" id="ThemeButton1" onclick="ThemeChoose()">Select Theme</button>
-            </div>
+            <div class="ListsofThemesWindow">
+                <div class="Theme1">
+                    <img class="Theme1IMG" src="https://i.pinimg.com/736x/b2/bc/13/b2bc13d8b2d37fbaee9c503d0d6c1279.jpg">
+                    <button class="ThemeButton1" id="ThemeButton1" onclick="ThemeChoose()">Select Theme</button>
+                </div>
 
-            <div class="Theme2">
-                <img class="Theme2IMG" src="https://i.pinimg.com/1200x/4f/d7/ce/4fd7ce13e677485ec2849de64473c258.jpg">
-                <button class="ThemeButton2" id="ThemeButton2" onclick="ThemeChoose()">Select Theme</button>
-            </div>
+                <div class="Theme2">
+                    <img class="Theme2IMG" src="https://i.pinimg.com/1200x/4f/d7/ce/4fd7ce13e677485ec2849de64473c258.jpg">
+                    <button class="ThemeButton2" id="ThemeButton2" onclick="ThemeChoose()">Select Theme</button>
+                </div>
 
-            <div class="Theme3">
-                <img class="Theme3IMG" src="https://i.pinimg.com/1200x/76/64/1b/76641b53502d4ca601ecd3c240ad6245.jpg">
-                <button class="ThemeButton3" id="ThemeButton3" onclick="ThemeChoose()">Select Theme</button>
-            </div>
-            <div class="Theme4">
-                <img class="Theme4IMG" src="https://i.pinimg.com/1200x/47/82/3a/47823a30f1bba5c3a9351e2bc137b9b2.jpg">
-                <button class="ThemeButton4" id="ThemeButton4" onclick="ThemeChoose()">Select Theme</button>
+                <div class="Theme3">
+                    <img class="Theme3IMG" src="https://i.pinimg.com/1200x/76/64/1b/76641b53502d4ca601ecd3c240ad6245.jpg">
+                    <button class="ThemeButton3" id="ThemeButton3" onclick="ThemeChoose()">Select Theme</button>
+                </div>
+                <div class="Theme4">
+                    <img class="Theme4IMG" src="https://i.pinimg.com/1200x/47/82/3a/47823a30f1bba5c3a9351e2bc137b9b2.jpg">
+                    <button class="ThemeButton4" id="ThemeButton4" onclick="ThemeChoose()">Select Theme</button>
+                </div>
             </div>
 
             <!--ThemeStyle-->
@@ -98,7 +105,7 @@
         </div>
 
         <div class="MainNoteCreationframe" >
-
+            
         </div>
 
         
@@ -108,5 +115,9 @@
         <div class="NoteTabMainSection" id="NoteTabMainSection">
             <h1 class="NoNoteCreatedText"> No #NoteCode created yet! </h1>
         </div>
+
+        <footer>
+            <h1 class="VersionText"> Dev. 0.5 (Underdevelopment)</h1>
+        </footer>
     </body>
 </html>

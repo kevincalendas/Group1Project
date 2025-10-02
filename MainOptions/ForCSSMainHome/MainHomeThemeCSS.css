@@ -45,6 +45,9 @@
     border-radius: 100px;
 }
 
+.ListsofThemesWindow {
+    display: grid;
+}
 
 .Theme1 {
     position: absolute;
@@ -145,5 +148,88 @@
 
     100% {
         scale: 1.0;
+    }
+}
+
+
+/* for changing aspect ratio */
+
+@media (max-width: 625px) {
+    .NoteThemeHomeWindowElements {
+        position: fixed;
+        display: grid;
+        width: 425px;
+        height: 600px;
+        background-color: rgba(255, 255, 255, 0.5);
+        top: 53%;
+        left: 50%;
+        translate: -50% -50%;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        z-index: 100;
+        overflow-y: auto;
+        opacity: 0;
+        scale: 1.0;
+    }
+
+    .Theme1IMG, .Theme2IMG, .Theme3IMG, .Theme4IMG {
+        position: relative;
+        height: 125px;
+        width: 175px;
+        background-color: pink;
+        border: 3px solid rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+    }
+    
+    .Theme1 {
+        position: absolute;
+        top: 60px;
+        left: 5%;
+        height: 250px;
+        width: 180px;
+        background-color: rgba(255, 0, 0,0);
+    }
+
+    .Theme2 {
+        position: absolute;
+        top: 60px;
+        left: 53%;
+        height: 250px;
+        width: 180px;
+        background-color: rgba(255, 0, 0,0);
+    }
+
+    .Theme3 {
+        position: absolute;
+        top: 275px;
+        left: 5%;
+        height: 250px;
+        width: 180px;
+        background-color: rgba(255, 0, 0,0);
+    }
+
+    .Theme4 {
+        position: absolute;
+        top: 275px;
+        left: 53%;
+        height: 350px;
+        width: 180px;
+        background-color: rgba(255, 0, 0,0);
+    }
+
+    .ThemeWindowh2 {
+        top: 500px;
+        width: 300px;
+        left: 15%;
+    }
+
+    .GobackOptionButton1 {
+        width: 70px;
+        height: 30px;
+        border-radius: 10px;
+        content: "Close";
+        font-size: 30px;
     }
 }

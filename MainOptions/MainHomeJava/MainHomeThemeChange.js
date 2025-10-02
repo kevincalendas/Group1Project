@@ -20,6 +20,7 @@ function ThemeChoose() {
 
     ThemeWindowOpenButton.addEventListener("click", () => {
         if (ThemeWindow.style.opacity === "1") {
+            NoteWindowButtonExec.disabled = false;
             ThemeWindow.style.transform = "scale(0.5)";
             ThemeWindow.style.opacity = "0";
             ThemeWindow.style.zIndex = "1";
@@ -27,7 +28,7 @@ function ThemeChoose() {
         } else {
             ThemeWindow.style.transform = "scale(1.0)";
             ThemeWindow.style.opacity = "1";
-            ThemeWindow.style.zIndex = "13";
+            ThemeWindow.style.zIndex = "300";
             ThemeWindow.style.filter = "blur(0px)";
             ThemeWindow.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.2)";
         }
@@ -39,6 +40,12 @@ function ThemeChoose() {
             notewindowicon.style.transition = "all 0.2s cubic-bezier(0.1, 0, 0.1, 1.0)";
             notewindowicon.style.filter = "blur(5px)"
             notewindowiconpreview.classList.remove('animateFUNCTIONPreview1');
+
+            ThemeWindow.style.transform = "scale(1.0)";
+            ThemeWindow.style.opacity = "1";
+            ThemeWindow.style.zIndex = "300";
+            ThemeWindow.style.filter = "blur(0px)";
+            ThemeWindow.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.2)";
         }
     });
 
@@ -159,3 +166,5 @@ function ThemeChoose() {
 
 
 }
+
+
