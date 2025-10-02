@@ -31,10 +31,10 @@ function ThemeChoose() {
     });
 
     ThemeWindowCloseButton.addEventListener("click", () => {
-        ThemeWindow.style.transform = "scale(0.5)";
+        ThemeWindow.style.transform = "scale(0.8)";
         ThemeWindow.style.opacity = "0";
         ThemeWindow.style.zIndex = "1";
-        ThemeWindow.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.2)"
+        ThemeWindow.style.transition = "all 0.2s cubic-bezier(0.4, 0, 0.2, 1.2)"
     })
 
     ThemeButtonChange1.addEventListener("click", () => {

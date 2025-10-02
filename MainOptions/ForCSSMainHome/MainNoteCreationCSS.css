@@ -1,16 +1,20 @@
 .NoteCreationWindowSetup {
     position: fixed;
-    min-width: 700px;
-    max-width: 800px;
-    min-height: 200px;
-    max-height: 300px;
+    min-width: 500px;
+    max-width: 600px;
+    min-height: 225px;
+    max-height: 350px;
     top: 50%;
     left: 50%;
     translate: -50% -50%;
-    background-color: rgb(245, 245, 220);
+    background-color: rgb(255, 255, 255);
     z-index: 300;
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 10px;
+    scale: 0.7;
+    opacity: 0;
+    transition: all 0.5s ease-out;
+    filter: blur(5px);
 }
 
 .NoteNameCreationSetup1A {
@@ -25,23 +29,25 @@
 
 .NoteInputHeading1 {
     position: relative;
-    font-size: 30px;
+    font-size: 28px;
     font-family: Arial;
     font-weight: bold;
     left: 200px;
-    top: 10px;
+    top: 20px;
 }
 
 .NoteInputSaveData {
     position: relative;
-    width: 65%;
-    height: 25px;
-    border: 1.5px solid rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
+    width: 55%;
+    height: 35px;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
     z-index: 1000;
     left: 200px;
-    top: 10px;
+    top: 20px;
     transition: all 0.3s ease-out;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .NoteInputSaveData:hover {
@@ -53,24 +59,29 @@
     background-color: white;
     position: fixed;
     width: 150px;
-    height: 30px;
-    left: 400px;
-    bottom: 20px;
-    border: 1.5px solid rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
+    height: 37px;
+    right: 10px;
+    bottom: 35px;
+    background-color: rgb(255, 230, 0);
+    border: none;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: bold;
     transition: all 0.3s ease-out;
 }
 
 .NoteCreationSetupButton2 {
     background-color: white;
     position: fixed;
-    width: 100px;
-    height: 30px;
-    right: 40px;
-    bottom: 20px;
-    border: 1.5px solid rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
+    width: 125px;
+    height: 37px;
+    right: 175px;
+    bottom: 35px;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
     transition: all 0.3s ease-out;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .NoteCreationSetupButton1:hover, .NoteCreationSetupButton2:hover {
@@ -85,6 +96,24 @@
     left: 30px;
     width: 125px;
     height: 125px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgb(243, 243, 1);
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgb(243, 219, 1);
+}
+
+.animateFUNCTIONPreview1 {
+    animation-name: NoteIconPreviewAnimationGoUP;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.100, 0.82, 0.110, 1.0);
+    animation-fill-mode: forwards;
+}
+
+@keyframes NoteIconPreviewAnimationGoUP {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }

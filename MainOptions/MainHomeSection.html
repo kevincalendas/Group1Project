@@ -20,7 +20,7 @@
             <h1 class="TitleMain">Note#Code</h1>
 
             <!--CreateFileSectionButton(Critical)-->
-            <button class="MainButtonCreateFileExecute" id="MainButtonCreateFileExecute" onclick="NoteOpenCreationSetup()"> + </button>
+            <button class="MainButtonCreateFileExecute" id="MainButtonCreateFileExecute" onclick="OpenCreationSETUP()"> + </button>
 
             <!--MainRightOptionSettings-->
                 <button class="OptionsButton" id="OptionsButton" onclick="showOptions()">
@@ -57,11 +57,11 @@
         <!--Create new Note Setup Elements🥰-->
         <div class="NoteCreationWindowSetup" id="NoteCreationWindowSetup">
             <div class="noteCreationWindowSetup1">
-                <img class="NoteIconPreviewCreationNote" src="../Login/LoginIcons/NOTEICON1.png" alt="">
+                <img class="NoteIconPreviewCreationNote" id="NoteIconPreviewCreationNoteID" src="../Login/LoginIcons/NOTEICON1.png" alt="">
                 <h1 class="NoteInputHeading1" id="NoteInputHeading1">Name your Note:</h1>
-                <input type="text" placeholder="Input here" class="NoteInputSaveData">
-                <button class="NoteCreationSetupButton1"> Cancel this Setup </button>
-                <button class="NoteCreationSetupButton2"> Create Note </button>
+                <input type="text" placeholder="   Input here" class="NoteInputSaveData" id="NoteInputSaveDataID">
+                <button class="NoteCreationSetupButton1"> Create Note </button>
+                <button class="NoteCreationSetupButton2" onclick="CloseCreationSETUP()"> Cancel </button>
             </div>
         </div>
 
