@@ -233,3 +233,31 @@
         font-size: 30px;
     }
 }
+
+@media(max-height: 675px) {
+    .NoteThemeHomeWindowElements {
+        position: fixed;
+        display: grid;
+        height: 300px;
+        background-color: rgba(255, 255, 255, 0.5);
+        top: 53%;
+        left: 50%;
+        translate: -50% -50%;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        z-index: 100;
+        overflow-y: auto;
+        opacity: 0;
+        scale: 1.0;
+        .Theme1IMG, .Theme2IMG, .Theme3IMG, .Theme4IMG {
+        position: relative;
+        height: 125px;
+        width: 175px;
+        background-color: pink;
+        border: 3px solid rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+    }
+    }
+}
