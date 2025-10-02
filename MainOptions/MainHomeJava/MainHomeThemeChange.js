@@ -7,6 +7,9 @@ function ThemeChoose() {
     const ThemeWindowOpenButton = document.getElementById('OptionButton1');
     const ThemeWindow = document.getElementById('NoteThemeHomeWindowElements');
     const ThemeWindowCloseButton = document.getElementById('GobackOptionButton1');
+    const notewindowopen = document.getElementById('NoteCreationWindowSetup');
+    const NoteWindowButtonExec = document.getElementById('MainButtonCreateFileExecute');
+
 
     if (ThemeWindow.style.transform === "scale(1.0)") {
         ThemeWindow.style.transform = "scale(0.5)";
@@ -28,9 +31,19 @@ function ThemeChoose() {
             ThemeWindow.style.filter = "blur(0px)";
             ThemeWindow.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.2)";
         }
+
+        if (notewindowopen.style.opacity === "1") {
+            notewindowopen.style.zIndex = "1";
+            notewindowopen.style.scale = "0.7";
+            notewindowopen.style.opacity = "0";
+            notewindowicon.style.transition = "all 0.2s cubic-bezier(0.1, 0, 0.1, 1.0)";
+            notewindowicon.style.filter = "blur(5px)"
+            notewindowiconpreview.classList.remove('animateFUNCTIONPreview1');
+        }
     });
 
     ThemeWindowCloseButton.addEventListener("click", () => {
+        NoteWindowButtonExec.disabled = false;
         ThemeWindow.style.transform = "scale(0.8)";
         ThemeWindow.style.opacity = "0";
         ThemeWindow.style.zIndex = "1";
