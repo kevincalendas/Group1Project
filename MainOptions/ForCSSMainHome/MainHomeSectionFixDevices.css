@@ -160,3 +160,29 @@
     }
 
 }
+
+@media(max-width: 500px) {
+    .OptionFrame {
+        top: 75px;
+        right: -275px;
+        width: 420px;
+        z-index: 100;
+    }
+
+    .OptionButton1, .OptionButton2, .OptionButton3, .OptionButton4, .OptionButton5 {
+        width: 385px;
+    }
+}
+
+@media(max-width: 400px) {
+    .OptionFrame {
+        top: 75px;
+        right: -295px;
+        width: 375px;
+        z-index: 100;
+    }
+
+    .OptionButton1, .OptionButton2, .OptionButton3, .OptionButton4, .OptionButton5 {
+        width: 335px;
+    }
+}
