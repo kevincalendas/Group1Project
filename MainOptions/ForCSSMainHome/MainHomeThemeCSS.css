@@ -234,7 +234,7 @@
     }
 }
 
-@media(max-height: 675px) {
+@media(max-height: 600px) {
     .NoteThemeHomeWindowElements {
         position: fixed;
         display: grid;

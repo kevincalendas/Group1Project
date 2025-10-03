@@ -1,0 +1,61 @@
+.MainNoteOrganizedTabs {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    top: 75px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    z-index: 11;
+}
+
+.OpenOrganizedWindowText{
+    position: absolute;
+    width: 300px;
+    top: 5px;
+    left: 70px;
+    text-align: center;
+    font-size: 25px;
+    font-family: Arial;;
+
+
+}
+
+.CreateOrganizedTab {
+    position: absolute;
+    top: 10px;
+    right: 75px;
+    width: 50px;
+    height: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    font-size: 40px;
+    text-align: center;
+    background-color: rgb(255, 234, 139);
+}
+
+.ExitOrganizedWindow {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    font-size: 30px;
+    text-align: center;
+    background-color: rgb(255, 234, 139);
+    font-weight: bold;
+    font-family: sans-serif;
+    
+}
+
+.OrganizeIconIMG{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 10px;
+    left: 10px; 
+}
