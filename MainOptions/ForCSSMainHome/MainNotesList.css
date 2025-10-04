@@ -5,8 +5,8 @@
     position: absolute;
     height: auto;
     width: 100%;
-    top: 0px;
-    left: 0px;
+    top: 60px;
+    left: 3%;
     background-color: rgb(46, 123, 190, 0);
     grid-template-columns: repeat( 3, 415px);
     grid-template-rows: repeat(3, 260px);
@@ -18,14 +18,13 @@
 }
 
 .NoteTab {
+    position: absolute;
     width: 370px;
-    height: 235px;
-    translate: 0 100px;
-    background-color: rgb(255, 255, 255, 0.5);
+    height: 50px;
+    background-color: rgba(255, 130, 249, 0.5);
     text-align: center;
-    border: 3px solid rgba(0, 0, 0, 0.5);
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border:2px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
     backdrop-filter: blur(10px);
     z-index: 10;
 
@@ -48,8 +47,8 @@
     border-radius: 10px;
     font-size: 15px;
     font-weight: bold;
-    bottom: 5px;
-    right: 5px;
+    bottom: 15%;
+    right: 10px;
     
 }
 
