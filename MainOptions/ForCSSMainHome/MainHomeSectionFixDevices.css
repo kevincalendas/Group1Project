@@ -5,15 +5,19 @@
         z-index: 1;
     }
     
+    .NoteThemeHomeWindowElements {
+        scale: 0.8;
+        z-index: 1;
+    }
     .OptionFrame {
         top: 75px;
-        right: -275px;
+        right: 20px;
         width: 450px;
-        z-index: 100;
+        z-index: 1;
     }
 
     .OptionSection {
-        z-index: 100;
+        z-index: 1;
     }
     .OptionButton1 {
         position: absolute;
@@ -31,7 +35,6 @@
         font-weight: bold;
         font-family: Arial;
         transition: all 0.3s ease-in-out;
-        z-index: 300;
     }
     .OptionButton2 {
         position: absolute;
@@ -49,7 +52,6 @@
         font-weight: bold;
         font-family: Arial;
         transition: all 0.3s ease-in-out;
-        z-index: 300;
     }
     .OptionButton3 {
         position: absolute;
@@ -67,7 +69,6 @@
         font-weight: bold;
         font-family: Arial;
         transition: all 0.3s ease-in-out;
-        z-index: 300;
     }
 
     .OptionButton4 {
@@ -86,7 +87,6 @@
         font-weight: bold;
         font-family: Arial;
         transition: all 0.3s ease-in-out;
-        z-index: 300;
     }
 
     .OptionButton5 {
@@ -105,7 +105,6 @@
         font-weight: bold;
         font-family: Arial;
         transition: all 0.3s ease-in-out;
-        z-index: 300;
     }
 
     .OptionButton1:hover, .OptionButton2:hover, .OptionButton3:hover, .OptionButton4:hover {
@@ -161,25 +160,18 @@
 
 }
 
-@media(max-width: 500px) {
-    .OptionFrame {
-        top: 75px;
-        right: -290px;
-        width: 395px;
-        z-index: 100;
-    }
-
-    .OptionButton1, .OptionButton2, .OptionButton3, .OptionButton4, .OptionButton5 {
-        width: 350px;
-    }
-}
 
 @media(max-width: 450px) {
     .OptionFrame {
         top: 75px;
-        right: -290px;
-        width: 300px;
-        z-index: 100;
+        right: 130px;
+        translate: 40%;
+        width: 350px;
+        z-index: 1;
+    }
+
+    .NoteThemeHomeWindowElements {
+        scale: 0.8;
     }
 
     .OptionButton1, .OptionButton2, .OptionButton3, .OptionButton4, .OptionButton5 {

@@ -1,0 +1,61 @@
+.NoteInterfaceCodeMain {
+    position: absolute;
+    width: 90%;
+    height: 70%;
+    background-color: rgb(255, 255, 255, 0.5);
+    top: 18%;
+    left: 50%;
+    translate: -50% -10%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.NoteCodeName {
+    position: absolute;
+    resize: none;
+    top: 15px;
+    height: 30px;
+    left: 20px;
+    font-weight: bold;
+    font-family: Arial;
+    font-size: 25px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0 );
+}
+
+.NoteCodeContent {
+    position: absolute;
+    resize: none;
+    top: 60px;
+    left: 20px;
+    width: 97%;
+    height: 80%;
+    font-weight: bold;
+    font-family: Arial;
+    font-size: 15px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0 );
+}
+
+.NoteCodeServerStatus {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    border: none;
+    border-radius: 100%;
+    background-color: green;
+    width: 20px;
+    height: 20px;
+}
+
+.NoteCodeStatush1 {
+    position: absolute;
+    bottom: 0px;
+    left: 35px;
+    font-size: 15px;
+    font-family: Arial;
+}
+ 

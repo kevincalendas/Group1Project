@@ -267,7 +267,7 @@
     .NoteIconPreviewCreationNote {
         position: fixed;
         top: 7%;
-        left: 35%;
+        left: 30%;
         width: 150px;
         height: 150px;
         border-radius: 20px;
@@ -278,7 +278,7 @@
         font-size: 28px;
         font-family: Arial;
         font-weight: bold;
-        left: 28%;
+        left: 23%;
         top: 190px;
     }
     .NoteInputSaveData {

@@ -1,27 +1,51 @@
 /* Main Frame of the Note Tab lists */
 
-.MainNoteCreationframe {
+.MainNoteCreationGUI {
     display: grid;
+    overflow-y: auto;
+    overflow-anchor:auto;
     position: absolute;
-    height: auto;
-    width: 100%;
+    min-height: 60px;
+    max-height: 340px;
+    width: 98%;
     top: 60px;
-    left: 3%;
+    left: 0%;
     background-color: rgb(46, 123, 190, 0);
-    grid-template-columns: repeat( 3, 415px);
-    grid-template-rows: repeat(3, 260px);
+    grid-template-columns: repeat( 1, 370px);
+    grid-template-rows: repeat(infinite, 0);
     row-gap: 10px;
     justify-content: center;
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transition: grid-template-columns 0.5s ease-in-out, grid-template-rows 0.5s ease-in-out;
-    z-index: 10;
+    scale: 1;
+}
+
+.MainNoteOrganizedLists {
+    display: grid;
+    overflow-y: auto;
+    overflow-anchor:auto;
+    position: absolute;
+    min-height: 70px;
+    max-height: 340px;
+    padding-top: 5px;
+    width: 98%;
+    top: 60px;
+    left: 0%;
+    background-color: rgb(46, 123, 190, 0);
+    grid-template-columns: repeat( 1, 370px);
+    grid-template-rows: repeat(infinite, 0);
+    row-gap: 10px;
+    justify-content: center;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: grid-template-columns 0.5s ease-in-out, grid-template-rows 0.5s ease-in-out;
+    scale: 1;
 }
 
 .NoteTab {
-    position: absolute;
-    width: 370px;
+    position: flex;
+    width: 360px;
     height: 50px;
-    background-color: rgba(255, 130, 249, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     text-align: center;
     border:2px solid rgba(0, 0, 0, 0.5);
     border-radius: 10px;
@@ -59,51 +83,111 @@
     padding-left: 30px;
 }
 
-@media (max-width: 1300px) {
-    .MainNoteCreationframe {
-        display: grid;
-        position: absolute;
-        height: auto;
+@media (max-width: 600px) {
+    .MainNoteCreationframeUncategorized {
+        min-height: none;
+        max-height: 100%;
         width: 100%;
-        top: 0px;
-        left: 0px;
+        top: 65px;
+        left: 0%;
         background-color: rgb(46, 123, 190, 0);
-        grid-template-columns: repeat( 2, 415px);
-        grid-template-rows: repeat(3, 260px);
-        row-gap: 10px;
-        justify-content: center;
-        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transition: grid-template-columns 0.5s ease-in-out, grid-template-rows 0.5s ease-in-out;
+
+    }
+
+    .NoteTab {
+        position: flex;
+        width: 100%;
+        height: 50px;
+        translate: -1%;
+        text-align: center;
+        border:2px solid rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
         z-index: 10;
+
+    }
+
+    .NoteTabName {
+        text-align: center;
+        position: fixed;
+        left: 20px;
+        font-family: Arial;
+        font-size: 20px;
+    }
+
+    .NoteTabDeleteButton {
+        position: fixed;
+        width: 100px;
+        height: 35px;
+        background-color: rgb(255, 0, 0);
+        border: 2px solid rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: bold;
+        bottom: 15%;
+        right: 10px;
+        
+    }
+
+    .MainNoteName1 {
+        font-family: Arial;
+        font-size: 20px;
+        text-align: left;
+        padding-left: 30px;
     }
 }
 
-@media (max-width: 770px) {
-    .MainNoteCreationframe {
-        display: grid;
-        position: absolute;
-        height: auto;
-        width: 100%;
-        top: 0px;
-        left: 0px;
-        background-color: rgb(46, 123, 190, 0);
-        grid-template-columns: repeat( 1, 415px);
-        grid-template-rows: repeat(3, 260px);
-        row-gap: 10px;
-        justify-content: center;
-        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        z-index: 10;
-    }
-    .NoteTab {
-        width: 350px;
-        height: 235px;
-        translate: 5% 100px;
-        background-color: rgb(255, 255, 255, 0.5);
-        text-align: center;
-        border: 3px solid rgba(0, 0, 0, 0.5);
-        border-radius: 15px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(10px);
-        z-index: 10;
-    
-    }
+/* For main lists of note tabs */
+.OrganizedWindows {
+    display: grid;
+    overflow-y: auto;
+    overflow-anchor:auto;
+    position: absolute;
+    min-height: 70px;
+    max-height: 340px;
+    width: 98%;
+    top: 60px;
+    left: 0%;
+    background-color: rgb(46, 123, 190, 0);
+    grid-template-columns: repeat( 1, 370px);
+    grid-template-rows: repeat(infinite, 10px);
+    row-gap: 10px;
+    justify-content: center;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: grid-template-columns 0.5s ease-in-out, grid-template-rows 0.5s ease-in-out;
+    scale: 1;
+}
+
+.OrganizedList {
+    position: flex;
+    width: 100%;
+    height: 50px;
+    background-color: rgba(192, 255, 134, 0.5);
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    border:2px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease-in-out;
+}
+
+.OrganizedList:hover {
+    background-color: rgba(192, 255, 134, 1);
+}
+
+/*For OrganizedList Creation Window*/
+.NewOrganizedList {
+    position: flex;
+    width: 100%;
+    height: 50px;
+    background-color: rgba(192, 255, 134, 0.5);
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    border:2px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease-in-out;
 }

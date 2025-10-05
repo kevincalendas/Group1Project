@@ -9,10 +9,24 @@ function ThemeChoose() {
     const ThemeWindowCloseButton = document.getElementById('GobackOptionButton1');
     const notewindowopen = document.getElementById('NoteCreationWindowSetup');
     const NoteWindowButtonExec = document.getElementById('MainButtonCreateFileExecute');
+    const OptionFrame = document.getElementById('OptionFrame');
 
 
+    if (OptionFrame.style.opacity === "1") {
+        OptionFrame.style.opacity = "0";
+        OptionFrame.style.zIndex = "1";
+        OptionFrame.style.transform = "translateX(450px)";
+        OptionFrame.classList.toggle('optionSettings-Open');
+    } else {
+        OptionFrame.style.opacity = "1";
+        OptionFrame.style.zIndex = "800";
+        OptionFrame.style.scale = "1.0";
+        OptionFrame.style.transform = "translateX(0)";
+        OptionFrame.classList.toggle('optionSettings-Open');
+    }
+    
     if (ThemeWindow.style.transform === "scale(1.0)") {
-        ThemeWindow.style.transform = "scale(0.5)";
+        ThemeWindow.style.scale = "0.5";
         ThemeWindow.style.opacity = "0";
         ThemeWindow.style.zIndex = "1";
         ThemeWindow.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.2)"
@@ -21,12 +35,13 @@ function ThemeChoose() {
     ThemeWindowOpenButton.addEventListener("click", () => {
         if (ThemeWindow.style.opacity === "1") {
             NoteWindowButtonExec.disabled = false;
-            ThemeWindow.style.transform = "scale(0.5)";
+            ThemeWindow.style.scale = "0.5";
             ThemeWindow.style.opacity = "0";
             ThemeWindow.style.zIndex = "1";
             ThemeWindow.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.2)";
+            
         } else {
-            ThemeWindow.style.transform = "scale(1.0)";
+            ThemeWindow.style.scale = "1.0";
             ThemeWindow.style.opacity = "1";
             ThemeWindow.style.zIndex = "300";
             ThemeWindow.style.filter = "blur(0px)";
@@ -41,7 +56,7 @@ function ThemeChoose() {
             notewindowicon.style.filter = "blur(5px)"
             notewindowiconpreview.classList.remove('animateFUNCTIONPreview1');
 
-            ThemeWindow.style.transform = "scale(1.0)";
+            ThemeWindow.style.scale = "1.0";
             ThemeWindow.style.opacity = "1";
             ThemeWindow.style.zIndex = "300";
             ThemeWindow.style.filter = "blur(0px)";
@@ -51,10 +66,11 @@ function ThemeChoose() {
 
     ThemeWindowCloseButton.addEventListener("click", () => {
         NoteWindowButtonExec.disabled = false;
-        ThemeWindow.style.transform = "scale(0.8)";
+        ThemeWindow.style.scale = "0.5";
         ThemeWindow.style.opacity = "0";
         ThemeWindow.style.zIndex = "1";
         ThemeWindow.style.transition = "all 0.2s cubic-bezier(0.4, 0, 0.2, 1.2)"
+        ThemeWindow.style.zIndex = "1";
     })
 
     ThemeButtonChange1.addEventListener("click", () => {

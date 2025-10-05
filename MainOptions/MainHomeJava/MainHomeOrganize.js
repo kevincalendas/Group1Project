@@ -1,13 +1,149 @@
-const mainNoteOrganizedWindow = document.getElementById('MainNoteOrganizedTabsID');
-const MainHomeCreationUncategorizedFrameWindow = document.getElementById('MainNoteCreationframeUncategorizedID');
-const MainOptionsButton = document.getElementById('OptionsButton');
-
-
 function OrganizedWindowOpen() {
-    mainNoteOrganizedWindow.style.opacity = '1';
-    MainOptionsButton.disabled = true;
+    const mainNoteOrganizedWindow = document.getElementById('MainNoteOrganizedTabsID');
+    const OptionFrame = document.getElementById('OptionFrame');
+    const MainHomeCreationUncategorizedFrameWindow = document.getElementById('MainNoteCreationframeUncategorizedID');
+    const MainOptionsButton = document.getElementById('OptionButton2ID');
+
+    if (mainNoteOrganizedWindow.style.opacity === "1") {
+        mainNoteOrganizedWindow.style.opacity = "0";   
+        mainNoteOrganizedWindow.style.transform = "translateX(420px)";
+        OptionFrame.classList.toggle('optionSettings-Open');
+    } else {
+        mainNoteOrganizedWindow.style.opacity = "1";
+        mainNoteOrganizedWindow.style.transform = "translateX(0px)";
+        OptionFrame.classList.toggle('optionSettings-Open');
+    }
+
+    if (OptionFrame.style.opacity === "1") {
+        OptionFrame.style.opacity = "0";
+        OptionFrame.style.zIndex = "1";
+        OptionFrame.style.transform = "translateX(450px)";
+        OptionFrame.classList.toggle('optionSettings-Open');
+    } else {
+        OptionFrame.style.opacity = "1";
+        OptionFrame.style.zIndex = "800";
+        OptionFrame.style.transform = "translateX(0)";
+        OptionFrame.classList.toggle('optionSettings-Open');
+    }
 }
 
-function OrganizedWindowClose() {
-    mainNoteOrganizedWindow.style.opacity = '0';
+
+
+
+
+
+
+// OPEN LIST THINGS SETUP //
+
+
+//FOR OPENING THE ORGANIZED LIST CREATION SETUP THINGSZ//
+function OpenCloseOrganizedSetup() {
+    const OrganizedWindowSetup = document.getElementById('OrganizedListCreationWindowID');
+    const OrganizedNextButton = document.getElementById('OrganizedListCreationButton');
+    const OrganizedCancelSetupButton = document.getElementById('OrganizedListCreationCancelButton');
+    const OrganizedInputText = document.getElementById('OrganizedListCreationInputID');
+    const OrganizePreviewIMG1 = document.getElementById('CreateListIMGPreview1ID');
+    const OrganizePreviewIMG2 = document.getElementById('CreateListIMGPreview2ID');
+
+    if (OrganizedWindowSetup.style.opacity === "1") {
+        OrganizedWindowSetup.style.opacity = "0";   
+        OrganizedWindowSetup.style.scale = "0";
+        OrganizedWindowSetup.style.zIndex = "1";
+        OrganizedWindowSetup.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.05);"
+        OrganizePreviewIMG1.classList.remove('AniamtionExecuteIMGPreview1');
+        OrganizePreviewIMG2.classList.remove('AniamtionExecuteIMGPreview2');
+        OrganizedInputText.value = '';
+
+    } else {
+        OrganizedWindowSetup.style.opacity = "1";
+        OrganizedWindowSetup.style.scale = "1";
+        OrganizedWindowSetup.style.zIndex = "400";
+        OrganizedWindowSetup.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.05);"
+        OrganizePreviewIMG1.classList.add('AniamtionExecuteIMGPreview1');
+        OrganizePreviewIMG2.classList.add('AniamtionExecuteIMGPreview2');
+    }
+}
+
+
+//For Creating the organized list//
+function CreateOrganizedList() {
+    const OrganizedWindowSetup = document.getElementById('OrganizedListCreationWindowID');
+    const OrganizedNextButton = document.getElementById('OrganizedListCreationButton');
+    const OrganizedCancelSetupButton = document.getElementById('OrganizedListCreationCancelButton');
+    const HeadingWindowSetupOrganized = document.getElementById('OrganizedListCreationH1ID');
+    const OrganizePreviewIMG1 = document.getElementById('CreateListIMGPreview1ID');
+    const OrganizePreviewIMG2 = document.getElementById('CreateListIMGPreview2ID');
+    const OrganizedInputText = document.getElementById('OrganizedListCreationInputID');
+    const OrganizedWindowsMainParent = document.getElementById('OrganizedWindows');
+    organizednameinfo = OrganizedInputText.value;
+    if (OrganizedInputText.value === "") {
+        OrganizedInputText.style.border = "2px solid red";
+        OrganizedInputText.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)";
+        setTimeout(() => {
+            OrganizedInputText.style.border = "2px solid rgba(0, 0, 0, 0.3)";
+            OrganizedInputText.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)";
+        }, 1000);
+    } else if (OrganizedInputText.value === OrganizedInputText.value) {
+        OrganizePreviewIMG1.classList.remove('AniamtionExecuteIMGPreview1');
+        OrganizePreviewIMG2.classList.remove('AniamtionExecuteIMGPreview2');
+        setTimeout(() => {
+            HeadingWindowSetupOrganized.innerHTML = "Setting up your folder...";
+            OrganizePreviewIMG1.classList.add('AniamtionExecuteIMGPreview1');
+            OrganizePreviewIMG2.classList.add('AniamtionExecuteIMGPreview2');
+            OrganizedCancelSetupButton.style.opacity = "0";
+            OrganizedNextButton.style.opacity = "0";
+            OrganizedInputText.style.opacity = "0";
+            OrganizedWindowSetup.style.height = "175px";
+            HeadingWindowSetupOrganized.style.bottom = "0";
+
+
+            setTimeout(() => {
+                HeadingWindowSetupOrganized.innerHTML = "Done!";
+                let OrganizedInfosNumber = 1;
+                const NewOrganizedList = document.createElement('button');
+                NewOrganizedList.classList.add('NewOrganizedList');
+                NewOrganizedList.textContent = organizednameinfo;   
+                HeadingWindowSetupOrganized.style.left = "43%";
+                
+
+                OrganizedInfosNumber++
+                
+                OrganizedWindowsMainParent.appendChild(NewOrganizedList);
+
+                NewOrganizedList.style.scale = "0.5";
+                NewOrganizedList.style.opacity = "0";
+                setTimeout(() => {
+                    NewOrganizedList.style.scale = "1";
+                    NewOrganizedList.style.opacity = "1";
+                    NewOrganizedList.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15)"
+                }, 400);
+            }, 2000);
+            setTimeout(() => {
+                HeadingWindowSetupOrganized.innerHTML = "Create your Organized list";
+                OrganizedCancelSetupButton.style.opacity = "1";
+                OrganizedNextButton.style.opacity = "1";
+                OrganizedInputText.style.opacity = "1";
+                OrganizedWindowSetup.style.height = "175px";
+                HeadingWindowSetupOrganized.style.bottom = "35%";
+                HeadingWindowSetupOrganized.style.left = "18%";
+                OrganizedWindowSetup.style.opacity = "0";   
+                OrganizedWindowSetup.style.scale = "0";
+                OrganizedWindowSetup.style.zIndex = "1";
+                OrganizedWindowSetup.style.transition = "all 0.3s ease-out"
+                OrganizePreviewIMG1.classList.remove('AniamtionExecuteIMGPreview1');
+                OrganizePreviewIMG2.classList.remove('AniamtionExecuteIMGPreview2');
+                OrganizedInputText.value = '';
+                OrganizedWindowSetup.style.height = "280px";
+            }, 2100);
+        }, 100);
+        
+    }
+
+
+}
+
+
+function OpenNote() {
+    const OrganizedWindows = document.getElementById('OrganizedWindows');
+    const MainUncategorylistWindow = document.getElementById('OrganizeWindows')
 }

@@ -3,6 +3,20 @@ function showOptions() {
     const OptionsButton = document.getElementById('OptionsButton');
     OptionsButton.classList.toggle('OptionButtonAnimate');
     const OptionFrame = document.getElementById('OptionFrame');
-    OptionFrame.classList.toggle('optionSettings-Open');
-    OptionFrame.classList.toggle('optionSettings-Hide');
+    const OptionSection = document.getElementById('OptionSection');
+    if (OptionFrame.style.opacity === "1") {
+        OptionFrame.style.opacity = "0";
+        OptionFrame.style.zIndex = "1";
+        OptionFrame.style.transform = "translateX(450px)";
+        OptionFrame.style.transition = "all 1s cubic-bezier(0.175, 0.885, 0.32, 1.05)";
+        OptionFrame.classList.toggle('optionSettings-Close');
+    } else {
+        OptionFrame.style.opacity = "1";
+        OptionFrame.style.zIndex = "1000";
+        OptionFrame.style.transform = "translateX(0px)";
+        OptionFrame.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.05)";
+        OptionFrame.classList.toggle('optionSettings-Open');
+    }
 }
+
+

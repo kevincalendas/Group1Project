@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeSectionFixDevices.css">
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeNoteListTabs.css">
         <link rel="stylesheet" href="ForCSSMainHome/MainHomeOrganizedWindow.css">
+        <link rel="stylesheet" href="ForCSSMainHome/MainCodeInterface.css">
         <meta name="viewport" content="width=device-width, initial-scale=0.9"
     </head>
     <body id="pagebody">
@@ -47,13 +48,14 @@
                         <img class="OptionIcon3" src="../2ndpageIcons/ChecklistIcon.png" height="30px" width="30px">
                         <img class="OptionIcon4" src="../2ndpageIcons/AboutIcon.png" height="30px" width="30px">
                         <button class="OptionButton1" id="OptionButton1" onclick="ThemeChoose()"> Theme </button>
-                        <button class="OptionButton2" onclick="OrganizedWindowOpen()"> Organize Note#Code </button>
+                        <button class="OptionButton2" id="OptionButton2ID" onclick="OrganizedWindowOpen()"> Organize Note#Code </button>
                         <button class="OptionButton3"> Checklist </button>
                         <button class="OptionButton4"> About </button>
                         <button class="OptionButton5"> Logout </button>
                     </div>
                 </div>         
         </div>
+        
 
 
 
@@ -109,20 +111,46 @@
 
         <div class="MainNoteOrganizedTabs" id="MainNoteOrganizedTabsID">
             <h1 class="OpenOrganizedWindowText"> Organize your note tabs </h1>
-            <button class="CreateOrganizedTab"> + </button>
-            <button class="ExitOrganizedWindow"> X </button>
-            <div class="MainNoteCreationframeUncategorized"  id="MainNoteCreationframeUncategorizedID">
+            <button class="CreateOrganizedTab" onclick="OpenCloseOrganizedSetup()"> + </button>
+            <button class="ExitOrganizedWindow" onclick="OrganizedWindowOpen()"> X </button>
+            <div class="OrganizedWindows" id="OrganizedWindows">
+                <button class="OrganizedList" id="OrganizedListID" onclick="OpenOrganizedList()"> Favorites⭐ </button>
+                <button class="OrganizedList" id="OrganizedListID" onclick="OpenOrganizedList()"> Uncategorized </button>
+            </div>
+            <div class="MainNoteOrganizedLists" id="MainNoteOrganizedListsID">
+                <div class="UncategorizedList" id="UncategorizedList">
+                
+                </div>
             </div>
             <img class="OrganizeIconIMG" src="../2ndpageIcons/OrganizeIcon.png">
         </div>
 
+        <div class="OrganizedListCreationWindow" id="OrganizedListCreationWindowID">
+            <h1 class="OrganizedListCreationH1" id="OrganizedListCreationH1ID"> Create your organized list </h1>
+            <input type="text" placeholder=" Input here" class="OrganizedListCreationInput" id="OrganizedListCreationInputID">
+            <img class="CreateListIMGPreview1" id="CreateListIMGPreview1ID" src="../2ndpageIcons/Folder.png"> 
+            <img class="CreateListIMGPreview2" id="CreateListIMGPreview2ID" src="../Login/LoginIcons/NOTEICON1.png"> 
+            <button class="OrganizedListCreationButton" id="OrganizedListCreationButton" onclick="CreateOrganizedList()"> Create List </button>
+            <button class="OrganizedListCreationCancelButton" id="OrganizedListCreationCancelButton" onclick="OpenCloseOrganizedSetup()"> Cancel </button>
+        </div>
+
+        <div style="font-family:Arial; background:linear-gradient(to bottom right,); height:80vh; display:flex; justify-content:center; align-items:center; flex-direction:column; color:#333;">
+        <div style="font-size:32px; font-weight:bold;">Note#Code</div>
+        <div style="font-size:14px; margin-top:5px;">Organize. Create. Save.</div> 
+        </div>
+
+        <div class="NoteInterfaceCodeMain" id="NoteInterfaceCodeMainID">
+            <textarea class="NoteCodeName" id="NoteCodeNameID">Text here</textarea>
+            <textarea class="NoteCodeContent" rows="5" cols="50"></textarea>
+            <div class="NoteCodeServerStatus" id="NoteInterfaceCodeMainID"></div>
+            <h1 class="NoteCodeStatush1" id="NoteCodeStatush1ID">Saved!</h1>
+            <button class="NoteCodeExitEdit" id="NoteCodeExitEditID"></button>
+        </div>
+
+
         
 
         <!--NoteTabMainSections(Critical)-->
-        
-        <div class="NoteTabMainSection" id="NoteTabMainSection">
-            <h1 class="NoNoteCreatedText"> No #NoteCode created yet! </h1>
-        </div>
 
         <footer>
             <h1 class="VersionText"> Dev. 0.5 (Underdevelopment)</h1>

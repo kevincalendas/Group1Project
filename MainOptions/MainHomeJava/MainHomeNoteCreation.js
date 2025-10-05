@@ -66,7 +66,7 @@ function GettingINFOEntered() {
     } else {
         //calling out the main window of the note lists//
         let notenumbercreation = 0;
-        const NoteGridLayoutWindowCreation = document.getElementById('MainNoteCreationframeID');
+        const NoteGridLayoutWindowCreation = document.getElementById('UncategorizedList');
         notenumbercreation++
         //disable the opacity of note window setup1
         NoteWindowSetup1.style.opacity = "0";
@@ -86,14 +86,17 @@ function GettingINFOEntered() {
         }, 2200)
 
         setTimeout(() => {
+            const OrganizedWindows = document.getElementById('OrganizedWindowsID');
+            NoListOrganizedCreated = true;
             const NoteTab = document.createElement('div');
             const NoteTabNamee = document.createElement('h1');
             const NoteTabDeleteButton = document.createElement('button');
-
+            const NoteTabContent = document.createElement('p');
 
             NoteTab.classList.add('NoteTab');
             NoteTabNamee.classList.add('NoteTabName');
             NoteTabDeleteButton.classList.add('NoteTabDeleteButton');
+            NoteTabContent.classList.add('NoteTabContent'); 
 
             NoteTabNamee.textContent = notenameinfocreation;
             NoteTabDeleteButton.textContent = "Delete";
@@ -101,6 +104,7 @@ function GettingINFOEntered() {
 
 
             NoteGridLayoutWindowCreation.appendChild(NoteTab);
+            NoteTab.appendChild(NoteTabContent);
             NoteTab.appendChild(NoteTabNamee);  
             NoteTab.appendChild(NoteTabDeleteButton);
 
@@ -122,6 +126,8 @@ function GettingINFOEntered() {
                 NoteTab.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.0)";
                 CloseCreationSETUP();
             }, 300);
+
+            //closing the note creation window setup2 and going back to main note window//
             NoteWindowSetup2.style.opacity = "0";
             NoteWindowSetup2.style.scale = "0";
             NoteWindowSetup2.style.zIndex = "1";
@@ -137,7 +143,6 @@ function GettingINFOEntered() {
 
 
     }
-
     if (notenumbercreation === 0) {
         NoNoteCreatedText.style.opacity = "1";
     }   else if (notenumbercreation > 1) {
@@ -145,3 +150,5 @@ function GettingINFOEntered() {
     }
 
 }
+
+// Tracks whether any organized note list has been created
