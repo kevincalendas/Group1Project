@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("Passwords do not match!");
     }
 
-    $checkStmt = $conn->prepare("SELECT id FROM sign_up WHERE username = ? OR email = ? LIMIT 1");
+    $checkStmt = $conn->prepare("SELECT id FROM users WHERE username = ? OR email = ? LIMIT 1");
     if ($checkStmt === false) {
         die("Prepare failed: " . $conn->error);
     }
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    $stmt = $conn->prepare("INSERT INTO sign_up (fullname, username, email, password) VALUES (?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO users (fullname, username, email, password) VALUES (?, ?, ?, ?)");
     if ($stmt === false) {
         die("Prepare failed: " . $conn->error);
     }
@@ -44,6 +44,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($stmt->execute()) {
         echo "Account created successfully!";
+        echo "<script>window.location = 'index.html'
+        alert('Account created successfully!')
+        </script>";
     } else {
         echo "Error: " . $stmt->error;
     }
