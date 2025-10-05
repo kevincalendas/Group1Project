@@ -1,10 +1,9 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Login | Note#Code</title>
   <link rel="stylesheet" href="LoginAnimation.css">
-</head>
   <style>
     body {
       background: #fff8dc; 
@@ -13,9 +12,6 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-    }
-
-    body {
       background-image: url('https://img.freepik.com/premium-vector/elegant-yellow-watercolor-background_205765-201.jpg');
       background-attachment: fixed;
       background-size: cover;
@@ -23,7 +19,6 @@
 
     .box {
       position: fixed;
-      translate: 50%, 50%;
       right: 25%;
       left: 53%;
       background: #fff6b9;
@@ -32,10 +27,11 @@
       border-radius: 10px;
       text-align: center;
       width: 280px;
-      height: 300px;
+      height: 320px;
       backdrop-filter: blur(5px);
     }
-    input, .button1, .button2{
+
+    input, .button1, .button2 {
       width: 90%;
       padding: 8px; 
       margin: 8px 0;
@@ -49,23 +45,18 @@
     }
 
     input:hover {
-      scale: 1;
       box-shadow: 0 0 5px rgba(36, 39, 0, 0.616);
-      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.5);
     }
 
-    
     .button1 {
       background: #FFBF00;
       color: #fff;
       cursor: pointer;
       width: 100px;
-      position: absolute;
-      right: 30px;
-      font-size: 10px;  
+      font-size: 12px;  
       font-family: Arial;
-      font-weight: bold;  
-      font-size: 10px;
+      font-weight: bold;
+      margin-top: 10px;
     }
 
     .button2 {
@@ -73,102 +64,63 @@
       color: #fff;
       cursor: pointer;
       width: 150px;
-      position: absolute;
-      left: 30px;
-      font-size: 10px; 
+      font-size: 12px; 
       font-family: Arial;
       font-weight: bold;  
-      font-size: 10px; 
-    }
-
-    img{
-        float: left;
-        vertical-align: top;
-    }
-
-    footer{
-        color: #FFBF00;
-        font-family: cursive;
-        position:absolute;
-        bottom: 0;
-        text-align: center;
-        font-size: 15px;
-        
+      margin-top: 5px;
     }
 
     .Rememberme1 {
-      position:absolute;
-      bottom: -48px;
-      left: -10px;
-      color:rgb(0, 0, 0);
+      margin-top: 10px;
+    }
+
+    .Rememberme2 {
+      color: black;
       font-size: 15px;
-      align-items: center;
-      width: 20px;
-      height: 20px;
-      transition: all 0.3s ease-out;
+      font-family: Arial;
+      margin-left: 5px;
     }
 
-    .Rememberme1:hover {
-      scale: 1.1;
-      transition: all 0.3s ease-out;
-    }
-
-    .Rememberme1:checked {
+    footer {
       color: #FFBF00;
-    }
-
-    .Rememberme1 {
+      font-family: cursive;
       position: absolute;
       bottom: 10px;
-      left: 30px;
-      background-color:rgb(255, 251, 0);
+      text-align: center;
       font-size: 15px;
-      align-items: center;
-      width: 20px;
-      height: 20px;
-      border: none;
-      transition: all 0.3s ease-out;
-    }
-    .Rememberme2 {
-      position: absolute;
-      bottom: 20px;
-      left: 60px;
-      color:black;
-      font-size: 15px;
-      align-items: center;
-      border: none;
-      font-family: Arial;
-    }
-
-    .footerCredits {
-      top: 10px;
+      width: 100%;
     }
   </style>
 </head>
 <body>
   <div class="InsideImagesPreviews">
-    <img class="LOGOICON21" src="..\2ndpageIcons\LOGOICON2.1.png"> 
-    <img class="IMGPREVIEW2" src="./LoginIcons/NOTEICON1.png">
-    <img class="IMGPREVIEW3" src="./LoginIcons/Preview2.png">
-    <img class="IMGPREVIEW4" src="./LoginIcons/PROFILE ICON.png">
+    <img class="LOGOICON21" src="../2ndpageIcons/LOGOICON2.1.png" alt="">
+    <img class="IMGPREVIEW2" src="./LoginIcons/NOTEICON1.png" alt="">
+    <img class="IMGPREVIEW3" src="./LoginIcons/Preview2.png" alt="">
+    <img class="IMGPREVIEW4" src="./LoginIcons/PROFILE ICON.png" alt="">
   </div>
+
   <div class="box">
-    <h1 style= "font-family: arial; font-weight: bolder; font-size: 28px; color: #FFBF00"> Login to Note#Code </h1>
-    <h5 style= "font-family: georgia; font-weight: bold;"> Come and try the newest and innovative Note#Code Pad! </h5>
+    <h1 style="font-family: arial; font-weight: bolder; font-size: 28px; color: #FFBF00">Login to Note#Code</h1>
+    <h5 style="font-family: georgia; font-weight: bold;">Come and try the newest and innovative Note#Code Pad!</h5>
+
     <form action="login.php" method="POST">
       <input type="email" name="email" placeholder="Email" required>
       <input type="password" name="password" placeholder="Password" required>
-    </form>
-    <button class="button1" type="submit">Login</button>
-    <button class= "button2" onclick="window.location.href= './signup.html'"> New here? Create Account </button>
-    <input type="checkbox" class="Rememberme1"  name="Remember Me">
-    <label for="Remember Me" class="Rememberme2"> Remember Me </label>  
-  </div>
-        <div class="footer"> 
-    <footer>
-         <p class="footerCredits"> "2025 Note#Code | All rights reserved."</p>
-    </footer>
 
+      <div>
+        <input type="checkbox" id="remember" class="Rememberme1" name="remember">
+        <label for="remember" class="Rememberme2">Remember Me</label>
+      </div>
+
+      <button class="button1" type="submit">Login</button>
+    </form>
+
+    <button class="button2" onclick="window.location.href='./signup.html'">New here? Create Account</button>
   </div>
+
+  <footer>
+    <p>"2025 Note#Code | All rights reserved."</p>
+  </footer>
 </body>
 </html>

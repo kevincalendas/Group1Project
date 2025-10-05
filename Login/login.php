@@ -12,26 +12,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($email) || empty($password)) {
         die("All fields are required!");
     }
-    $sql = "SELECT id FROM users WHERE username";
-    $result = $conn -> query($sql);
-    if ($result === false) {
+
+    $sql = "SELECT id, username, password FROM users WHERE email = ? OR username = ?";
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
         die("Prepare failed: " . $conn->error);
     }
 
-    if ($result->num_rows < 0) {
-        die("Username or Email doesnt exists!");
+    $stmt->bind_param("ss", $email, $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 0) {
+        die("Username or Email doesn't exist!");
     }
-    while($row = $result->fetch_assoc()) {
-        echo $row;
+
+    $row = $result->fetch_assoc();
+
+    if (password_verify($password, $row['password'])) {
+        echo "Login successful! Welcome, " . htmlspecialchars($row['username']) . "!";
+    } else {
+        die("Incorrect password!");
     }
 
-    $row = $result -> fetch_assoc();
-    echo ($row);
-
-    $result->close();
-
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    
+    $stmt->close();
 }
 
 $conn->close();
