@@ -19,6 +19,7 @@ function OpenCreationSETUP() {
     NoteWindowSetup1.style.zIndex = "400";
     NoteWindowSetup1.classList.toggle('TagsFadingINAnimation');
     NoteWindowSetup2.style.zIndex = "1";
+    NoteWindowButtonExec.disabled = true;
     
     setTimeout(() => {
         NoteWindowButtonExec.disabled = true;

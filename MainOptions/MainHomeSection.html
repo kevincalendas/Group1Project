@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainNoteCreationCSS.css">
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeSectionFixDevices.css">
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeNoteListTabs.css">
+        <link rel="stylesheet" href="ForCSSMainHome/MainHomeOrganizedWindow.css">
         <meta name="viewport" content="width=device-width, initial-scale=0.9"
     </head>
     <body id="pagebody">
@@ -15,6 +16,7 @@
         <script src="../MainOptions/MainHomeJava/MainHomeSection.js"></script>
         <script src="../MainOptions/MainHomeJava/MainHomeThemeChange.js"></script>
         <script src="../MainOptions/MainHomeJava/MainHomeNoteCreation.js"></script>
+        <script src="../MainOptions/MainHomeJava/MainHomeOrganize.js"></script>
         <!--Main Dock at the top of the Main webpage--> 
         <div class="MainHomeDockSection">
             <!--MainTopDockSections-->
@@ -45,7 +47,7 @@
                         <img class="OptionIcon3" src="../2ndpageIcons/ChecklistIcon.png" height="30px" width="30px">
                         <img class="OptionIcon4" src="../2ndpageIcons/AboutIcon.png" height="30px" width="30px">
                         <button class="OptionButton1" id="OptionButton1" onclick="ThemeChoose()"> Theme </button>
-                        <button class="OptionButton2"> Organize Note#Code </button>
+                        <button class="OptionButton2" onclick="OrganizedWindowOpen()"> Organize Note#Code </button>
                         <button class="OptionButton3"> Checklist </button>
                         <button class="OptionButton4"> About </button>
                         <button class="OptionButton5"> Logout </button>
@@ -105,7 +107,13 @@
 
         </div>
 
-        <div class="MainNoteCreationframe"  id="MainNoteCreationframeID">
+        <div class="MainNoteOrganizedTabs" id="MainNoteOrganizedTabsID">
+            <h1 class="OpenOrganizedWindowText"> Organize your note tabs </h1>
+            <button class="CreateOrganizedTab"> + </button>
+            <button class="ExitOrganizedWindow"> X </button>
+            <div class="MainNoteCreationframeUncategorized"  id="MainNoteCreationframeUncategorizedID">
+            </div>
+            <img class="OrganizeIconIMG" src="../2ndpageIcons/OrganizeIcon.png">
         </div>
 
         

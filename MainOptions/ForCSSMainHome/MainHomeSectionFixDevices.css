@@ -174,7 +174,7 @@
     }
 }
 
-@media(max-width: 385px) {
+@media(max-width: 450px) {
     .OptionFrame {
         top: 75px;
         right: -290px;
