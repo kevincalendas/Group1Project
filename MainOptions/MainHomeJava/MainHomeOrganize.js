@@ -57,7 +57,7 @@ function OpenCloseOrganizedSetup() {
     } else {
         OrganizedWindowSetup.style.opacity = "1";
         OrganizedWindowSetup.style.scale = "1";
-        OrganizedWindowSetup.style.zIndex = "400";
+        OrganizedWindowSetup.style.zIndex = "1000";
         OrganizedWindowSetup.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.05);"
         OrganizePreviewIMG1.classList.add('AniamtionExecuteIMGPreview1');
         OrganizePreviewIMG2.classList.add('AniamtionExecuteIMGPreview2');
