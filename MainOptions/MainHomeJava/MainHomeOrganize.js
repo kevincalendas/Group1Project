@@ -83,6 +83,8 @@ function CreateOrganizedList() {
     const OrganizePreviewIMG1 = document.getElementById('CreateListIMGPreview1ID');
     const OrganizePreviewIMG2 = document.getElementById('CreateListIMGPreview2ID');
     const OrganizedInputText = document.getElementById('OrganizedListCreationInputID');
+
+    const OrganizedLocationFolder = document.getElementById('MainNoteOrganizedListsID');
     const OrganizedWindowsMainParent = document.getElementById('OrganizedWindows');
     organizednameinfo = OrganizedInputText.value;
     if (OrganizedInputText.value === "") {
@@ -112,8 +114,12 @@ function CreateOrganizedList() {
                 let OrganizedInfosNumber = 1;
                 const NewOrganizedList = document.createElement('button');
                 const NewOrganizedRemove = document.createElement('button');
+                const OrganizedFolder = document.createElement('div');
+
                 NewOrganizedList.classList.add('NewOrganizedList');
                 NewOrganizedRemove.classList.add('NewOrganizedRemove');
+                OrganizedFolder.classList.add('OrganizedFolder');
+
                 NewOrganizedList.textContent = organizednameinfo;   
                 NewOrganizedRemove.textContent = "Delete";
                 HeadingWindowSetupOrganized.style.left = "45%";
@@ -121,8 +127,18 @@ function CreateOrganizedList() {
 
                 OrganizedInfosNumber++
                 
+                NewOrganizedRemove.addEventListener('click', () => {
+                    NewOrganizedList.style.scale = "0";
+                    NewOrganizedList.style.opacity = "0";
+
+                    setTimeout(() => {
+                        NewOrganizedList.remove();
+                    }, 300);
+                });
+
                 NewOrganizedList.appendChild(NewOrganizedRemove);
                 OrganizedWindowsMainParent.appendChild(NewOrganizedList);
+                OrganizedLocationFolder.appendChild(OrganizedFolder);
 
                 NewOrganizedList.style.scale = "0.5";
                 NewOrganizedList.style.opacity = "0";

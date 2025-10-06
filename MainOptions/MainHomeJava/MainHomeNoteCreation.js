@@ -91,13 +91,18 @@ function GettingINFOEntered() {
             NoListOrganizedCreated = true;
             const NoteTab = document.createElement('div');
             const NoteTabNamee = document.createElement('h1');
+            const NoteFavoriteButton = document.createElement('button');
             const NoteTabDeleteButton = document.createElement('button');
             const NoteTabContent = document.createElement('p');
 
+
             NoteCodeNameID.textContent = notenameinfocreation;
+
+
 
             NoteTab.classList.add('NoteTab');
             NoteTabNamee.classList.add('NoteTabName');
+            NoteFavoriteButton.classList.add('NoteFavoriteButton');
             NoteTabDeleteButton.classList.add('NoteTabDeleteButton');
             NoteTabContent.classList.add('NoteTabContent'); 
 
@@ -109,6 +114,7 @@ function GettingINFOEntered() {
             NoteGridLayoutWindowCreation.appendChild(NoteTab);
             NoteTab.appendChild(NoteTabContent);
             NoteTab.appendChild(NoteTabNamee);  
+            NoteTab.appendChild(NoteFavoriteButton);
             NoteTab.appendChild(NoteTabDeleteButton);
 
             NoteTabDeleteButton.addEventListener('click', () => {
@@ -124,6 +130,10 @@ function GettingINFOEntered() {
                     NoteInterfaceCodeMainID.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1.0)"
                 }, 300);
             });
+
+            NoteFavoriteButton.addEventListener('click', () => {
+                
+            })
 
             NoteTab.style.opacity = "0";
             NoteTab.style.scale = "0.5";
