@@ -3,7 +3,8 @@ function ThemeChoose() {
     const ThemeButtonChange1 = document.getElementById('ThemeButton1');
     const ThemeButtonChange2 = document.getElementById('ThemeButton2');
     const ThemeButtonChange3 = document.getElementById('ThemeButton3');
-    const ThemeButtonChange4 = document.getElementById('ThemeButton4')
+    const ThemeButtonChange4 = document.getElementById('ThemeButton4');
+    
     const ThemeWindowOpenButton = document.getElementById('OptionButton1');
     const ThemeWindow = document.getElementById('NoteThemeHomeWindowElements');
     const ThemeWindowCloseButton = document.getElementById('GobackOptionButton1');
@@ -50,7 +51,7 @@ function ThemeChoose() {
 
         if (notewindowopen.style.opacity === "1") {
             notewindowopen.style.zIndex = "1";
-            notewindowopen.style.scale = "0.7";
+            notewindowopen.style.scale = "0.5";
             notewindowopen.style.opacity = "0";
             notewindowicon.style.transition = "all 0.2s cubic-bezier(0.1, 0, 0.1, 1.0)";
             notewindowicon.style.filter = "blur(5px)"

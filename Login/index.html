@@ -8,7 +8,7 @@
     body {
       background: #fff8dc; 
       font-family: Arial, sans-serif;
-      display: flex;
+      display:block;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -19,8 +19,9 @@
 
     .box {
       position: fixed;
-      right: 25%;
-      left: 53%;
+      top: 50%;
+      left: 63%;
+      translate: -30% -50%;
       background: #fff6b9;
       padding: 25px;
       border: 3px solid #ffffff;
@@ -31,6 +32,11 @@
       backdrop-filter: blur(5px);
     }
 
+    .InsideImagesPreviews {
+      position: fixed;
+      top: 50%;
+      right: 30%;
+    }
     input, .button1, .button2 {
       width: 90%;
       padding: 8px; 
@@ -57,28 +63,39 @@
       font-family: Arial;
       font-weight: bold;
       margin-top: 10px;
+      position:absolute;
+      right: 20px;
+      bottom: 50px;
     }
 
     .button2 {
       background: #FFBF00;
       color: #fff;
       cursor: pointer;
-      width: 150px;
+      width: 190px;
       font-size: 12px; 
       font-family: Arial;
       font-weight: bold;  
       margin-top: 5px;
+      position: absolute;
+      left: 10px;
+      bottom: 50px;
     }
 
     .Rememberme1 {
-      margin-top: 10px;
+      margin-top: 10px; 
+      bottom: 15px;
+      position: absolute;
+      left: -3%;
     }
 
     .Rememberme2 {
       color: black;
       font-size: 15px;
       font-family: Arial;
-      margin-left: 5px;
+      left: 25px;
+      position: absolute;
+      bottom: 20px;
     }
 
     footer {
@@ -90,6 +107,7 @@
       font-size: 15px;
       width: 100%;
     }
+
   </style>
 </head>
 <body>
@@ -113,10 +131,14 @@
         <label for="remember" class="Rememberme2">Remember Me</label>
       </div>
 
-      <button class="button1" type="submit">Login</button>
+      <button class="button1" onclick="window.location.href='../MainOptions/MainHomeSection.html'" type="submit">Login</button></a>
+
+    
     </form>
 
     <button class="button2" onclick="window.location.href='./signup.html'">New here? Create Account</button>
+
+     
   </div>
 
   <footer>

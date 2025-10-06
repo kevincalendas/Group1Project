@@ -164,9 +164,9 @@
 @media(max-width: 450px) {
     .OptionFrame {
         top: 75px;
-        right: 130px;
+        right: 150px;
         translate: 40%;
-        width: 350px;
+        width: 300px;
         z-index: 1;
     }
 

@@ -51,6 +51,7 @@ function GettingINFOEntered() {
     const NoteWindowSetup2 = document.getElementById('NoteCreatingQueneID');
     const noteinputname = document.getElementById('NoteInputSaveDataID');
     const noteloadinginfoH1 = document.getElementById('infoCreationSetupH1ID');
+    const NoteCodeNameID = document.getElementById('NoteCodeNameID');
     notenameinfocreation = noteinputname.value;
    
     
@@ -93,6 +94,8 @@ function GettingINFOEntered() {
             const NoteTabDeleteButton = document.createElement('button');
             const NoteTabContent = document.createElement('p');
 
+            NoteCodeNameID.textContent = notenameinfocreation;
+
             NoteTab.classList.add('NoteTab');
             NoteTabNamee.classList.add('NoteTabName');
             NoteTabDeleteButton.classList.add('NoteTabDeleteButton');
@@ -115,18 +118,26 @@ function GettingINFOEntered() {
                 setTimeout(() => {
                     NoteTab.remove();
                     notenumbercreation--
+                    const NoteInterfaceCodeMainID = document.getElementById('NoteInterfaceCodeMainID'); 
+                    NoteInterfaceCodeMainID.style.opacity = "0";
+                    NoteInterfaceCodeMainID.style.scale = "0";
+                    NoteInterfaceCodeMainID.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1.0)"
                 }, 300);
             });
 
             NoteTab.style.opacity = "0";
             NoteTab.style.scale = "0.5";
             setTimeout(() => {
+                const NoteInterfaceCodeMainID = document.getElementById('NoteInterfaceCodeMainID');
                 NoteTab.style.opacity = "1";
                 NoteTab.style.scale = "1.0";
                 NoteTab.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.0)";
+                NoteInterfaceCodeMainID.style.scale = "1";
+                NoteInterfaceCodeMainID.style.opacity = "1";
+                NoteInterfaceCodeMainID.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.1  )"
                 CloseCreationSETUP();
             }, 300);
-
+            
             //closing the note creation window setup2 and going back to main note window//
             NoteWindowSetup2.style.opacity = "0";
             NoteWindowSetup2.style.scale = "0";
@@ -135,6 +146,7 @@ function GettingINFOEntered() {
             NoteWindowSetupMAIN.style.width = "500px";
             NoteWindowSetupMAIN.style.scale = "0";
             noteloadinginfoH1.textContent = "Enter the name of your note";
+            
             setTimeout(() => {
                 NoteWindowSetup1.style.opacity = "1";
                 NoteWindowSetup1.style.zIndex = "400";

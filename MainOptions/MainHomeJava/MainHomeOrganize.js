@@ -7,10 +7,14 @@ function OrganizedWindowOpen() {
     if (mainNoteOrganizedWindow.style.opacity === "1") {
         mainNoteOrganizedWindow.style.opacity = "0";   
         mainNoteOrganizedWindow.style.transform = "translateX(420px)";
+
+        mainNoteOrganizedWindow.style.zIndex = "1";
         OptionFrame.classList.toggle('optionSettings-Open');
     } else {
         mainNoteOrganizedWindow.style.opacity = "1";
         mainNoteOrganizedWindow.style.transform = "translateX(0px)";
+        
+        mainNoteOrganizedWindow.style.zIndex = "800";
         OptionFrame.classList.toggle('optionSettings-Open');
     }
 
@@ -46,6 +50,11 @@ function OpenCloseOrganizedSetup() {
     const OrganizePreviewIMG2 = document.getElementById('CreateListIMGPreview2ID');
 
     if (OrganizedWindowSetup.style.opacity === "1") {
+        const UncategoryWindow = document.getElementById('UncategorizedList');
+        const MainUncategorylistWindow = document.getElementById('OrganizedWindows');
+
+        UncategoryWindow.style.opacity = "0";
+        MainUncategorylistWindow.style.opacity = "1";  
         OrganizedWindowSetup.style.opacity = "0";   
         OrganizedWindowSetup.style.scale = "0";
         OrganizedWindowSetup.style.zIndex = "1";
@@ -91,6 +100,7 @@ function CreateOrganizedList() {
             OrganizePreviewIMG1.classList.add('AniamtionExecuteIMGPreview1');
             OrganizePreviewIMG2.classList.add('AniamtionExecuteIMGPreview2');
             OrganizedCancelSetupButton.style.opacity = "0";
+            HeadingWindowSetupOrganized.style.left = "20%";
             OrganizedNextButton.style.opacity = "0";
             OrganizedInputText.style.opacity = "0";
             OrganizedWindowSetup.style.height = "175px";
@@ -103,7 +113,7 @@ function CreateOrganizedList() {
                 const NewOrganizedList = document.createElement('button');
                 NewOrganizedList.classList.add('NewOrganizedList');
                 NewOrganizedList.textContent = organizednameinfo;   
-                HeadingWindowSetupOrganized.style.left = "43%";
+                HeadingWindowSetupOrganized.style.left = "45%";
                 
 
                 OrganizedInfosNumber++
@@ -143,7 +153,19 @@ function CreateOrganizedList() {
 }
 
 
-function OpenNote() {
-    const OrganizedWindows = document.getElementById('OrganizedWindows');
-    const MainUncategorylistWindow = document.getElementById('OrganizeWindows')
+function OpenNoteUncateg() {
+    const UncategoryWindow = document.getElementById('UncategorizedList');
+    const MainUncategorylistWindow = document.getElementById('OrganizedWindows');
+    
+
+    UncategoryWindow.style.opacity = "1";
+    MainUncategorylistWindow.style.opacity = "0";  
+}
+
+function CloseNoteUncateg() {
+    const UncategoryWindow = document.getElementById('UncategorizedList');
+    const MainUncategorylistWindow = document.getElementById('OrganizedWindows');
+
+    UncategoryWindow.style.opacity = "0";
+    MainUncategorylistWindow.style.opacity = "1";  
 }

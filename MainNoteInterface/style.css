@@ -1,0 +1,42 @@
+
+
+body {
+background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIALcAwQMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAAAQb/xAAXEAEBAQEAAAAAAAAAAAAAAAAAATER/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAECBv/EABgRAQEBAQEAAAAAAAAAAAAAAAABETEh/9oADAMBAAIRAxEAPwDWgOGdUAAAAAAAAAAAAAAAAAAAAAAAAoCgAAAAAAAAAAAAAAAAAAAAigAAEVFhAAUADAAMAAwAAAAAAAAADAAASqlQQAFixFhAAaAAABKACAioAioAAgAAAJRYqTVbnASqlQQAFWIsIADQAAAJQAQEVAKiogAAAAAJRZqpNVucBFRBAAWLEiwgANAAAAlABARUAqKiAAAAAAlFmqk1W5wEqoggAKsRYQAGgAAASgAgIqAVFqIAAAAACUWaqTVbnARUqCAAsWIsIADQAAAJQAQEVAEWogAAAAAJRZqpNVucBFSoIACrEWEABQAXQAQAAAAOJxQ8E4cUMgnDihkE4cUMgnFBQRUZEABYqAKIAogCiAKIAogCiAKIAogCiAKIAqACCgIAgAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAP/9k=);
+}
+
+
+.carousel {
+    margin: 3em auto;
+    overflow-x: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex: 50%;
+    padding: 0 4px;
+    scale: 1.1;
+}
+
+figure {
+    padding: 4px;
+    scale: 1.1;
+}
+
+figcaption {
+color: black;
+font-style: italic;
+padding: 2px;
+text-align: center;
+} 
+
+.card {
+    display: grid;
+    flex: 1 0 200;  
+    height: 200px;
+    background-color: var(--primary-color);
+    padding: 2em;
+    border-radius: 15%;
+    text-align: center;
+    align-content: center;
+    scale: 1.1;
+}
+

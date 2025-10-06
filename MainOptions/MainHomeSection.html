@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeNoteListTabs.css">
         <link rel="stylesheet" href="ForCSSMainHome/MainHomeOrganizedWindow.css">
         <link rel="stylesheet" href="ForCSSMainHome/MainCodeInterface.css">
-        <meta name="viewport" content="width=device-width, initial-scale=0.9"
+        <meta name="viewport" content="width=device-width, initial-scale=0.9">
     </head>
     <body id="pagebody">
         <!--For JAVA-->
@@ -115,18 +115,20 @@
             <button class="ExitOrganizedWindow" onclick="OrganizedWindowOpen()"> X </button>
             <div class="OrganizedWindows" id="OrganizedWindows">
                 <button class="OrganizedList" id="OrganizedListID" onclick="OpenOrganizedList()"> Favorites⭐ </button>
-                <button class="OrganizedList" id="OrganizedListID" onclick="OpenOrganizedList()"> Uncategorized </button>
+                <button class="OrganizedList" id="OrganizedListID" onclick="OpenNoteUncateg()"> Uncategorized </button>
             </div>
             <div class="MainNoteOrganizedLists" id="MainNoteOrganizedListsID">
                 <div class="UncategorizedList" id="UncategorizedList">
-                
                 </div>
             </div>
+            <button class="GObackList" id="GObackListID" onclick="CloseNoteUncateg()">
+                        Go back
+                    </button>
             <img class="OrganizeIconIMG" src="../2ndpageIcons/OrganizeIcon.png">
         </div>
 
         <div class="OrganizedListCreationWindow" id="OrganizedListCreationWindowID">
-            <h1 class="OrganizedListCreationH1" id="OrganizedListCreationH1ID"> Create your organized list </h1>
+            <h1 class="OrganizedListCreationH1" id="OrganizedListCreationH1ID"> Create your Folder </h1>
             <input type="text" placeholder=" Input here" class="OrganizedListCreationInput" id="OrganizedListCreationInputID">
             <img class="CreateListIMGPreview1" id="CreateListIMGPreview1ID" src="../2ndpageIcons/Folder.png"> 
             <img class="CreateListIMGPreview2" id="CreateListIMGPreview2ID" src="../Login/LoginIcons/NOTEICON1.png"> 
@@ -140,11 +142,10 @@
         </div>
 
         <div class="NoteInterfaceCodeMain" id="NoteInterfaceCodeMainID">
-            <textarea class="NoteCodeName" id="NoteCodeNameID">Text here</textarea>
+            <h1 class="NoteCodeName" id="NoteCodeNameID">Title</h1>
             <textarea class="NoteCodeContent" rows="5" cols="50"></textarea>
             <div class="NoteCodeServerStatus" id="NoteInterfaceCodeMainID"></div>
             <h1 class="NoteCodeStatush1" id="NoteCodeStatush1ID">Saved!</h1>
-            <button class="NoteCodeExitEdit" id="NoteCodeExitEditID"></button>
         </div>
 
 
