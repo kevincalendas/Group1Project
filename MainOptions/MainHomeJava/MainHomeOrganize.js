@@ -53,7 +53,6 @@ function OpenCloseOrganizedSetup() {
         const UncategoryWindow = document.getElementById('UncategorizedList');
         const MainUncategorylistWindow = document.getElementById('OrganizedWindows');
 
-        UncategoryWindow.style.opacity = "0";
         MainUncategorylistWindow.style.opacity = "1";  
         OrganizedWindowSetup.style.opacity = "0";   
         OrganizedWindowSetup.style.scale = "0";
@@ -174,18 +173,35 @@ function CreateOrganizedList() {
 
 
 function OpenNoteUncateg() {
-    const UncategoryWindow = document.getElementById('UncategorizedList');
+    const UncategoryWindow = document.getElementById('MainNoteOrganizedListsID');
     const MainUncategorylistWindow = document.getElementById('OrganizedWindows');
+    const GObackListID = document.getElementById('GObackListID');
     
 
+    GObackListID.style.visibility = "visible";
+    GObackListID.style.opacity = "1";
+    GObackListID.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1)";
     UncategoryWindow.style.opacity = "1";
+    UncategoryWindow.style.scale = "1";
+    UncategoryWindow.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1)";
     MainUncategorylistWindow.style.opacity = "0";  
+    MainUncategorylistWindow.style.scale = "0";
+    MainUncategorylistWindow.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1)";
+    
 }
 
 function CloseNoteUncateg() {
-    const UncategoryWindow = document.getElementById('UncategorizedList');
+    const UncategoryWindow = document.getElementById('MainNoteOrganizedListsID');
     const MainUncategorylistWindow = document.getElementById('OrganizedWindows');
+    const GObackListID = document.getElementById('GObackListID');
 
+    GObackListID.style.visibility = "hidden";
+    GObackListID.style.opacity = "0";
+    GObackListID.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1)";
     UncategoryWindow.style.opacity = "0";
+    UncategoryWindow.style.scale = "0";
+    UncategoryWindow.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1)";
     MainUncategorylistWindow.style.opacity = "1";  
+    MainUncategorylistWindow.style.scale = "1";
+    MainUncategorylistWindow.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1)";
 }

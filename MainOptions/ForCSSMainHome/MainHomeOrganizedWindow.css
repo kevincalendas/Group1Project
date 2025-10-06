@@ -271,31 +271,10 @@
 }
 
 /*For Main Categorized/Uncategorized Lists */
-.UncategorizedList {
-    display: grid;
-    overflow-y: auto;
-    overflow-x: hidden;
-    row-gap: 10px;
-    min-height: 70px;
-    max-height: 340px;
-    width: 380px;
-    opacity: 0;
-}
-
-.MainNoteOrganizedLists {
-    position: absolute;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    min-height: 70px;
-    max-height: 330px;
-    left: 0;
-    width: 400px;
-}
-
 .GObackList {
     position: absolute;
     bottom: 10px;
-    right: 10px;
+    left: 10px;
     width: 140px;
     height: 40px;
     background-color: rgba(255, 255, 255, 0.3);
@@ -305,6 +284,7 @@
     font-size: 20px;
     font-weight: bold;
     font-family: Arial;
+    visibility: hidden;
 }
 
 @media (max-width: 600px) {

@@ -12,7 +12,7 @@ function OpenCreationSETUP() {
     notewindowicon.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.3)";
     notewindowicon.style.filter = "blur(0px)"
     notewindowiconpreview.classList.add('animateFUNCTIONPreview1');
-    ThemeWindow.style.transform = "scale(0.5)";
+    ThemeWindow.style.transform = "scale(1)";
     ThemeWindow.style.opacity = "0";
     ThemeWindow.style.zIndex = "1";
     ThemeWindow.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.2)"
@@ -52,11 +52,13 @@ function GettingINFOEntered() {
     const noteinputname = document.getElementById('NoteInputSaveDataID');
     const noteloadinginfoH1 = document.getElementById('infoCreationSetupH1ID');
     const NoteCodeNameID = document.getElementById('NoteCodeNameID');
+    const NoteCodeContent = document.getElementById('NoteCodeContentID');
     notenameinfocreation = noteinputname.value;
    
     
     // closing the creation of the note window //
     
+
 
 
     if (noteinputname.value === "") {
@@ -87,65 +89,127 @@ function GettingINFOEntered() {
         }, 2200)
 
         setTimeout(() => {
+            const ThemeWindow = document.getElementById('NoteThemeHomeWindowElements');
             const OrganizedWindows = document.getElementById('OrganizedWindowsID');
             NoListOrganizedCreated = true;
-            const NoteTab = document.createElement('div');
+            const NoteTab = document.createElement('button');
             const NoteTabNamee = document.createElement('h1');
             const NoteFavoriteButton = document.createElement('button');
+            const NoteTabOpenButton = document.createElement('button');
             const NoteTabDeleteButton = document.createElement('button');
             const NoteTabContent = document.createElement('p');
 
 
             NoteCodeNameID.textContent = notenameinfocreation;
+            NoteTabOpenButton.textContent = "Open";
 
 
 
             NoteTab.classList.add('NoteTab');
-            NoteTabNamee.classList.add('NoteTabName');
-            NoteFavoriteButton.classList.add('NoteFavoriteButton');
+            NoteTabNamee.classList.add('NoteTabNamee');
             NoteTabDeleteButton.classList.add('NoteTabDeleteButton');
+            NoteTabOpenButton.classList.add('NoteTabOpenButton');
             NoteTabContent.classList.add('NoteTabContent'); 
 
             NoteTabNamee.textContent = notenameinfocreation;
             NoteTabDeleteButton.textContent = "Delete";
-            
+            NoteTabContent.textContent = "Input";
 
 
             NoteGridLayoutWindowCreation.appendChild(NoteTab);
+            NoteTab.appendChild(NoteTabOpenButton);
             NoteTab.appendChild(NoteTabContent);
             NoteTab.appendChild(NoteTabNamee);  
-            NoteTab.appendChild(NoteFavoriteButton);
             NoteTab.appendChild(NoteTabDeleteButton);
 
+            ThemeWindow.style.scale = "1.0";
             NoteTabDeleteButton.addEventListener('click', () => {
+                const NoteCodeNameID = document.getElementById('NoteCodeNameID');
+                const NoteCodeContentInterface = document.getElementById('NoteCodeContentID');
+                const NoteInterfaceCodeMainID = document.getElementById('NoteInterfaceCodeMainID');
+
+
                 NoteTab.style.scale = "0.5";
                 NoteTab.style.opacity = "0";
                 NoteTab.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1.0)";
+
+                const ValueTextContent = NoteCodeContentInterface.value; 
+                const ValueTitleContent = NoteCodeNameID.textContent; 
+
+                NoteTabNamee.textContent = ValueTitleContent;
+                NoteTabContent.textContent = ValueTextContent;
+
                 setTimeout(() => {
                     NoteTab.remove();
-                    notenumbercreation--
-                    const NoteInterfaceCodeMainID = document.getElementById('NoteInterfaceCodeMainID'); 
+                    notenumbercreation--;
+                    NoteCodeNameID.textContent = '';
+                    NoteCodeContentInterface.value = '';
                     NoteInterfaceCodeMainID.style.opacity = "0";
-                    NoteInterfaceCodeMainID.style.scale = "0";
-                    NoteInterfaceCodeMainID.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1.0)"
+                    NoteInterfaceCodeMainID.style.scale = "0.9";
+                    NoteInterfaceCodeMainID.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1.0)";
+
+                    setTimeout(() => {
+                        NoteInterfaceCodeMainID.scale = "0";
+                    }, 400);
                 }, 300);
             });
 
-            NoteFavoriteButton.addEventListener('click', () => {
-                
-            })
+            NoteTabOpenButton.addEventListener('click', () => {
+                const NoteCodeNameID = document.getElementById('NoteCodeNameID');
+                const NoteCodeContent = document.getElementById('NoteCodeContentID');
+                const NoteInterfaceCodeMainID = document.getElementById('NoteInterfaceCodeMainID');
+
+                const ValueTextContent = NoteTabContent.value; 
+                const ValueTitleContent = NoteTabNamee.textContent; 
+
+                NoteCodeNameID.textContent = ValueTitleContent;
+                NoteCodeContent.textContent = ValueTextContent;
+
+                NoteInterfaceCodeMainID.style.scale = "1";
+                NoteInterfaceCodeMainID.style.opacity = "1";
+                NoteInterfaceCodeMainID.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1.1)";
+            });
+
+            GoBackButtonNoteInterfaceID.addEventListener('click', () => {
+                const NoteCodeNameID = document.getElementById('NoteCodeNameID');   // h1 in interface
+                const NoteCodeContent = document.getElementById('NoteCodeContentID'); // textarea in interface
+                const NoteInterfaceCodeMainID = document.getElementById('NoteInterfaceCodeMainID');
+
+                // ✅ Just transfer text directly to the current note tab
+                NoteTabNamee.textContent = NoteCodeNameID.textContent; // h1 → h1
+                NoteTabContent.textContent = NoteCodeContent.value;    // textarea → p
+
+                // ✅ Animate closing
+                NoteInterfaceCodeMainID.style.scale = "0.7";
+                NoteInterfaceCodeMainID.style.opacity = "0";
+                NoteInterfaceCodeMainID.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.1)";
+
+                setTimeout(() => {
+                    NoteInterfaceCodeMainID.style.scale = "0";
+                }, 500);
+            });
+
 
             NoteTab.style.opacity = "0";
             NoteTab.style.scale = "0.5";
             setTimeout(() => {
                 const NoteInterfaceCodeMainID = document.getElementById('NoteInterfaceCodeMainID');
-                NoteTab.style.opacity = "1";
-                NoteTab.style.scale = "1.0";
+                NoteTab.style.opacity = "0";
+                NoteTab.style.scale = "0.7";
                 NoteTab.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.0)";
                 NoteInterfaceCodeMainID.style.scale = "1";
                 NoteInterfaceCodeMainID.style.opacity = "1";
                 NoteInterfaceCodeMainID.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.1  )"
                 CloseCreationSETUP();
+                setTimeout(() => {
+                    NoteTab.style.opacity = "1";
+                    NoteTab.style.scale = "1.0";
+                    NoteTab.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.0)";
+                    NoteInterfaceCodeMainID.style.scale = "1";
+                    NoteInterfaceCodeMainID.style.opacity = "1";
+                    NoteInterfaceCodeMainID.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.1  )"
+                CloseCreationSETUP();
+                }, 400);
             }, 300);
             
             //closing the note creation window setup2 and going back to main note window//
@@ -172,6 +236,10 @@ function GettingINFOEntered() {
     }
 
 }
+
+//Closing the MainCodeInterface //
+
+//for opening the interface//
 
 // Tracks whether any organized note list has been created
 

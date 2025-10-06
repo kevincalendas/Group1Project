@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    
+
   </head>
+  <body>
+    <p id="noteParagraph">This is my saved note.</p>
+    <textarea id="noteTextarea" placeholder="Write something..."></textarea>
+    <button id="loadBtn">Load to Textarea</button>
+    <script>
+      document.getElementById("loadBtn").addEventListener("click", function() {
+        // get text from the paragraph
+        const paragraphText = document.getElementById("noteParagraph").textContent;
+
+        // put it inside the textarea
+        document.getElementById("noteTextarea").value = paragraphText;
+      });
+    </script>
+  </body>
 </html>
