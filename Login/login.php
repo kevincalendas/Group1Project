@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (password_verify($password, $row['password'])) {
         echo "Login successful! Welcome, " . htmlspecialchars($row['username']) . "!";
+        header("Location: ../MainOptions/MainHomeSection.html");
     } else {
         die("Incorrect password!");
     }

@@ -293,3 +293,20 @@
     font-weight: bold;
     font-family: Arial;
 }
+
+@media (max-width: 600px) {
+    .GObackList {
+    position: absolute;
+    bottom: 60px;
+    right: 10px;
+    width: 140px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial;
+}
+}

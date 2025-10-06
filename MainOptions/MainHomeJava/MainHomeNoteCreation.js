@@ -164,3 +164,10 @@ function GettingINFOEntered() {
 }
 
 // Tracks whether any organized note list has been created
+
+
+const indexlogininputuser = get.getElementById('Email').value;
+const h1getinput = get.getElementById('ProfileName');
+
+localStorage.setItem(indexlogininputuser);  
+

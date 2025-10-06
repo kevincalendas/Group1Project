@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up | Note#Code</title>
+  <style>
+    body {
+      margin: 0;
+      font-family:  Georgia, Times, 'Times New Roman', serif;
+      background-image: url("https://img.freepik.com/premium-vector/elegant-yellow-watercolor-background_205765-201.jpg");
+      background-attachment: fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .signup-box {
+      background: #fff8dc;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 300px;
+      text-align: center;
+    }
+
+    .signup-box h2 {
+      color: #e6ac00;
+      margin-bottom: 15px;
+      font-family:  Georgia, Times, 'Times New Roman', serif;
+      font-size: 27px;
+
+
+      animation-name: animatethings;
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+      animation-fill-mode: forwards;
+    }
+
+   
+
+    .signup-box button {
+      width: 95%;
+      padding: 6px;
+      background: #e6ac00;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .signup-box button:hover {
+      background: #cc9900;
+    }
+
+    .signup-box a {
+      display: block;
+      margin-top: 10px;
+      font-size: 13px;
+      text-decoration: none;
+      color: #e6ac00;
+    }
+    .signup-box input, .button1.sign, .button2{
+      width: 90%;
+      padding: 8px; 
+      margin: 8px 0;
+      border: 1px solid #aaa;
+      border-radius: 3px;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.0);
+    }
+
+    .sign
+
+    .button1:hover, .button2:hover {
+      scale: 1.03;
+    }
+
+    input:hover {
+      scale: 1;
+      box-shadow: 0 0 5px rgba(36, 39, 0, 0.616);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.5);
+    }
+    
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      right: 20px;
+      font-size: 12px;
+      color: #e6ac00;
+    }
+
+
+    @media (max-width: 600px) {
+      .signup-box {
+        width: 80%;
+      }
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="signup-box">
+    <h2>Create Account</h2>
+
+    <form action="signup.php" method="POST">
+      <input type="text" name="fullname" placeholder="Full Name" required>
+      <input type="text" name="username" placeholder="Username" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <input type="password" name="confirmpassword" placeholder="Confirm Password" required>
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <p style = "font-weight: bolder;"> <a href="index.html">Already have an account? Login</a> </p>
+  </div>
+</body>
+</html>

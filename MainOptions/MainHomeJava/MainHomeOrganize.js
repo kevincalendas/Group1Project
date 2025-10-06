@@ -111,13 +111,17 @@ function CreateOrganizedList() {
                 HeadingWindowSetupOrganized.innerHTML = "Done!";
                 let OrganizedInfosNumber = 1;
                 const NewOrganizedList = document.createElement('button');
+                const NewOrganizedRemove = document.createElement('button');
                 NewOrganizedList.classList.add('NewOrganizedList');
+                NewOrganizedRemove.classList.add('NewOrganizedRemove');
                 NewOrganizedList.textContent = organizednameinfo;   
+                NewOrganizedRemove.textContent = "Delete";
                 HeadingWindowSetupOrganized.style.left = "45%";
                 
 
                 OrganizedInfosNumber++
                 
+                NewOrganizedList.appendChild(NewOrganizedRemove);
                 OrganizedWindowsMainParent.appendChild(NewOrganizedList);
 
                 NewOrganizedList.style.scale = "0.5";
