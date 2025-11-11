@@ -1,0 +1,167 @@
+.AboutWindow {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 600px;
+    height: 400px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid #929292;
+    border-radius: 13px;
+    box-shadow: 0 0px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+}
+
+.AboutWindow1 {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: 360px;
+    background-color: none;
+    overflow-y: scroll;
+}
+
+.NoteIcon {
+    position: fixed;
+    top: 20px;
+    left: 40px;
+    width: 50px;
+    height: 50px;
+}
+
+.AboutWindowH1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    color: #222;
+    position: fixed;
+    top: 0px;
+    left: 110px;
+}
+
+.AboutWindowP1 {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color: #333;
+    position: absolute;
+    left: 40px;
+    text-align: justify;
+    line-height: 25px;
+}
+
+.AboutWindowsP2 {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color: #333;
+    position: absolute;
+    top: 300px;
+    left: 40px;
+    text-align: justify;
+    line-height: 25px;
+}
+
+.AboutWindowCloseButton {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    padding: 7px 30px;
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(0, 0, 0, 0.555);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+.AboutWindowCloseButton:hover {
+    scale: 1.05;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    background-color: rgba(255, 123, 123, 0.5);
+}
+
+.MainTitlesA1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 24px;
+    color: #222;
+    position: absolute;
+    top: 260px;
+    left: 40px;
+}
+
+@media(max-width: 700px) {
+    .AboutWindow {
+        width: 90%;
+        height: 70%;
+        top: 52%;
+    }
+
+    .AboutWindow1 {
+        height: 85%;
+    }
+    
+    .MainTitlesA1 {
+        top: 340px;
+    }
+    .AboutWindowsP2 {
+        top: 385px;
+    }
+    
+}
+
+@media(max-width: 500px) {
+    .AboutWindow {
+        width: 90%;
+        height: 70%;
+        top: 52%;
+    }
+
+    .AboutWindow1 {
+        height: 85%;
+    }
+    
+    .MainTitlesA1 {
+        top: 345px;
+    }
+    .AboutWindowsP2 {
+        top: 380px;
+    }
+    
+}
+
+@media(max-width: 450px) {
+    .AboutWindow {
+        width: 90%;
+        height: 70%;
+        top: 52%;
+    }
+
+    .AboutWindow1 {
+        height: 85%;
+    }
+    
+    .MainTitlesA1 {
+        top: 425px;
+    }
+    .AboutWindowsP2 {
+        top: 480px;
+    }
+    
+}
+
+@media (max-width: 400px) {
+    .AboutWindow {
+        width: 80%;
+    }
+    .AboutWindowH1 {
+        top: 7px;
+        font-size: 25px;
+    }
+}

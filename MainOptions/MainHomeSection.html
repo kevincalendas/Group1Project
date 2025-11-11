@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeNoteListTabs.css">
         <link rel="stylesheet" href="ForCSSMainHome/MainHomeOrganizedWindow.css">
         <link rel="stylesheet" href="ForCSSMainHome/MainCodeInterface.css">
+        <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeAbout.css">
         <meta name="viewport" content="width=device-width, initial-scale=0.9">
     </head>
     <body id="pagebody">
@@ -18,6 +19,7 @@
         <script src="../MainOptions/MainHomeJava/MainHomeThemeChange.js"></script>
         <script src="../MainOptions/MainHomeJava/MainHomeNoteCreation.js"></script>
         <script src="../MainOptions/MainHomeJava/MainHomeOrganize.js"></script>
+        <script src="../MainOptions/MainHomeJava/MainHomeOtherFunction.js"></script>
         <!--Main Dock at the top of the Main webpage--> 
         <div class="MainHomeDockSection">
             <!--MainTopDockSections-->
@@ -50,7 +52,7 @@
                         <button class="OptionButton1" id="OptionButton1" onclick="ThemeChoose()"> Theme </button>
                         <button class="OptionButton2" id="OptionButton2ID" onclick="OrganizedWindowOpen()"> Organize Note#Code </button>
                         <button class="OptionButton3"> Checklist </button>
-                        <button class="OptionButton4"> About </button>
+                        <button class="OptionButton4" onclick="MainOpenWindowAbout()"> About </button>
                          <button class="OptionButton5" onclick="window.location.href='../Login/index.html'"> Logout </button>
                     </div>
                 </div>         
@@ -135,6 +137,27 @@
             <button class="OrganizedListCreationButton" id="OrganizedListCreationButton" onclick="CreateOrganizedList()"> Create List </button>
             <button class="OrganizedListCreationCancelButton" id="OrganizedListCreationCancelButton" onclick="OpenCloseOrganizedSetup()"> Cancel </button>
         </div>
+
+        <div class="AboutWindow" id="AboutWindow">
+            <img class="NoteIcon" src="../Login/LoginIcons/NOTEICON1.png" alt="notepad with a pencil">
+            <h1 class="AboutWindowH1"> About Note#Code </h1>
+            <button class="AboutWindowCloseButton" id="AboutWindowCloseButton" onclick="MainCloseWindowAbout()"> Close </button>
+            <div class="AboutWindow1">
+                <p class="AboutWindowP1"> It is a project developed by students at Sumulong College of Arts and Sciences (SCAS) and is part of a research study titled "Typing Without Worry
+                    <br><br>The main goal of Note#Code is to lessen the stress and wasted time that overcomes from losing files because you forgot to save or due to accidental 
+                    app closures. <br><br>By using this tool, users especially to ICT students can focus better on their notecode creation without worrying about technical issues.</p>
+                
+                    <h1 class="MainTitlesA1"> Key Functions & Goals </h1>
+                <p class="AboutWindowsP2">The application is being developed to be a free web-based application tool and a reliable, easy-to-use platform for both note-taking and code writing.
+                    <br><br>Some of the key functions and goals of Note#Code include:
+                    <br><br> 1. Auto-Save Functionality: The application automatically saves notes and code snippets in real-time, reducing the risk of data loss.
+                    <br><br> 2. Organized Note Management: Users can create, categorize, and manage their notes and code snippets efficiently through an intuitive interface.
+                    <br><br> 3. User-Friendly Interface: The application features a clean and beautiful interface that is easy to navigate, making it accessible to users of all technical levels.
+                    <br><br><br>
+                </p>
+            </div>
+        </div>
+
 
         <div style="font-family:Arial; background:linear-gradient(to bottom right,); height:80vh; display:flex; justify-content:center; align-items:center; flex-direction:column; color:#333;">
         <div style="font-size:32px; font-weight:bold;">Note#Code</div>
