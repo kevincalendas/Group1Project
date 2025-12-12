@@ -2,7 +2,7 @@
 // One-time setup script to add category support to the database
 // Run this once to set up the categories table and add category_id to notes
 
-$conn = mysqli_connect("localhost", "Kev", "103022_Si", "notecode");
+$conn = mysqli_connect("localhost", "nick", "nick2025", "notecode");
 
 if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
