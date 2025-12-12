@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-$conn = mysqli_connect("localhost", "Kev", "103022_Si", "notecode");
+$conn = mysqli_connect("localhost", "nick", "nick2025", "notecode");
 
 if (!$conn) {
     http_response_code(500);
