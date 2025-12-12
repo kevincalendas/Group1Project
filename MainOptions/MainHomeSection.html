@@ -15,6 +15,58 @@
     </head>
     <body id="pagebody">
         <!--For JAVA-->
+        <script>
+            // Initialize user data from URL parameters (set after login)
+            // This must run immediately, before other scripts
+            (function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const email = urlParams.get('email');
+                const username = urlParams.get('username');
+                
+                if (email) {
+                    localStorage.setItem('userEmail', email);
+                }
+                if (username) {
+                    localStorage.setItem('profileName', username);
+                }
+                
+                // Clean up URL by removing query parameters
+                if (email || username) {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+            })();
+        </script>
+        <!-- Load scripts after DOM is ready to ensure elements exist -->
+        <script>
+            // Ensure DOM is loaded before running scripts
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    loadScripts();
+                });
+            } else {
+                loadScripts();
+            }
+            
+            function loadScripts() {
+                // Update profile displays after DOM is ready
+                const email = localStorage.getItem('userEmail');
+                const username = localStorage.getItem('profileName');
+                
+                if (username) {
+                    const profileNameElement = document.getElementById('ProfileName');
+                    if (profileNameElement) {
+                        profileNameElement.textContent = username;
+                    }
+                }
+                
+                if (email) {
+                    const profileEmailElement = document.querySelector('.ProfileEmail');
+                    if (profileEmailElement) {
+                        profileEmailElement.textContent = email;
+                    }
+                }
+            }
+        </script>
         <script src="../MainOptions/MainHomeJava/MainHomeSection.js"></script>
         <script src="../MainOptions/MainHomeJava/MainHomeThemeChange.js"></script>
         <script src="../MainOptions/MainHomeJava/MainHomeNoteCreation.js"></script>
@@ -165,9 +217,16 @@
         </div>
 
         <div class="NoteInterfaceCodeMain" id="NoteInterfaceCodeMainID">
-            <h1 class="NoteCodeName" id="NoteCodeNameID">Title</h1>
-            <textarea class="NoteCodeContent" id="NoteCodeContentID" rows="5" cols="50"></textarea>
-            <button class="GoBackButton" id="GoBackButtonNoteInterfaceID"></button>
+            <h1 class="NoteCodeName" id="NoteCodeNameID" contenteditable="true">Title</h1>
+            <button class="NoteFavoriteButton" id="NoteFavoriteButton" aria-label="Toggle favorite">☆</button>
+            <div class="NoteCategorySelector" id="NoteCategorySelectorID">
+                <label for="NoteCategorySelect" class="CategoryLabel">Category:</label>
+                <select id="NoteCategorySelect" class="CategorySelect">
+                    <option value="">Uncategorized</option>
+                </select>
+            </div>
+            <textarea class="NoteCodeContent" id="NoteCodeContentID" rows="5" cols="50" placeholder="Start typing your note here..."></textarea>
+            <button class="GoBackButton" id="GoBackButtonNoteInterfaceID" aria-label="Close note">✕</button>
             <div class="NoteCodeServerStatus" id="NoteInterfaceCodeMainID"></div>
             <h1 class="NoteCodeStatush1" id="NoteCodeStatush1ID">Saved!</h1>
         </div>

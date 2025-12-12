@@ -118,6 +118,37 @@
     transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
+.NoteTabFavoriteButton {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.NoteTabFavoriteButton:hover {
+    transform: scale(1.2);
+    background-color: rgba(255, 255, 200, 0.9);
+    box-shadow: 0 2px 8px rgba(255, 200, 0, 0.4);
+}
+
+.NoteTabFavoriteButton.favorited {
+    background-color: rgba(255, 230, 0, 0.9);
+    border-color: rgba(255, 200, 0, 0.5);
+    box-shadow: 0 2px 8px rgba(255, 200, 0, 0.5);
+}
+
 .NoteTabDeleteButton:hover, .NoteTabOpenButton:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);

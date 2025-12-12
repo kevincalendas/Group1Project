@@ -1,47 +1,118 @@
 .NoteInterfaceCodeMain {
     position: absolute;
-    width: 60%;
-    height: 70%;
-    background-color: rgb(255, 255, 255, 0.5);
-    top: 18%;
+    width: 70%;
+    max-width: 800px;
+    height: 75%;
+    min-height: 500px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+    top: 15%;
     left: 50%;
-    translate: -50% -10%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    translate: -50% -5%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(20px);
-    border: 2px solid rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
+    border: 2px solid rgba(255, 230, 0, 0.3);
+    border-radius: 15px;
     z-index: 1;
     opacity: 0;
     scale: 0;
+    padding: 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1.1);
 }
 
 .NoteCodeName {
     position: absolute;
     resize: none;
-    top: 0px;
-    height: 30px;
+    top: 10px;
+    height: 40px;
     left: 20px;
+    right: 60px;
     font-weight: bold;
-    font-family: Arial;
-    font-size: 25px;
+    font-family: Arial, sans-serif;
+    font-size: 28px;
     border: none;
-    background-color: rgba(255, 255, 255, 0 );
+    background-color: rgba(255, 255, 255, 0);
+    color: #333;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.NoteCodeName:focus {
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 
 
+.NoteCategorySelector {
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.CategoryLabel {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+    white-space: nowrap;
+}
+
+.CategorySelect {
+    flex: 1;
+    padding: 8px 12px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.9);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.CategorySelect:hover {
+    border-color: rgba(255, 230, 0, 0.5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.CategorySelect:focus {
+    border-color: rgba(255, 230, 0, 0.8);
+    box-shadow: 0 0 12px rgba(255, 230, 0, 0.3);
+}
+
 .NoteCodeContent {
     position: absolute;
     resize: none;
-    top: 60px;
+    top: 110px;
     left: 20px;
-    width: 97%;
-    height: 80%;
-    font-weight: bold;
-    font-family: Arial;
-    font-size: 15px;
-    border: none;
-    background-color: rgba(255, 255, 255, 0 );
+    right: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 180px);
+    font-weight: normal;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.NoteCodeContent:focus {
+    border-color: rgba(255, 230, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .NoteCodeServerStatus {
@@ -57,31 +128,72 @@
 
 .NoteCodeStatush1 {
     position: absolute;
-    bottom: 0px;
-    left: 35px;
-    font-size: 15px;
-    font-family: Arial;
+    bottom: 8px;
+    left: 40px;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    color: #666;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
 .NoteFavoriteButton {
-    top: 10px;
-    right: 10px;
+    position: absolute;
+    right: 60px;
+    top: 15px;
+    width: 35px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.NoteFavoriteButton:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(255, 200, 0, 0.4);
+    background: rgba(255, 255, 200, 0.9);
+}
+
+.NoteFavoriteButton.favorited {
+    background: rgba(255, 230, 0, 0.9);
+    border-color: rgba(255, 200, 0, 0.5);
+    box-shadow: 0 4px 12px rgba(255, 200, 0, 0.5);
 }
 
 .GoBackButton {
     position: absolute;
     right: 15px;
     top: 15px;
-    width: 30px;
-    height: 30px;
-    background-color: red;
-    border: none;
-    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
     transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .GoBackButton:hover {
-    scale: 1.1;
-    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transform: scale(1.15) rotate(90deg);
+    box-shadow: 0 4px 12px rgba(255, 68, 68, 0.4);
+    background: linear-gradient(135deg, #ff6666 0%, #ff0000 100%);
+}
+
+.GoBackButton:active {
+    transform: scale(1.05) rotate(90deg);
 }
  
