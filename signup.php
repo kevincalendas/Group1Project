@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "meow", "Kingbunner123", "notecode");
+$conn = mysqli_connect("localhost", "Kev", "103022_Si", "notecode");
 
 if (!$conn) {
     die("Failed to connect: " . mysqli_connect_error());
