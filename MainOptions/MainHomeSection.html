@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="ForCSSMainHome/MainNoteInterfaceUserInfo.css">
         <meta name="viewport" content="width=device-width, initial-scale=0.9">
     </head>
-    <body id="pagebody">
+    <body id="pagebody" class="Toggle-Dark-Mode-Window">
         <!--For JAVA-->
         <script>
             // Initialize user data from URL parameters (set after login)
@@ -140,6 +140,11 @@
         <div class="NoteThemeHomeWindowElements" id="NoteThemeHomeWindowElements">
             <button class="GobackOptionButton1" id="GobackOptionButton1" onclick="ThemeChoose()"> Go back </button>
             <h1 class="ThemeWindowh1">Choose your Themes</h1>
+            <div class="List-of-Color-Modes-Window">
+                <h1 class="ColorWindowText" id="ColorWindowText">Choose your default UI color mode</h1>
+                <button class="ColorModeButton1" id="ColorModeButton1" onclick="ColorModeWindowChooseLight()"> Switch to Light Mode </button>
+            </div>
+
             <div class="ListsofThemesWindow">
                 <div class="Theme1">
                     <img class="Theme1IMG" src="https://i.pinimg.com/736x/b2/bc/13/b2bc13d8b2d37fbaee9c503d0d6c1279.jpg">
@@ -155,15 +160,30 @@
                     <img class="Theme3IMG" src="https://i.pinimg.com/1200x/76/64/1b/76641b53502d4ca601ecd3c240ad6245.jpg">
                     <button class="ThemeButton3" id="ThemeButton3" onclick="ThemeChoose()">Select Theme</button>
                 </div>
+
                 <div class="Theme4">
                     <img class="Theme4IMG" src="https://i.pinimg.com/1200x/47/82/3a/47823a30f1bba5c3a9351e2bc137b9b2.jpg">
                     <button class="ThemeButton4" id="ThemeButton4" onclick="ThemeChoose()">Select Theme</button>
                 </div>
+                
+                <div class="Theme5">
+                    <img class="Theme5IMG" >
+                    <button class="ThemeButton5" id="ThemeButton5" onclick="ThemeChoose()">Select Theme</button>
+                </div>
+                
+                <div class="Theme6">
+                    <img class="Theme6IMG" src="https://i.pinimg.com/1200x/c1/7c/d8/c17cd8ede2fb830173adac23344595d8.jpg    ">
+                    <button class="ThemeButton6" id="ThemeButton6" onclick="ThemeChoose()">Select Theme</button>
+                </div>
             </div>
+            
 
+            <br>
             <!--ThemeStyle-->
 
-            <h1 class="ThemeWindowh2"> More Customized Themes (Ongoing) </h1>
+            <h1 class="ThemeWindowh2"> Choose your mode </h1>
+
+            <h1 class="TextCategory3"> GIF Background (Coming soon) </h1>
 
         </div>
 
@@ -216,7 +236,7 @@
 
         <!--User Profile Window-->
         <div class="UserProfileWindow" id="UserProfileWindow">
-            <button class="UserProfileCloseButton" onclick="closeUserProfile()">✕</button>
+            <button class="UserProfileCloseButton" onclick="closeUserProfile()">X</button>
             <div class="UserProfileContent">
                 <img class="UserProfileIcon" src="../2ndpageIcons/LOGOICON2.1.png" alt="Profile Icon">
                 <div class="UserProfileInfo">
@@ -243,8 +263,8 @@
 
 
         <div style="font-family:Arial; background:linear-gradient(to bottom right,); height:80vh; display:flex; justify-content:center; align-items:center; flex-direction:column; color:#333;">
-        <div style="font-size:32px; font-weight:bold;">Note#Code</div>
-        <div style="font-size:14px; margin-top:5px;"> Create. Save. Organize. </div>  
+        <div style="font-size:32px; font-weight:bold; color: var(--text-primary)">Note#Code</div>
+        <div style="font-size:14px; margin-top:5px; color: var(--text-primary);"> Create. Save. Organize. </div>  
         </div>
 
         <div class="NoteInterfaceCodeMain" id="NoteInterfaceCodeMainID">

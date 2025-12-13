@@ -2,7 +2,7 @@
     position: fixed;
     width: 650px;
     height: 500px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: var(--bg-primary);
     top: 53%;
     left: 50%;
     translate: -50% -50%;
@@ -11,7 +11,7 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
     z-index: 1;
-    overflow-y: auto;
+    overflow-y: scroll;
     opacity: 0;
     scale: 1
 }
@@ -40,11 +40,38 @@
     position: fixed;
     margin-bottom: 10px;
     font-size: 20px;
+    color: var(--text-primary);
     width: 225px;
     font-family: Arial;
     top: 3px;
     left: 5px;
     text-align: center;
+    border: none;
+    border-radius: 10px;
+}
+
+.ThemeWindowh2 {
+    position: absolute;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: var(--text-primary);
+    font-family: Arial;
+    left: 20px;
+    top: 445px;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+}
+
+.TextCategory3 {
+    position: absolute;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-family: Arial;
+    color: var(--text-primary);
+    top: 610px;
+    left: 20px;
+    text-align: left;
     border: none;
     border-radius: 10px;
 }
@@ -58,61 +85,43 @@
     font-size: 15px;
     font-weight: bold;
     font-family: Arial;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-secondary);
     box-shadow: 0 0 3px rgb(0, 0, 0);
+    color: var(--text-primary);
     border: none;
     border-radius: 10px;
 }
 
 .ListsofThemesWindow {
+    position: absolute;
     display: grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-columns: 200px 200px 200px;
+    justify-content: center;
+    row-gap: 10px;
+    background-color: transparent;
+    width: 100%;
+    top: 50px;
 }
 
-.Theme1 {
-    position: absolute;
-    height: 250px;
+.Theme1, .Theme2, .Theme3, .Theme4, .Theme5, .Theme6 {
+    height: 200px;
     width: 180px;
     top: 50px;
     left: 20px;
     background-color: rgba(255, 0, 0,0);
 }
 
-.Theme2 {
-    position: absolute;
-    height: 250px;
-    width: 180px;
-    top: 50px;
-    left: 230px;
-    background-color: rgba(255, 0, 0,0);
-}
-
-.Theme3 {
-    position: absolute;
-    height: 250px;
-    width: 180px;
-    top: 50px;
-    right: 20px;
-    background-color: rgba(255, 0, 0,0);
-}
-
-.Theme4 {
-    position: absolute;
-    height: 350px;
-    width: 180px;
-    top: 250px;
-    left: 20px;
-    background-color: rgba(255, 0, 0,0);
-}
-
-.ThemeButton1, .ThemeButton2, .ThemeButton3, .ThemeButton4{
+.ThemeButton1, .ThemeButton2, .ThemeButton3, .ThemeButton4, .ThemeButton5, .ThemeButton6 {
     position: relative;
     width: 95%;
     height: 35px;
     border: none;
     border-radius: 10px;
     translate: 3% 5px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: var(--bg-secondary);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    color: var(--text-primary);
     font-family: Arial;
     font-size: 17px;
     font-weight: bold;
@@ -122,16 +131,18 @@
 .ThemeButton1:hover:not(.ButtonClicked),
 .ThemeButton2:hover:not(.ButtonClicked),
 .ThemeButton3:hover:not(.ButtonClicked),
-.ThemeButton4:hover:not(.ButtonClicked) {
+.ThemeButton4:hover:not(.ButtonClicked),
+.ThemeButton5:hover:not(.ButtonClicked),
+.ThemeButton6:hover:not(.ButtonClicked) {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     scale: 1.1;
-    background-color: rgba(255, 255, 255);
+    background-color: var(--bg-primary);
     border: 1px solid black;
     font-size: 15px;
     transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.Theme1IMG, .Theme2IMG, .Theme3IMG, .Theme4IMG {
+.Theme1IMG, .Theme2IMG, .Theme3IMG, .Theme4IMG, .Theme5IMG, .Theme6IMG {
     position: relative;
     height: 125px;
     width: 175px;
@@ -140,21 +151,106 @@
     border-radius: 10px;
 }
 
-.ThemeWindowh2 {
-    position: absolute;
-    margin-bottom: 10px;
-    font-size: 20px;
-    font-family: Arial;
-    left: 20px;
-    top: 440px;
-    text-align: center;
-    border: none;
-    border-radius: 10px;
+.Theme5IMG, .Theme6IMG {
+    background-color: rgb(36, 36, 36);
 }
 
 .ButtonClicked {
     animation: ButtonClickedAnimation 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* For Toggle Light and Dark Theme  */
+
+.List-of-Color-Modes-Window {
+    position: absolute;
+    height: 55px;
+    width: 90%;
+    top: 495px;
+    left: 3%;
+    padding-left: 20px;
+    background-color: transparent;
+    background-color: var(--bg-secondary);
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.ColorWindowText {
+    position: absolute;
+    font-size: 18px;
+    font-family: Arial;
+    color: var(--text-primary);
+    left: 20px;
+    top: 7px;
+    text-align: left;
+    border: none;
+    border-radius: 10px;
+    width: 90%;
+}
+
+.ColorTextModeText {
+    position: absolute;
+    font-size: 18px;
+    font-family: Arial;
+    left: 20px;
+    bottom: 4px;
+    text-align: left;
+    border: none;
+    border-radius: 10px;
+    width: 90%;
+}
+
+.ColorModeButton1 {
+    position: absolute;
+    font-size: 18px;
+    font-family: Arial;
+    right: 10px;
+    top: 8px;
+    text-align: center;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+    border: 3px solid var(--bg-primary);
+    border-radius: 7px;
+    height: 40px;
+    width: 35%;
+    transition: all 0.3s ease-out;
+}
+
+.ColorModeButton1:hover {
+    cursor: pointer;
+    background-color: var(--bg-primary);
+    border: 1px solid black;
+    scale: 1.03;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-out;
+}
+
+/* Toggle Light Mode */ 
+
+body.Toggle-Light-Mode-Window {
+    --bg-primary: rgba(255, 255, 255, 0.5);
+    --bg-secondary: rgba(223, 223, 223, 0.3);
+    --bg-third: rgb(255, 230, 0);
+    --text-primary: #000000;
+    --text-secondary: #000000;
+}
+
+body.Toggle-Dark-Mode-Window {
+    --bg-primary: rgba(75, 75, 75, 0.5);
+    --bg-secondary: rgba(36, 34, 34, 0.3);
+    --bg-third: rgb(202, 182, 3);
+    --text-primary: #c4c4c4;
+    --text-secondary: #888888;
+}
+
+
+
+/* --bg-primary: rgba(75, 75, 75, 0.5);
+    --bg-secondary: rgba(36, 34, 34, 0.3);
+    --bg-third: rgb(216, 194, 0);
+    --text-primary: #000000;
+    --text-secondary: #000000;
+*/
 
 @keyframes ButtonClickedAnimation {
     0% {
@@ -175,71 +271,24 @@
 
 @media (max-width: 650px) {
     .NoteThemeHomeWindowElements {
-        position: fixed;
-        display: grid;
         width: 100%;
-        height: 93%;
-        background-color: rgba(255, 255, 255, 0.5);
-        top: 53%;
+        height: 665px;
+        top: 405px;
         left: 50%;
+        border-radius: 0px;
         translate: -50% -50%;
         border: none;
-        border-radius: 0px;
-        box-shadow: 0 0 0px rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(10px);
-        z-index: 100;
-        overflow-y: auto;
-        opacity: 0;
-        scale: 1.0;
-    }
-
-    .Theme1IMG, .Theme2IMG, .Theme3IMG, .Theme4IMG {
-        position: relative;
-        height: 125px;
-        width: 175px;
-        background-color: pink;
-        border: 3px solid rgba(0, 0, 0, 0.5);
-        border-radius: 10px;
     }
     
-    .Theme1 {
-        position: absolute;
-        top: 60px;
-        left: 5%;
-        height: 250px;
-        width: 180px;
-        background-color: rgba(255, 0, 0,0);
-    }
-
-    .Theme2 {
-        position: absolute;
-        top: 60px;
-        left: 53%;
-        height: 250px;
-        width: 180px;
-        background-color: rgba(255, 0, 0,0);
-    }
-
-    .Theme3 {
-        position: absolute;
-        top: 275px;
-        left: 5%;
-        height: 250px;
-        width: 180px;
-        background-color: rgba(255, 0, 0,0);
-    }
-
-    .Theme4 {
-        position: absolute;
-        top: 275px;
-        left: 53%;
-        height: 350px;
-        width: 180px;
-        background-color: rgba(255, 0, 0,0);
+    .ListsofThemesWindow {
+        grid-template-columns: 200px 200px;
+        grid-template-rows: repeat(200px);
+        height: auto;
     }
 
     .ThemeWindowh2 {
-        top: 500px;
+        position: fixed;
+        top: 850px;
         width: 300px;
         left: 15%;
     }
@@ -249,16 +298,10 @@
         height: 30px;
         border-radius: 10px;
         content: "Close";
-        font-size: 30px;
+        font-size: 15px;
     }
 }
 
-@media (max-width: 650px) {
-    .Theme2, .Theme4 {
-        position: absolute;
-        right: 100px;
-    }
-}
 
 @media(max-height: 600px) {
     .NoteThemeHomeWindowElements {
@@ -266,25 +309,8 @@
         display: grid;
         grid-template-columns: 200px;
         height: 300px;
-        background-color: rgba(255, 255, 255, 0.5);
         top: 53%;
         left: 50%;
         translate: -50% -50%;
-        border: none;
-        border-radius: 10px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(10px);
-        z-index: 100;
-        overflow-y: auto;
-        opacity: 0;
-        scale: 1.0;
-        .Theme1IMG, .Theme2IMG, .Theme3IMG, .Theme4IMG {
-        position: relative;
-        height: 125px;
-        width: 175px;
-        background-color: pink;
-        border: 3px solid rgba(0, 0, 0, 0.5);
-        border-radius: 10px;
-    }
     }
 }
