@@ -11,8 +11,8 @@
     }
     .OptionFrame {
         top: 75px;
-        right: 20px;
-        width: 450px;
+        translate: -10%;
+        width: 80%;
         z-index: 1;
     }
 
@@ -23,7 +23,7 @@
         position: absolute;
         top: 85px;
         height: 45px;
-        width: 405px;
+        width: 90%;
         translate: 3%;
         text-align: right;
         left: 10px;
@@ -40,7 +40,7 @@
         position: absolute;
         top: 140px;
         height: 45px;
-        width: 405px;
+        width: 90%;
         translate: 3%;
         text-align: right;
         left: 10px;
@@ -57,7 +57,7 @@
         position: absolute;
         top: 195px;
         height: 45px;
-        width: 405px;
+        width: 90%;
         translate: 3%;
         text-align: right;
         left: 10px;
@@ -75,7 +75,7 @@
         position: absolute;
         top: 250px;
         height: 45px;
-        width: 405px;
+        width: 90%;
         translate: 3%;
         text-align: right;
         left: 10px;
@@ -93,7 +93,7 @@
         position: absolute;
         top: 305px;
         height: 45px;
-        width: 405px;
+        width: 90%;
         translate: 3%;
         text-align: center;
         left: 10px;

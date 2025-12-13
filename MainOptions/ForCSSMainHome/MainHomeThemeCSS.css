@@ -6,7 +6,7 @@
     top: 53%;
     left: 50%;
     translate: -50% -50%;
-    border: none;
+    border: 2px solid rgba(156, 156, 156, 0.4);
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
@@ -15,6 +15,25 @@
     opacity: 0;
     scale: 1
 }
+
+.NoteThemeHomeWindowElements::-webkit-scrollbar {
+    width: 10px;
+}
+
+.NoteThemeHomeWindowElements::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    height: 95%;
+}
+
+.NoteThemeHomeWindowElements::-webkit-scrollbar-thumb {
+    background: rgba(158, 158, 158, 0.3);
+    border-radius: 10px;
+}
+
+
+
 
 /* Main Heading Text */
 .ThemeWindowh1 {
@@ -32,17 +51,17 @@
 
 .GobackOptionButton1 {
     position: fixed;
-    width: 30px;
+    width: 90px;
     height: 30px;
     top: 10px;
     right: 10px;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     font-family: Arial;
-    background-color: rgba(255, 0, 0, 1);
+    background-color: rgb(255, 255, 255);
     box-shadow: 0 0 3px rgb(0, 0, 0);
     border: none;
-    border-radius: 100px;
+    border-radius: 10px;
 }
 
 .ListsofThemesWindow {
@@ -226,7 +245,7 @@
     }
 
     .GobackOptionButton1 {
-        width: 70px;
+        width: 71x;
         height: 30px;
         border-radius: 10px;
         content: "Close";
@@ -245,6 +264,7 @@
     .NoteThemeHomeWindowElements {
         position: fixed;
         display: grid;
+        grid-template-columns: 200px;
         height: 300px;
         background-color: rgba(255, 255, 255, 0.5);
         top: 53%;

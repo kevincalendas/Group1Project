@@ -6,15 +6,28 @@
     width: 600px;
     height: 400px;
     background-color: rgba(255, 255, 255, 0.5);
-    border: 2px solid #929292;
+    border: 2px solid rgba(209, 209, 209, 0.7);
     border-radius: 13px;
     box-shadow: 0 0px 20px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    backdrop-filter: blur(10px);
     z-index: 1000;
     display: none;
     scale: 0.8;
 }
+
+.AboutWindow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 13px;
+    /* --- PARENT FILTER --- */
+    backdrop-filter: blur(50px);
+    z-index: -1; /* Puts the pseudo-element behind the main content (including the button) */
+}
+
 
 .AboutWindow1 {
     position: absolute;
@@ -26,12 +39,29 @@
     overflow-y: scroll;
 }
 
+.AboutWindow1::-webkit-scrollbar {
+    width: 10px;
+}
+
+.AboutWindow1::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+}
+
+.AboutWindow1::-webkit-scrollbar-thumb {
+    background: rgba(158, 158, 158, 0.3);
+    border-radius: 10px;
+}
+
 .NoteIcon {
     position: fixed;
-    top: 20px;
+    top: 15px;
     left: 40px;
     width: 50px;
     height: 50px;
+    border: none;
+    border-radius: 10px;
 }
 
 .AboutWindowH1 {
@@ -71,15 +101,17 @@
     padding: 7px 30px;
     font-size: 16px;
     background-color: rgba(255, 255, 255, 0.5);
-    border: 2px solid rgba(0, 0, 0, 0.555);
+    border: 1.5px solid rgba(95, 95, 95, 0.4);
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(10px);
     z-index: 1000;
+    backdrop-filter: grayscale(100%);
+    backdrop-filter: blur(2px) brightness(1.1);
 }
+
+
 
 .AboutWindowCloseButton:hover {
     scale: 1.05;
