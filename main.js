@@ -4,16 +4,27 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (previewButton) {
         previewButton.addEventListener('click', function() {
-            window.location.href = 'Login/index.html';
+            // Check if user is logged in (check localStorage)
+            const userEmail = localStorage.getItem('userEmail');
+            if (userEmail) {
+                // User is logged in, redirect to main interface
+                window.location.href = 'MainOptions/MainHomeSection.html';
+            } else {
+                // User is not logged in, redirect to login/signup
+                window.location.href = 'Login/index.html';
+            }
         });
     }
     
     // Add keyboard accessibility
-    previewButton.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            this.click();
-        }
-    });
+    if (previewButton) {
+        previewButton.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    }
 });
+
 

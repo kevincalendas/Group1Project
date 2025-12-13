@@ -72,6 +72,7 @@
         <script src="../MainOptions/MainHomeJava/MainHomeNoteCreation.js"></script>
         <script src="../MainOptions/MainHomeJava/MainHomeOrganize.js"></script>
         <script src="../MainOptions/MainHomeJava/MainHomeOtherFunction.js"></script>
+        <script src="../MainOptions/MainHomeJava/MainHomeProfile.js"></script>
         <!--Main Dock at the top of the Main webpage--> 
         <div class="MainHomeDockSection">
             <!--MainTopDockSections-->
@@ -207,6 +208,34 @@
                     <br><br> 3. User-Friendly Interface: The application features a clean and beautiful interface that is easy to navigate, making it accessible to users of all technical levels.
                     <br><br><br>
                 </p>
+            </div>
+        </div>
+
+        <!--User Profile Window-->
+        <div class="UserProfileWindow" id="UserProfileWindow" style="display: none; opacity: 0; scale: 0.9;">
+            <button class="UserProfileCloseButton" onclick="closeUserProfile()">✕</button>
+            <h1 class="UserProfileTitle">User Profile</h1>
+            <div class="UserProfileContent">
+                <img class="UserProfileIcon" src="../2ndpageIcons/LOGOICON2.1.png" alt="Profile Icon">
+                <div class="UserProfileInfo">
+                    <h2 id="ProfileWindowUsername">User</h2>
+                    <p class="UserProfileEmail" id="ProfileWindowEmail">user@email.com</p>
+                    <div class="UserProfileStats">
+                        <div class="UserProfileStat">
+                            <span class="StatLabel">Notes:</span>
+                            <span class="StatValue" id="ProfileWindowNoteCount">0</span>
+                        </div>
+                        <div class="UserProfileStat">
+                            <span class="StatLabel">Categories:</span>
+                            <span class="StatValue" id="ProfileWindowCategoryCount">0</span>
+                        </div>
+                        <div class="UserProfileStat">
+                            <span class="StatLabel">Joined:</span>
+                            <span class="StatValue" id="ProfileWindowJoinDate">-</span>
+                        </div>
+                    </div>
+                    <button class="UserProfileDeleteButton" onclick="deleteUserAccount()">Delete Account</button>
+                </div>
             </div>
         </div>
 

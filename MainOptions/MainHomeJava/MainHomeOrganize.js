@@ -278,8 +278,30 @@ async function loadCategories() {
                     }
                 });
 
-                // Load each category
-                data.categories.forEach((category) => {
+                // Get note counts for each category and sort by least to most
+                const categoriesWithCounts = await Promise.all(
+                    data.categories.map(async (category) => {
+                        try {
+                            const notesResponse = await fetch(`../save_note.php?userEmail=${encodeURIComponent(userEmail)}&categoryId=${category.id}`, {
+                                method: 'GET',
+                                headers: { 'Content-Type': 'application/json' }
+                            });
+                            const notesData = await notesResponse.json();
+                            return {
+                                ...category,
+                                noteCount: notesData.success && notesData.notes ? notesData.notes.length : 0
+                            };
+                        } catch (error) {
+                            return { ...category, noteCount: 0 };
+                        }
+                    })
+                );
+
+                // Sort by note count (least to most)
+                categoriesWithCounts.sort((a, b) => a.noteCount - b.noteCount);
+
+                // Load each category in sorted order
+                categoriesWithCounts.forEach((category) => {
                     createCategoryButton(category.id, category.name, OrganizedWindowsMainParent, OrganizedLocationFolder);
                 });
             }
@@ -403,7 +425,12 @@ function OpenNoteUncateg() {
 }
 
 function CloseNoteUncateg() {
-    currentCategoryFilter = null;
+    // Reset favorites filter if it was set
+    if (currentCategoryFilter === 'favorites') {
+        currentCategoryFilter = null;
+    } else {
+        currentCategoryFilter = null;
+    }
     currentCategoryFolder = null;
     
     const UncategoryWindow = document.getElementById('MainNoteOrganizedListsID');
@@ -421,10 +448,89 @@ function CloseNoteUncateg() {
     MainUncategorylistWindow.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1)";
 }
 
-// Function to open a specific organized list (for Favorites - can be extended)
+// Function to open favorites list
 function OpenOrganizedList() {
-    // This can be used for Favorites or other special categories
-    alert('Favorites feature coming soon!');
+    // Set a special flag to indicate we're viewing favorites
+    currentCategoryFilter = 'favorites';
+    currentCategoryFolder = null;
+    
+    // Update UI
+    const UncategoryWindow = document.getElementById('MainNoteOrganizedListsID');
+    const MainUncategorylistWindow = document.getElementById('OrganizedWindows');
+    const GObackListID = document.getElementById('GObackListID');
+
+    GObackListID.style.visibility = "visible";
+    GObackListID.style.opacity = "1";
+    GObackListID.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1)";
+    UncategoryWindow.style.opacity = "1";
+    UncategoryWindow.style.scale = "1";
+    UncategoryWindow.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1)";
+    MainUncategorylistWindow.style.opacity = "0";  
+    MainUncategorylistWindow.style.scale = "0";
+    MainUncategorylistWindow.style.transition = "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1)";
+    
+    // Load favorite notes
+    loadFavoriteNotes();
+}
+
+// Function to load favorite notes
+async function loadFavoriteNotes() {
+    const userEmail = localStorage.getItem('userEmail');
+    if (!userEmail) {
+        return;
+    }
+
+    try {
+        // Load all notes and filter for favorites
+        const response = await fetch(`../save_note.php?userEmail=${encodeURIComponent(userEmail)}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        const data = await response.json();
+        if (data.success && data.notes) {
+            const UncategorizedList = document.getElementById('UncategorizedList');
+            if (!UncategorizedList) {
+                console.error('UncategorizedList element not found');
+                return;
+            }
+
+            // Clear existing notes
+            const existingTabs = UncategorizedList.querySelectorAll('.NoteTab');
+            existingTabs.forEach(tab => tab.remove());
+
+            // Filter for favorites only
+            const favoriteNotes = data.notes.filter(note => note.is_favorite == 1 || note.is_favorite === true);
+
+            // Sort favorites: by updated_at DESC
+            const sortedFavorites = [...favoriteNotes].sort((a, b) => {
+                const aDate = new Date(a.updated_at || a.created_at || 0);
+                const bDate = new Date(b.updated_at || b.created_at || 0);
+                return bDate - aDate;
+            });
+
+            // Load each favorite note
+            sortedFavorites.forEach((note) => {
+                const existingTab = UncategorizedList.querySelector(`[data-note-id="${note.id}"]`);
+                if (!existingTab) {
+                    if (typeof createNoteTab === 'function') {
+                        createNoteTab(note.id, note.title, note.content, true);
+                        if (typeof notenumbercreation !== 'undefined') {
+                            notenumbercreation++;
+                        }
+                    }
+                }
+            });
+
+            console.log(`Loaded ${favoriteNotes.length} favorite notes`);
+        } else {
+            console.warn('No notes found or invalid response:', data);
+        }
+    } catch (error) {
+        console.error('Error loading favorite notes:', error);
+    }
 }
 
 // Load categories on page load
