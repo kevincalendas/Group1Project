@@ -74,8 +74,9 @@ function ThemeChoose() {
         ThemeWindow.style.zIndex = "1";
     })
 
-    ThemeButtonChange1.addEventListener("click", () => {
-        BodyoftheMainHome.style.backgroundImage = "url('https://i.pinimg.com/736x/b2/bc/13/b2bc13d8b2d37fbaee9c503d0d6c1279.jpg')";
+    ThemeButtonChange1.addEventListener("click", async () => {
+        const themeUrl = 'https://i.pinimg.com/736x/b2/bc/13/b2bc13d8b2d37fbaee9c503d0d6c1279.jpg';
+        BodyoftheMainHome.style.backgroundImage = `url('${themeUrl}')`;
         BodyoftheMainHome.style.backgroundSize = "cover";
         BodyoftheMainHome.style.backgroundAttachment = "fixed";
         BodyoftheMainHome.style.backgroundPosition = "center";
@@ -97,11 +98,14 @@ function ThemeChoose() {
             ThemeButtonChange1.classList.remove("ButtonClicked");
             void ThemeButtonChange1.offsetWidth;
             ThemeButtonChange1.classList.add("ButtonClicked");
-        }, 100)
+        }, 100);
 
+        // Save theme to database
+        await saveThemeToDatabase('theme1', themeUrl);
     });
-    ThemeButtonChange2.addEventListener("click", () => {
-        BodyoftheMainHome.style.backgroundImage = "url('https://i.pinimg.com/1200x/4f/d7/ce/4fd7ce13e677485ec2849de64473c258.jpg')";
+    ThemeButtonChange2.addEventListener("click", async () => {
+        const themeUrl = 'https://i.pinimg.com/1200x/4f/d7/ce/4fd7ce13e677485ec2849de64473c258.jpg';
+        BodyoftheMainHome.style.backgroundImage = `url('${themeUrl}')`;
         BodyoftheMainHome.style.backgroundSize = "cover";
         BodyoftheMainHome.style.backgroundAttachment = "fixed";
         BodyoftheMainHome.style.backgroundPosition = "center";
@@ -125,10 +129,14 @@ function ThemeChoose() {
         ThemeButtonChange2.disabled = true;
         ThemeButtonChange3.disabled = false;
         ThemeButtonChange4.disabled = false;
+
+        // Save theme to database
+        await saveThemeToDatabase('theme2', themeUrl);
     });
 
-    ThemeButtonChange3.addEventListener("click", () => {
-        BodyoftheMainHome.style.backgroundImage = "url('https://i.pinimg.com/1200x/76/64/1b/76641b53502d4ca601ecd3c240ad6245.jpg')";
+    ThemeButtonChange3.addEventListener("click", async () => {
+        const themeUrl = 'https://i.pinimg.com/1200x/76/64/1b/76641b53502d4ca601ecd3c240ad6245.jpg';
+        BodyoftheMainHome.style.backgroundImage = `url('${themeUrl}')`;
         BodyoftheMainHome.style.backgroundSize = "cover";
         BodyoftheMainHome.style.backgroundAttachment = "fixed";
         BodyoftheMainHome.style.backgroundPosition = "center";
@@ -152,10 +160,14 @@ function ThemeChoose() {
         ThemeButtonChange2.disabled = false;
         ThemeButtonChange3.disabled = true;
         ThemeButtonChange4.disabled = false;
+
+        // Save theme to database
+        await saveThemeToDatabase('theme3', themeUrl);
     });
 
-    ThemeButtonChange4.addEventListener("click", () => {
-        BodyoftheMainHome.style.backgroundImage = "url('https://i.pinimg.com/1200x/47/82/3a/47823a30f1bba5c3a9351e2bc137b9b2.jpg')";
+    ThemeButtonChange4.addEventListener("click", async () => {
+        const themeUrl = 'https://i.pinimg.com/1200x/47/82/3a/47823a30f1bba5c3a9351e2bc137b9b2.jpg';
+        BodyoftheMainHome.style.backgroundImage = `url('${themeUrl}')`;
         BodyoftheMainHome.style.backgroundSize = "cover";
         BodyoftheMainHome.style.backgroundAttachment = "fixed";
         BodyoftheMainHome.style.backgroundPosition = "center";
@@ -179,9 +191,111 @@ function ThemeChoose() {
         ThemeButtonChange2.disabled = false;
         ThemeButtonChange3.disabled = false;
         ThemeButtonChange4.disabled = true;
+
+        // Save theme to database
+        await saveThemeToDatabase('theme4', themeUrl);
     });
 
+    // Load saved theme on page load
+    loadSavedTheme();
+}
 
+// Function to save theme to database
+async function saveThemeToDatabase(themeName, themeUrl) {
+    const userEmail = localStorage.getItem('userEmail');
+    if (!userEmail) {
+        console.warn('Cannot save theme: userEmail not found');
+        return;
+    }
+
+    try {
+        const response = await fetch('../user_settings.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userEmail: userEmail,
+                theme: themeName
+            })
+        });
+
+        const data = await response.json();
+        if (!data.success) {
+            console.error('Error saving theme:', data.error);
+        }
+    } catch (error) {
+        console.error('Error saving theme:', error);
+    }
+}
+
+// Function to load saved theme
+async function loadSavedTheme() {
+    const userEmail = localStorage.getItem('userEmail');
+    if (!userEmail) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`../user_settings.php?userEmail=${encodeURIComponent(userEmail)}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        const data = await response.json();
+        if (data.success && data.theme) {
+            const BodyoftheMainHome = document.getElementById('pagebody');
+            const ThemeButtonChange1 = document.getElementById('ThemeButton1');
+            const ThemeButtonChange2 = document.getElementById('ThemeButton2');
+            const ThemeButtonChange3 = document.getElementById('ThemeButton3');
+            const ThemeButtonChange4 = document.getElementById('ThemeButton4');
+
+            const themes = {
+                'theme1': {
+                    url: 'https://i.pinimg.com/736x/b2/bc/13/b2bc13d8b2d37fbaee9c503d0d6c1279.jpg',
+                    button: ThemeButtonChange1
+                },
+                'theme2': {
+                    url: 'https://i.pinimg.com/1200x/4f/d7/ce/4fd7ce13e677485ec2849de64473c258.jpg',
+                    button: ThemeButtonChange2
+                },
+                'theme3': {
+                    url: 'https://i.pinimg.com/1200x/76/64/1b/76641b53502d4ca601ecd3c240ad6245.jpg',
+                    button: ThemeButtonChange3
+                },
+                'theme4': {
+                    url: 'https://i.pinimg.com/1200x/47/82/3a/47823a30f1bba5c3a9351e2bc137b9b2.jpg',
+                    button: ThemeButtonChange4
+                }
+            };
+
+            const selectedTheme = themes[data.theme];
+            if (selectedTheme && BodyoftheMainHome) {
+                BodyoftheMainHome.style.backgroundImage = `url('${selectedTheme.url}')`;
+                BodyoftheMainHome.style.backgroundSize = "cover";
+                BodyoftheMainHome.style.backgroundAttachment = "fixed";
+                BodyoftheMainHome.style.backgroundPosition = "center";
+
+                // Update button states
+                Object.keys(themes).forEach((themeKey, index) => {
+                    const theme = themes[themeKey];
+                    if (theme.button) {
+                        if (themeKey === data.theme) {
+                            theme.button.innerText = "In use ✅";
+                            theme.button.disabled = true;
+                        } else {
+                            theme.button.innerText = "Select Theme";
+                            theme.button.disabled = false;
+                        }
+                    }
+                });
+            }
+        }
+    } catch (error) {
+        console.error('Error loading theme:', error);
+    }
 }
 
 
