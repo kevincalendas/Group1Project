@@ -14,7 +14,6 @@ function openUserProfile() {
     if (OptionFrame && OptionFrame.style.opacity === "1") {
         OptionFrame.style.opacity = "0";
         OptionFrame.style.zIndex = "1";
-        OptionFrame.style.transform = "translateX(450px)";
     }
     
     // Load user profile data

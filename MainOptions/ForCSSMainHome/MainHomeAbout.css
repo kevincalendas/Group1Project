@@ -12,7 +12,8 @@
     padding: 20px;
     backdrop-filter: blur(10px);
     z-index: 1000;
-    display: flex;
+    display: none;
+    scale: 0.8;
 }
 
 .AboutWindow1 {

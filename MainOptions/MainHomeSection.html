@@ -11,6 +11,9 @@
         <link rel="stylesheet" href="ForCSSMainHome/MainHomeOrganizedWindow.css">
         <link rel="stylesheet" href="ForCSSMainHome/MainCodeInterface.css">
         <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeAbout.css">
+
+        <!-- for MainNoteInterfaceUserInfoCSS-->
+        <link rel="stylesheet" href="ForCSSMainHome/MainNoteInterfaceUserInfo.css">
         <meta name="viewport" content="width=device-width, initial-scale=0.9">
     </head>
     <body id="pagebody">
@@ -212,13 +215,12 @@
         </div>
 
         <!--User Profile Window-->
-        <div class="UserProfileWindow" id="UserProfileWindow" style="display: none; opacity: 0; scale: 0.9;">
+        <div class="UserProfileWindow" id="UserProfileWindow">
             <button class="UserProfileCloseButton" onclick="closeUserProfile()">✕</button>
-            <h1 class="UserProfileTitle">User Profile</h1>
             <div class="UserProfileContent">
                 <img class="UserProfileIcon" src="../2ndpageIcons/LOGOICON2.1.png" alt="Profile Icon">
                 <div class="UserProfileInfo">
-                    <h2 id="ProfileWindowUsername">User</h2>
+                    <h2 class="User" id="ProfileWindowUsername">User</h2>
                     <p class="UserProfileEmail" id="ProfileWindowEmail">user@email.com</p>
                     <div class="UserProfileStats">
                         <div class="UserProfileStat">
