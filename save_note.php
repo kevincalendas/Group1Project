@@ -56,7 +56,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $title = isset($data['title']) ? trim($data['title']) : '';
     $content = isset($data['content']) ? $data['content'] : '';
     $categoryId = isset($data['categoryId']) ? (intval($data['categoryId']) > 0 ? intval($data['categoryId']) : null) : null;
-    $isFavorite = isset($data['isFavorite']) ? (bool)$data['isFavorite'] : false;
+    // Handle isFavorite more robustly - accept boolean, int, or string
+    $isFavorite = false;
+    if (isset($data['isFavorite'])) {
+        if (is_bool($data['isFavorite'])) {
+            $isFavorite = $data['isFavorite'];
+        } else if (is_int($data['isFavorite'])) {
+            $isFavorite = $data['isFavorite'] == 1;
+        } else if (is_string($data['isFavorite'])) {
+            $isFavorite = strtolower($data['isFavorite']) === 'true' || $data['isFavorite'] === '1';
+        } else {
+            $isFavorite = (bool)$data['isFavorite'];
+        }
+    }
 
     if (empty($userEmail) || empty($title)) {
         http_response_code(400);
@@ -132,11 +144,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $updateStmt->close();
         } else {
             // Note ID doesn't exist or doesn't belong to user, create new
-            // Check if category_id column exists
+            // Check if columns exist
             $checkCol = $conn->query("SHOW COLUMNS FROM notes LIKE 'category_id'");
             $hasCategoryCol = ($checkCol && $checkCol->num_rows > 0);
+            $checkFavCol = $conn->query("SHOW COLUMNS FROM notes LIKE 'is_favorite'");
+            $hasFavoriteCol = ($checkFavCol && $checkFavCol->num_rows > 0);
             
-            if ($hasCategoryCol && $categoryId !== null) {
+            if ($hasCategoryCol && $hasFavoriteCol && $categoryId !== null) {
+                $insertStmt = $conn->prepare("INSERT INTO notes (user_id, title, content, category_id, is_favorite) VALUES (?, ?, ?, ?, ?)");
+                $insertStmt->bind_param("issii", $userId, $title, $content, $categoryId, $isFavorite);
+            } else if ($hasCategoryCol && $hasFavoriteCol) {
+                $insertStmt = $conn->prepare("INSERT INTO notes (user_id, title, content, is_favorite) VALUES (?, ?, ?, ?)");
+                $insertStmt->bind_param("issi", $userId, $title, $content, $isFavorite);
+            } else if ($hasCategoryCol && $categoryId !== null) {
                 $insertStmt = $conn->prepare("INSERT INTO notes (user_id, title, content, category_id) VALUES (?, ?, ?, ?)");
                 $insertStmt->bind_param("issi", $userId, $title, $content, $categoryId);
             } else {
@@ -156,11 +176,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $checkStmt->close();
     } else {
         // Create new note
-        // Check if category_id column exists
+        // Check if columns exist
         $checkCol = $conn->query("SHOW COLUMNS FROM notes LIKE 'category_id'");
         $hasCategoryCol = ($checkCol && $checkCol->num_rows > 0);
+        $checkFavCol = $conn->query("SHOW COLUMNS FROM notes LIKE 'is_favorite'");
+        $hasFavoriteCol = ($checkFavCol && $checkFavCol->num_rows > 0);
         
-        if ($hasCategoryCol && $categoryId !== null) {
+        if ($hasCategoryCol && $hasFavoriteCol && $categoryId !== null) {
+            $insertStmt = $conn->prepare("INSERT INTO notes (user_id, title, content, category_id, is_favorite) VALUES (?, ?, ?, ?, ?)");
+            $insertStmt->bind_param("issii", $userId, $title, $content, $categoryId, $isFavorite);
+        } else if ($hasCategoryCol && $hasFavoriteCol) {
+            $insertStmt = $conn->prepare("INSERT INTO notes (user_id, title, content, is_favorite) VALUES (?, ?, ?, ?)");
+            $insertStmt->bind_param("issi", $userId, $title, $content, $isFavorite);
+        } else if ($hasCategoryCol && $categoryId !== null) {
             $insertStmt = $conn->prepare("INSERT INTO notes (user_id, title, content, category_id) VALUES (?, ?, ?, ?)");
             $insertStmt->bind_param("issi", $userId, $title, $content, $categoryId);
         } else {
