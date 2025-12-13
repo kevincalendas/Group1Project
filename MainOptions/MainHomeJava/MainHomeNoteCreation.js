@@ -337,10 +337,12 @@ function createNoteTab(noteId, title, content, isFavorite = false) {
     NoteTabContent.classList.add('NoteTabContent');
     
     // Show star icon if favorited (visual indicator only, no button)
+    // Remove any existing star from title to prevent duplication
+    const cleanTitle = title.replace(/^⭐\s*/, '');
     if (isFavorite) {
-        NoteTabNamee.textContent = '⭐ ' + title;
+        NoteTabNamee.textContent = '⭐ ' + cleanTitle;
     } else {
-        NoteTabNamee.textContent = title;
+        NoteTabNamee.textContent = cleanTitle;
     }
     
     NoteTabOpenButton.textContent = "Open";
@@ -448,7 +450,9 @@ function createNoteTab(noteId, title, content, isFavorite = false) {
                         const fullNote = data.notes.find(n => n.id === tabNoteId);
                         if (fullNote) {
                             if (NoteCodeNameID) {
-                                NoteCodeNameID.textContent = fullNote.title;
+                                // Remove any star from title when loading (star is only in the tab, not in the note itself)
+                                const cleanTitle = fullNote.title.replace(/^⭐\s*/, '');
+                                NoteCodeNameID.textContent = cleanTitle;
                             }
                             if (NoteCodeContent) {
                                 NoteCodeContent.value = fullNote.content || '';
@@ -457,22 +461,31 @@ function createNoteTab(noteId, title, content, isFavorite = false) {
                             loadCategoriesIntoDropdown().then(() => {
                                 const categorySelect = document.getElementById('NoteCategorySelect');
                                 if (categorySelect) {
-                                    categorySelect.value = fullNote.category_id || '';
-                                    // Update currentCategoryFilter to match
-                                    if (fullNote.category_id) {
-                                        currentCategoryFilter = parseInt(fullNote.category_id);
+                                    const noteCategoryId = fullNote.category_id ? parseInt(fullNote.category_id) : null;
+                                    categorySelect.value = noteCategoryId || '';
+                                    
+                                    // Update the old category ID tracker for change detection
+                                    if (typeof window.updateOldCategoryId === 'function') {
+                                        window.updateOldCategoryId();
                                     }
                                 }
                             });
+                            
                             // Update favorite button if it exists
                             const favoriteButton = document.getElementById('NoteFavoriteButton');
                             if (favoriteButton) {
-                                if (fullNote.is_favorite) {
+                                const isFavorite = fullNote.is_favorite == 1 || fullNote.is_favorite === true || fullNote.is_favorite === 1;
+                                if (isFavorite) {
                                     favoriteButton.classList.add('favorited');
                                     favoriteButton.textContent = '⭐';
                                 } else {
                                     favoriteButton.classList.remove('favorited');
                                     favoriteButton.textContent = '☆';
+                                }
+                                
+                                // Update the original favorite state tracker
+                                if (typeof window.updateOriginalFavoriteState === 'function') {
+                                    window.updateOriginalFavoriteState();
                                 }
                             }
                         }
@@ -626,18 +639,21 @@ async function loadNotesFromDatabase(categoryId = null) {
                     // Filter to show only notes in this category
                     notesToDisplay = data.notes.filter(note => {
                         const noteCategoryId = note.category_id ? parseInt(note.category_id) : null;
-                        return noteCategoryId === categoryId;
+                        return noteCategoryId === parseInt(categoryId);
                     });
-                } else if (categoryId === null) {
-                    // Show only uncategorized notes (no category_id)
-                    notesToDisplay = data.notes.filter(note => !note.category_id || note.category_id === null);
+                } else if (categoryId === null || categoryId === undefined) {
+                    // Show only uncategorized notes (no category_id or null category_id)
+                    notesToDisplay = data.notes.filter(note => {
+                        const noteCategoryId = note.category_id;
+                        return !noteCategoryId || noteCategoryId === null || noteCategoryId === '' || noteCategoryId === 0;
+                    });
                 }
 
                 // Sort notes: favorites first, then by updated_at DESC
                 const sortedNotes = [...notesToDisplay].sort((a, b) => {
-                    // Favorites first
-                    const aFavorite = a.is_favorite ? 1 : 0;
-                    const bFavorite = b.is_favorite ? 1 : 0;
+                    // Favorites first - handle different data types
+                    const aFavorite = (a.is_favorite == 1 || a.is_favorite === true || a.is_favorite === 1 || a.is_favorite === '1') ? 1 : 0;
+                    const bFavorite = (b.is_favorite == 1 || b.is_favorite === true || b.is_favorite === 1 || b.is_favorite === '1') ? 1 : 0;
                     if (aFavorite !== bFavorite) {
                         return bFavorite - aFavorite; // Favorites come first
                     }
@@ -652,7 +668,10 @@ async function loadNotesFromDatabase(categoryId = null) {
                     // Check if note already exists in THIS container (not globally)
                     const existingTab = NoteGridLayoutWindowCreation.querySelector(`[data-note-id="${note.id}"]`);
                     if (!existingTab) {
-                        const noteTab = createNoteTab(note.id, note.title, note.content, note.is_favorite || false);
+                        // Determine if note is favorited - handle different data types
+                        const isFav = note.is_favorite;
+                        const isFavorite = isFav == 1 || isFav === true || isFav === 1 || isFav === '1' || (typeof isFav === 'string' && isFav.toLowerCase() === 'true');
+                        const noteTab = createNoteTab(note.id, note.title, note.content, isFavorite);
                         if (noteTab) {
                             // Start with hidden state for fade-in
                             noteTab.style.opacity = "0";
@@ -762,8 +781,15 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         const categorySelect = document.getElementById('NoteCategorySelect');
         if (categorySelect) {
-            // Store the old category value before change
+            // Store the old category value - will be updated when note is opened
             let oldCategoryId = categorySelect.value || null;
+            
+            // Update oldCategoryId when note is opened (this will be called from the open handler)
+            const updateOldCategoryId = () => {
+                if (categorySelect) {
+                    oldCategoryId = categorySelect.value || null;
+                }
+            };
             
             categorySelect.addEventListener('change', async () => {
                 // Get the new category value
@@ -777,15 +803,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     const currentContent = NoteCodeContent.value || '';
                     
                     // Save the note with new category
-                    await saveNoteToDatabase(currentNoteId, currentTitle, currentContent, true).catch(error => {
+                    const saveResult = await saveNoteToDatabase(currentNoteId, currentTitle, currentContent, true).catch(error => {
                         console.error('Error saving category change:', error);
+                        return null;
                     });
                     
+                    if (saveResult === null) {
+                        // Save failed, revert dropdown
+                        categorySelect.value = oldCategoryId || '';
+                        return;
+                    }
+                    
                     // Remove note from current view if it no longer belongs to the current category
-                    const currentFilter = (typeof currentCategoryFilter !== 'undefined' && currentCategoryFilter !== null && currentCategoryFilter !== 'favorites') ? currentCategoryFilter : null;
+                    const currentFilter = (typeof currentCategoryFilter !== 'undefined' && currentCategoryFilter !== null && currentCategoryFilter !== 'favorites') ? parseInt(currentCategoryFilter) : null;
+                    const oldCategoryIdInt = oldCategoryId ? parseInt(oldCategoryId) : null;
                     
                     // If viewing a specific category and note was moved to a different category, remove it
-                    if (currentFilter !== null && oldCategoryId !== null && parseInt(oldCategoryId) === currentFilter && newCategoryId !== currentFilter) {
+                    if (currentFilter !== null && oldCategoryIdInt === currentFilter && newCategoryId !== currentFilter) {
                         // Remove the note tab from the current view
                         const noteTab = document.querySelector(`[data-note-id="${currentNoteId}"]`);
                         if (noteTab) {
@@ -800,23 +834,19 @@ document.addEventListener('DOMContentLoaded', function() {
                             }, 300);
                         }
                     }
-                    // If viewing favorites and note was unfavorited, remove it
-                    else if (currentCategoryFilter === 'favorites') {
-                        // Check if note is still favorited - if not, remove it
-                        const favoriteButton = document.getElementById('NoteFavoriteButton');
-                        if (favoriteButton && !favoriteButton.classList.contains('favorited')) {
-                            const noteTab = document.querySelector(`[data-note-id="${currentNoteId}"]`);
-                            if (noteTab) {
-                                noteTab.style.transition = "all 0.3s ease-out";
-                                noteTab.style.opacity = "0";
-                                noteTab.style.transform = "scale(0.8)";
-                                setTimeout(() => {
-                                    noteTab.remove();
-                                    if (typeof notenumbercreation !== 'undefined' && notenumbercreation > 0) {
-                                        notenumbercreation--;
-                                    }
-                                }, 300);
-                            }
+                    // If viewing uncategorized (null) and note was moved to a category, remove it
+                    else if (currentFilter === null && oldCategoryIdInt === null && newCategoryId !== null) {
+                        const noteTab = document.querySelector(`[data-note-id="${currentNoteId}"]`);
+                        if (noteTab) {
+                            noteTab.style.transition = "all 0.3s ease-out";
+                            noteTab.style.opacity = "0";
+                            noteTab.style.transform = "scale(0.8)";
+                            setTimeout(() => {
+                                noteTab.remove();
+                                if (typeof notenumbercreation !== 'undefined' && notenumbercreation > 0) {
+                                    notenumbercreation--;
+                                }
+                            }, 300);
                         }
                     }
                     
@@ -833,21 +863,36 @@ document.addEventListener('DOMContentLoaded', function() {
                     oldCategoryId = newCategoryId;
                 }
             });
+            
+            // Store the update function globally so it can be called when note is opened
+            window.updateOldCategoryId = updateOldCategoryId;
         }
         
         // Add event listener to favorite button
         const favoriteButton = document.getElementById('NoteFavoriteButton');
         if (favoriteButton) {
-            favoriteButton.addEventListener('click', async () => {
+            // Store original favorite state
+            let originalFavoriteState = favoriteButton.classList.contains('favorited');
+            
+            // Update original state when note is opened
+            const updateOriginalFavoriteState = () => {
+                if (favoriteButton) {
+                    originalFavoriteState = favoriteButton.classList.contains('favorited');
+                }
+            };
+            
+            favoriteButton.addEventListener('click', async (e) => {
+                e.stopPropagation(); // Prevent any bubbling
+                
                 const NoteCodeNameID = document.getElementById('NoteCodeNameID');
                 const NoteCodeContent = document.getElementById('NoteCodeContentID');
                 if (NoteCodeNameID && NoteCodeContent && currentNoteId) {
                     const currentTitle = NoteCodeNameID.textContent || '';
                     const currentContent = NoteCodeContent.value || '';
-                    const isFavorite = favoriteButton.classList.contains('favorited');
+                    const wasFavorite = favoriteButton.classList.contains('favorited');
                     
-                    // Toggle favorite state
-                    if (isFavorite) {
+                    // Toggle favorite state in UI immediately for better UX
+                    if (wasFavorite) {
                         favoriteButton.classList.remove('favorited');
                         favoriteButton.textContent = '☆';
                     } else {
@@ -856,15 +901,74 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                     
                     // Save to database
-                    await saveNoteToDatabase(currentNoteId, currentTitle, currentContent, true).catch(error => {
+                    const saveResult = await saveNoteToDatabase(currentNoteId, currentTitle, currentContent, true).catch(error => {
                         console.error('Error saving favorite status:', error);
+                        return null;
                     });
                     
-                    // Reload notes to update sorting
-                    const categoryId = (typeof currentCategoryFilter !== 'undefined' && currentCategoryFilter !== null) ? currentCategoryFilter : null;
-                    loadNotesFromDatabase(categoryId);
+                    if (saveResult === null) {
+                        // Save failed, revert button state
+                        if (wasFavorite) {
+                            favoriteButton.classList.add('favorited');
+                            favoriteButton.textContent = '⭐';
+                        } else {
+                            favoriteButton.classList.remove('favorited');
+                            favoriteButton.textContent = '☆';
+                        }
+                        return;
+                    }
+                    
+                    // Update note tab star indicator
+                    const noteTab = document.querySelector(`[data-note-id="${currentNoteId}"]`);
+                    if (noteTab) {
+                        const tabName = noteTab.querySelector('.NoteTabNamee');
+                        if (tabName) {
+                            if (!wasFavorite) {
+                                // Now favorited - add star to title
+                                if (!tabName.textContent.startsWith('⭐')) {
+                                    tabName.textContent = '⭐ ' + tabName.textContent;
+                                }
+                            } else {
+                                // No longer favorited - remove star from title
+                                tabName.textContent = tabName.textContent.replace(/^⭐\s*/, '');
+                            }
+                        }
+                        noteTab.setAttribute('data-is-favorite', !wasFavorite ? '1' : '0');
+                    }
+                    
+                    // If viewing favorites and note was unfavorited, remove it immediately
+                    if (currentCategoryFilter === 'favorites' && wasFavorite) {
+                        const noteTab = document.querySelector(`[data-note-id="${currentNoteId}"]`);
+                        if (noteTab) {
+                            noteTab.style.transition = "all 0.3s ease-out";
+                            noteTab.style.opacity = "0";
+                            noteTab.style.transform = "scale(0.8)";
+                            setTimeout(() => {
+                                noteTab.remove();
+                                if (typeof notenumbercreation !== 'undefined' && notenumbercreation > 0) {
+                                    notenumbercreation--;
+                                }
+                            }, 300);
+                        }
+                    } else {
+                        // Reload notes to update sorting and ensure consistency
+                        if (currentCategoryFilter === 'favorites') {
+                            if (typeof loadFavoriteNotes === 'function') {
+                                loadFavoriteNotes();
+                            }
+                        } else {
+                            const categoryId = (typeof currentCategoryFilter !== 'undefined' && currentCategoryFilter !== null) ? currentCategoryFilter : null;
+                            loadNotesFromDatabase(categoryId);
+                        }
+                    }
+                    
+                    // Update original state
+                    originalFavoriteState = !wasFavorite;
                 }
             });
+            
+            // Store the update function globally
+            window.updateOriginalFavoriteState = updateOriginalFavoriteState;
         }
     }, 500);
     

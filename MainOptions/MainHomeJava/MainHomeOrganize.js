@@ -497,34 +497,58 @@ async function loadFavoriteNotes() {
                 return;
             }
 
-            // Clear existing notes
+            // Clear existing notes with fade-out animation
             const existingTabs = UncategorizedList.querySelectorAll('.NoteTab');
-            existingTabs.forEach(tab => tab.remove());
-
-            // Filter for favorites only
-            const favoriteNotes = data.notes.filter(note => note.is_favorite == 1 || note.is_favorite === true);
-
-            // Sort favorites: by updated_at DESC
-            const sortedFavorites = [...favoriteNotes].sort((a, b) => {
-                const aDate = new Date(a.updated_at || a.created_at || 0);
-                const bDate = new Date(b.updated_at || b.created_at || 0);
-                return bDate - aDate;
+            existingTabs.forEach((tab, index) => {
+                tab.style.transition = "all 0.2s ease-out";
+                tab.style.opacity = "0";
+                tab.style.transform = "scale(0.9)";
+                setTimeout(() => tab.remove(), 200 + (index * 10));
             });
 
-            // Load each favorite note
-            sortedFavorites.forEach((note) => {
-                const existingTab = UncategorizedList.querySelector(`[data-note-id="${note.id}"]`);
-                if (!existingTab) {
-                    if (typeof createNoteTab === 'function') {
-                        createNoteTab(note.id, note.title, note.content, true);
-                        if (typeof notenumbercreation !== 'undefined') {
-                            notenumbercreation++;
+            // Wait for fade-out before adding new notes
+            setTimeout(() => {
+                // Filter for favorites only - handle different data types
+                const favoriteNotes = data.notes.filter(note => {
+                    const isFav = note.is_favorite;
+                    return isFav == 1 || isFav === true || isFav === 1 || isFav === '1' || (typeof isFav === 'string' && isFav.toLowerCase() === 'true');
+                });
+
+                // Sort favorites: by updated_at DESC
+                const sortedFavorites = [...favoriteNotes].sort((a, b) => {
+                    const aDate = new Date(a.updated_at || a.created_at || 0);
+                    const bDate = new Date(b.updated_at || b.created_at || 0);
+                    return bDate - aDate;
+                });
+
+                // Load each favorite note with fade-in animation
+                sortedFavorites.forEach((note, index) => {
+                    const existingTab = UncategorizedList.querySelector(`[data-note-id="${note.id}"]`);
+                    if (!existingTab) {
+                        if (typeof createNoteTab === 'function') {
+                            // Ensure note is marked as favorite
+                            const isFav = note.is_favorite;
+                            const isFavorite = isFav == 1 || isFav === true || isFav === 1 || isFav === '1' || (typeof isFav === 'string' && isFav.toLowerCase() === 'true');
+                            const noteTab = createNoteTab(note.id, note.title, note.content, isFavorite);
+                            if (noteTab) {
+                                // Start with hidden state for fade-in
+                                noteTab.style.opacity = "0";
+                                noteTab.style.transform = "scale(0.9)";
+                                setTimeout(() => {
+                                    noteTab.style.transition = "all 0.3s ease-out";
+                                    noteTab.style.opacity = "1";
+                                    noteTab.style.transform = "scale(1)";
+                                }, index * 30); // Stagger animation
+                                if (typeof notenumbercreation !== 'undefined') {
+                                    notenumbercreation++;
+                                }
+                            }
                         }
                     }
-                }
-            });
+                });
 
-            console.log(`Loaded ${favoriteNotes.length} favorite notes`);
+                console.log(`Loaded ${favoriteNotes.length} favorite notes`);
+            }, 250);
         } else {
             console.warn('No notes found or invalid response:', data);
         }
