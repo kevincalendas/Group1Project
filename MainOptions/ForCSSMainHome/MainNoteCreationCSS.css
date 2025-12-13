@@ -43,7 +43,7 @@
     border-radius: 10px;
     z-index: 1000;
     left: 200px;
-    top: 20px;
+    bottom: 20px;
     transition: all 0.3s ease-out;
     font-size: 16px;
     font-weight: bold;
@@ -61,7 +61,7 @@
     width: 150px;
     height: 37px;
     right: 10px;
-    bottom: 35px;
+    bottom: 5px;
     background-color: rgb(255, 230, 0);
     border: none;
     border-radius: 15px;
@@ -76,7 +76,7 @@
     width: 125px;
     height: 37px;
     right: 175px;
-    bottom: 35px;
+    bottom: 5px;
     border: 2px solid rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     transition: all 0.3s ease-out;
