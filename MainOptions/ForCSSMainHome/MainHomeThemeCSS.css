@@ -224,7 +224,7 @@
 
 body.Toggle-Light-Mode-Window {
     --bg-primary: rgba(255, 255, 255, 0.5);
-    --bg-secondary: rgba(223, 223, 223, 0.3);
+    --bg-secondary: rgba(223, 223, 223, 0.5);
     --bg-third: rgb(255, 230, 0);
     --text-primary: #000000;
     --text-secondary: #000000;
@@ -232,9 +232,9 @@ body.Toggle-Light-Mode-Window {
 
 body.Toggle-Dark-Mode-Window {
     --bg-primary: rgba(54, 54, 54, 0.5);
-    --bg-secondary: rgba(100, 100, 100, 0.3);
-    --bg-third: rgb(2, 2, 2);
-    --text-primary: #c4c4c4;
+    --bg-secondary: rgba(100, 100, 100, 0.5);
+    --bg-third: rgb(85, 85, 85);
+    --text-primary: #dbdbdb;
     --text-secondary: #888888;
 }
 
