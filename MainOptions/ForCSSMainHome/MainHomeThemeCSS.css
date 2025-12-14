@@ -267,8 +267,8 @@ body.Toggle-Dark-Mode-Window {
 @media (max-width: 650px) {
     .NoteThemeHomeWindowElements {
         width: 100%;
-        height: 665px;
-        top: 405px;
+        height: 785px;
+        top: 455px;
         left: 50%;
         border-radius: 0px;
         translate: -50% -50%;
@@ -283,9 +283,9 @@ body.Toggle-Dark-Mode-Window {
 
     .ThemeWindowh2 {
         position: fixed;
-        top: 850px;
+        top: 660px;
         width: 300px;
-        left: 15%;
+        left: 0;
     }
 
     .GobackOptionButton1 {
@@ -294,6 +294,17 @@ body.Toggle-Dark-Mode-Window {
         border-radius: 10px;
         content: "Close";
         font-size: 15px;
+    }
+    .List-of-Color-Modes-Window {
+        top: 705px;
+    }
+
+    .ColorModeButton1 {
+        font-size: 15px;
+    }
+
+    .ColorWindowText {
+        font-size: 17px;
     }
 }
 
@@ -307,5 +318,19 @@ body.Toggle-Dark-Mode-Window {
         top: 53%;
         left: 50%;
         translate: -50% -50%;
+    }
+}
+
+@media (max-width: 680px) {
+    .List-of-Color-Modes-Window {
+        top: 705px;
+    }
+
+    .ColorModeButton1 {
+        font-size: 13px;
+    }
+
+    .ColorWindowText {
+        font-size: 15px;
     }
 }
