@@ -421,105 +421,81 @@ function createNoteTab(noteId, title, content, isFavorite = false) {
         }, 300);
     });
 
-    // Add open functionality
-    NoteTabOpenButton.addEventListener('click', () => {
+    // Add open functionality (uses the existing note interface, now draggable)
+    NoteTabOpenButton.addEventListener('click', async () => {
+        stopAutoSave();
+
         const NoteCodeNameID = document.getElementById('NoteCodeNameID');
         const NoteCodeContent = document.getElementById('NoteCodeContentID');
         const NoteInterfaceCodeMainID = document.getElementById('NoteInterfaceCodeMainID');
+        const favoriteButton = document.getElementById('NoteFavoriteButton');
+        const categorySelect = document.getElementById('NoteCategorySelect');
 
-        // Get full content from database if note has ID, otherwise use preview
+        const rawTitle = NoteTabNamee.textContent || '';
+        const cleanTitle = rawTitle.replace(/^⭐\s*/, '');
         const existingNoteId = NoteTab.getAttribute('data-note-id');
         const tabNoteId = existingNoteId ? parseInt(existingNoteId) : null;
-        
-        // Set current note tab
+        const tabIsFavorite = NoteTab.getAttribute('data-is-favorite') === '1';
+
         currentNoteTab = NoteTab;
         currentNoteId = tabNoteId;
 
-        // Load full content if we have an ID (fetch from database)
+        const applyNoteToUI = (noteObj) => {
+            if (NoteCodeNameID) {
+                NoteCodeNameID.textContent = (noteObj.title || '').replace(/^⭐\s*/, '');
+            }
+            if (NoteCodeContent) {
+                NoteCodeContent.value = noteObj.content || '';
+            }
+            loadCategoriesIntoDropdown().then(() => {
+                if (categorySelect) {
+                    const noteCategoryId = noteObj.category_id ? parseInt(noteObj.category_id) : null;
+                    categorySelect.value = noteCategoryId || '';
+                    if (typeof window.updateOldCategoryId === 'function') {
+                        window.updateOldCategoryId();
+                    }
+                }
+            });
+            if (favoriteButton) {
+                const isFavorite = noteObj.is_favorite == 1 || noteObj.is_favorite === true || noteObj.is_favorite === '1';
+                if (isFavorite) {
+                    favoriteButton.classList.add('favorited');
+                    favoriteButton.textContent = '⭐';
+                } else {
+                    favoriteButton.classList.remove('favorited');
+                    favoriteButton.textContent = '☆';
+                }
+                if (typeof window.updateOriginalFavoriteState === 'function') {
+                    window.updateOriginalFavoriteState();
+                }
+            }
+        };
+
         if (tabNoteId) {
-            // Fetch full note content
             const userEmail = localStorage.getItem('userEmail');
             if (userEmail) {
-                fetch(`../save_note.php?userEmail=${encodeURIComponent(userEmail)}`, {
-                    method: 'GET',
-                    headers: { 'Content-Type': 'application/json' }
-                })
-                .then(response => response.json())
-                .then(data => {
+                try {
+                    const response = await fetch(`../save_note.php?userEmail=${encodeURIComponent(userEmail)}`, {
+                        method: 'GET',
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                    const data = await response.json();
                     if (data.success && data.notes) {
                         const fullNote = data.notes.find(n => n.id === tabNoteId);
                         if (fullNote) {
-                            if (NoteCodeNameID) {
-                                // Remove any star from title when loading (star is only in the tab, not in the note itself)
-                                const cleanTitle = fullNote.title.replace(/^⭐\s*/, '');
-                                NoteCodeNameID.textContent = cleanTitle;
-                            }
-                            if (NoteCodeContent) {
-                                NoteCodeContent.value = fullNote.content || '';
-                            }
-                            // Set category in dropdown - ensure it's loaded first
-                            loadCategoriesIntoDropdown().then(() => {
-                                const categorySelect = document.getElementById('NoteCategorySelect');
-                                if (categorySelect) {
-                                    const noteCategoryId = fullNote.category_id ? parseInt(fullNote.category_id) : null;
-                                    categorySelect.value = noteCategoryId || '';
-                                    
-                                    // Update the old category ID tracker for change detection
-                                    if (typeof window.updateOldCategoryId === 'function') {
-                                        window.updateOldCategoryId();
-                                    }
-                                }
-                            });
-                            
-                            // Update favorite button if it exists
-                            const favoriteButton = document.getElementById('NoteFavoriteButton');
-                            if (favoriteButton) {
-                                const isFavorite = fullNote.is_favorite == 1 || fullNote.is_favorite === true || fullNote.is_favorite === 1;
-                                if (isFavorite) {
-                                    favoriteButton.classList.add('favorited');
-                                    favoriteButton.textContent = '⭐';
-                                } else {
-                                    favoriteButton.classList.remove('favorited');
-                                    favoriteButton.textContent = '☆';
-                                }
-                                
-                                // Update the original favorite state tracker
-                                if (typeof window.updateOriginalFavoriteState === 'function') {
-                                    window.updateOriginalFavoriteState();
-                                }
-                            }
+                            applyNoteToUI(fullNote);
+                        } else {
+                            applyNoteToUI({ title: cleanTitle, content: NoteTabContent.textContent, category_id: null, is_favorite: tabIsFavorite });
                         }
                     }
-                })
-                .catch(error => {
+                } catch (error) {
                     console.error('Error loading note content:', error);
-                    // Fallback to preview content
-                    if (NoteCodeNameID) {
-                        NoteCodeNameID.textContent = NoteTabNamee.textContent;
-                    }
-                    if (NoteCodeContent) {
-                        NoteCodeContent.value = NoteTabContent.textContent;
-                    }
-                });
+                    applyNoteToUI({ title: cleanTitle, content: NoteTabContent.textContent, category_id: null, is_favorite: tabIsFavorite });
+                }
             }
         } else {
-            // Use preview content for new notes
-            if (NoteCodeNameID) {
-                NoteCodeNameID.textContent = NoteTabNamee.textContent;
-            }
-            if (NoteCodeContent) {
-                NoteCodeContent.value = NoteTabContent.textContent;
-            }
-            // Reset category to current filter or empty
-            const categorySelect = document.getElementById('NoteCategorySelect');
-            if (categorySelect) {
-                const currentFilter = (typeof currentCategoryFilter !== 'undefined' && currentCategoryFilter !== null) ? currentCategoryFilter : '';
-                categorySelect.value = currentFilter || '';
-            }
+            applyNoteToUI({ title: cleanTitle, content: NoteTabContent.textContent, category_id: currentCategoryFilter || null, is_favorite: tabIsFavorite });
         }
-        
-        // Load categories into dropdown
-        loadCategoriesIntoDropdown();
 
         if (NoteInterfaceCodeMainID) {
             NoteInterfaceCodeMainID.style.scale = "1";
@@ -527,10 +503,9 @@ function createNoteTab(noteId, title, content, isFavorite = false) {
             NoteInterfaceCodeMainID.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1.1)";
         }
 
-        // Start auto-save for this note
-        const title = NoteTabNamee.textContent;
-        const content = NoteTabContent.textContent;
-        startAutoSave(tabNoteId, title, content);
+        const titleForSave = NoteCodeNameID ? NoteCodeNameID.textContent : cleanTitle;
+        const contentForSave = NoteCodeContent ? NoteCodeContent.value : '';
+        startAutoSave(tabNoteId, titleForSave, contentForSave);
     });
 
     // Add go back button functionality
@@ -696,9 +671,9 @@ async function loadNotesFromDatabase(categoryId = null) {
     }
 }
 
-// Function to load categories into the dropdown selector
-async function loadCategoriesIntoDropdown() {
-    const categorySelect = document.getElementById('NoteCategorySelect');
+// Function to load categories into a dropdown selector (can accept a specific select)
+async function loadCategoriesIntoDropdown(targetSelect = document.getElementById('NoteCategorySelect')) {
+    const categorySelect = targetSelect;
     if (!categorySelect) {
         return;
     }
@@ -733,6 +708,8 @@ async function loadCategoriesIntoDropdown() {
         console.error('Error loading categories into dropdown:', error);
     }
 }
+
+// Floating window helpers removed; existing interface is now draggable
 
 // Store user info in localStorage (if available)
 // This runs when the page loads to initialize user data
@@ -987,6 +964,9 @@ document.addEventListener('DOMContentLoaded', function() {
             loadNotesFromDatabase();
         }
     }, 30000);
+
+    // Make the main note interface draggable (uses the existing UI only)
+    makeNoteInterfaceDraggable();
 });
 
 // ========== AUTO-SAVE FUNCTIONALITY ==========
@@ -1337,6 +1317,50 @@ function stopAutoSave() {
 window.addEventListener('beforeunload', () => {
     stopAutoSave();
 });
+
+// Drag support for the existing note interface window
+function makeNoteInterfaceDraggable() {
+    const noteEl = document.getElementById('NoteInterfaceCodeMainID');
+    if (!noteEl) return;
+
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    const onMouseMove = (e) => {
+        if (!isDragging) return;
+        const newLeft = e.clientX - offsetX;
+        const newTop = e.clientY - offsetY;
+        noteEl.style.left = `${newLeft}px`;
+        noteEl.style.top = `${newTop}px`;
+        noteEl.style.translate = '0 0';
+    };
+
+    const onMouseUp = () => {
+        isDragging = false;
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+    };
+
+    noteEl.addEventListener('mousedown', (e) => {
+        // ignore drags that start on inputs/textareas to keep editing easy
+        const target = e.target;
+        if (target && (target.tagName === 'TEXTAREA' || target.isContentEditable || target.tagName === 'SELECT' || target.tagName === 'BUTTON' || target.tagName === 'OPTION')) {
+            return;
+        }
+        isDragging = true;
+        const rect = noteEl.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+        // ensure positioning uses current screen coordinates
+        noteEl.style.position = 'absolute';
+        noteEl.style.left = `${rect.left}px`;
+        noteEl.style.top = `${rect.top}px`;
+        noteEl.style.translate = '0 0';
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+    });
+}
 
 // Initialize auto-save when note interface is opened
 // This will be called after note creation animation completes

@@ -225,3 +225,6 @@
         height: calc(100% - 170px);
     }
 }
+
+/* Floating note windows (draggable, up to 3 instances) */
+/* Floating note UI removed per request; existing interface is now draggable */
