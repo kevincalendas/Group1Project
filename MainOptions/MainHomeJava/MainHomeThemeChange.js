@@ -90,7 +90,7 @@ function ThemeChoose() {
         BodyoftheMainHome.style.backgroundPosition = "center";
         BodyoftheMainHome.style.transition = "all 0.4s cubic-bezier(0.100, 0.82, 0.110, 1.1)";
 
-        ThemeButtonChange1.innerText = "In use";
+        ThemeButtonChange1.innerText = "In use ✅";
         ThemeButtonChange2.innerText = "Select Theme";
         ThemeButtonChange3.innerText = "Select Theme";
         ThemeButtonChange4.innerText = "Select Theme";
@@ -134,7 +134,7 @@ function ThemeChoose() {
 
         
         ThemeButtonChange1.innerText = "Select Theme";
-        ThemeButtonChange2.innerText = "In use";
+        ThemeButtonChange2.innerText = "In use ✅";
         ThemeButtonChange3.innerText = "Select Theme";
         ThemeButtonChange4.innerText = "Select Theme";
         ThemeButtonChange5.innerText = "Select Theme";
@@ -170,7 +170,7 @@ function ThemeChoose() {
         
         ThemeButtonChange1.innerText = "Select Theme";
         ThemeButtonChange2.innerText = "Select Theme";
-        ThemeButtonChange3.innerText = "In use";
+        ThemeButtonChange3.innerText = "In use ✅";
         ThemeButtonChange4.innerText = "Select Theme";
         ThemeButtonChange5.innerText = "Select Theme";
         ThemeButtonChange6.innerText = "Select Theme";
@@ -207,7 +207,7 @@ function ThemeChoose() {
         ThemeButtonChange1.innerText = "Select Theme";
         ThemeButtonChange2.innerText = "Select Theme";
         ThemeButtonChange3.innerText = "Select Theme";
-        ThemeButtonChange4.innerText = "In use"
+        ThemeButtonChange4.innerText = "In use ✅"
         ThemeButtonChange5.innerText = "Select Theme";
         ThemeButtonChange6.innerText = "Select Theme";
 
@@ -242,7 +242,7 @@ function ThemeChoose() {
         ThemeButtonChange1.innerText = "Select Theme";
         ThemeButtonChange2.innerText = "Select Theme";
         ThemeButtonChange3.innerText = "Select Theme";
-        ThemeButtonChange5.innerText = "In use";
+        ThemeButtonChange5.innerText = "In use ✅";
         ThemeButtonChange4.innerText = "Select Theme"
         ThemeButtonChange6.innerText = "Select Theme";
 
@@ -279,7 +279,7 @@ function ThemeChoose() {
         ThemeButtonChange3.innerText = "Select Theme";
         ThemeButtonChange5.innerText = "Select Theme";
         ThemeButtonChange4.innerText = "Select Theme";
-        ThemeButtonChange6.innerText = "In use";
+        ThemeButtonChange6.innerText = "In use ✅";
 
         ThemeButtonChange1.disabled = false;
         ThemeButtonChange2.disabled = false;
@@ -399,7 +399,7 @@ async function loadSavedTheme() {
                     const theme = themes[themeKey];
                     if (theme.button) {
                         if (themeKey === data.theme) {
-                            theme.button.innerText = "In use";
+                            theme.button.innerText = "In use ✅";
                             theme.button.disabled = true;
                         } else {
                             theme.button.innerText = "Select Theme";
