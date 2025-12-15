@@ -3,6 +3,243 @@
 let notenumbercreation = 0;
 let NoListOrganizedCreated = false;
 
+// --- Multi-window note editor state (allow up to 3 floating editors) ---
+const MAX_NOTE_WINDOWS = 3;
+const openNoteWindows = new Map(); // windowId -> { el, timers, noteId, tabEl }
+let noteWindowCounter = 0;
+let windowTopZ = 1300;
+
+function bringWindowToFront(windowEl) {
+    if (!windowEl) return;
+    windowTopZ += 1;
+    windowEl.style.zIndex = `${windowTopZ}`;
+}
+
+function ensureNoteWindowContainer() {
+    let container = document.getElementById('NoteWindowContainer');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'NoteWindowContainer';
+        container.style.position = 'fixed';
+        container.style.inset = '0';
+        container.style.pointerEvents = 'none';
+        container.style.zIndex = '1200';
+        document.body.appendChild(container);
+    }
+    return container;
+}
+
+function buildNoteWindowElement(windowId) {
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('NoteInterfaceCodeMain', 'NoteWindowInstance');
+    wrapper.dataset.windowId = windowId;
+    wrapper.style.position = 'fixed';
+    wrapper.style.pointerEvents = 'auto';
+    wrapper.style.top = `${100 + (openNoteWindows.size * 35)}px`;
+    wrapper.style.left = `${100 + (openNoteWindows.size * 45)}px`;
+    bringWindowToFront(wrapper);
+
+    wrapper.innerHTML = `
+        <h1 class="NoteCodeName" contenteditable="true">Title</h1>
+        <button class="NoteFavoriteButton" aria-label="Toggle favorite">☆</button>
+        <div class="NoteCategorySelector">
+            <label class="CategoryLabel">Category:</label>
+            <select class="CategorySelect">
+                <option value="">Uncategorized</option>
+            </select>
+        </div>
+        <textarea class="NoteCodeContent" rows="5" cols="50" placeholder="Start typing your note here..."></textarea>
+        <button class="GoBackButton" aria-label="Close note">✕</button>
+        <div class="NoteCodeServerStatus"></div>
+        <h1 class="NoteCodeStatush1">Saved!</h1>
+    `;
+
+    return wrapper;
+}
+
+async function openNoteWindowForTab(noteTab, tabNameEl, tabContentEl) {
+    const existingNoteId = noteTab.getAttribute('data-note-id');
+    const tabIsFavorite = noteTab.getAttribute('data-is-favorite') === '1';
+
+    if (openNoteWindows.size >= MAX_NOTE_WINDOWS) {
+        alert(`You can only open up to ${MAX_NOTE_WINDOWS} note windows at once.`);
+        return;
+    }
+
+    let fullNote = {
+        id: existingNoteId ? parseInt(existingNoteId) : null,
+        title: (tabNameEl ? tabNameEl.textContent : '')?.replace(/^⭐\s*/, '') || '',
+        content: tabContentEl ? tabContentEl.textContent : '',
+        is_favorite: tabIsFavorite,
+        category_id: null
+    };
+
+    if (existingNoteId) {
+        const userEmail = localStorage.getItem('userEmail');
+        if (userEmail) {
+            try {
+                const response = await fetch(`../save_note.php?userEmail=${encodeURIComponent(userEmail)}`, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await response.json();
+                if (data.success && data.notes) {
+                    const noteFromDb = data.notes.find(n => n.id === parseInt(existingNoteId));
+                    if (noteFromDb) {
+                        fullNote = noteFromDb;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading note content:', error);
+            }
+        }
+    }
+
+    const windowId = `note-window-${++noteWindowCounter}`;
+    const container = ensureNoteWindowContainer();
+    const noteWindow = buildNoteWindowElement(windowId);
+    container.appendChild(noteWindow);
+    openNoteWindows.set(windowId, { el: noteWindow, noteId: fullNote.id, tabEl: noteTab, saveTimer: null, isSaving: false });
+    makeWindowDraggable(noteWindow);
+    attachNoteWindowBehavior(windowId, fullNote, noteTab);
+}
+
+function attachNoteWindowBehavior(windowId, noteData, noteTab) {
+    const state = openNoteWindows.get(windowId);
+    if (!state) return;
+    const el = state.el;
+    el.addEventListener('mousedown', () => bringWindowToFront(el));
+
+    const titleEl = el.querySelector('.NoteCodeName');
+    const contentEl = el.querySelector('.NoteCodeContent');
+    const favoriteBtn = el.querySelector('.NoteFavoriteButton');
+    const categorySelect = el.querySelector('.CategorySelect');
+    const closeBtn = el.querySelector('.GoBackButton');
+    const statusText = el.querySelector('.NoteCodeStatush1');
+
+    titleEl.textContent = (noteData.title || 'Untitled').replace(/^⭐\s*/, '');
+    contentEl.value = noteData.content || '';
+
+    // Load categories into this select
+    loadCategoriesIntoDropdown(categorySelect).then(() => {
+        const noteCategoryId = noteData.category_id ? parseInt(noteData.category_id) : null;
+        categorySelect.value = noteCategoryId || '';
+    });
+
+    // Set favorite button state
+    const isFavorite = noteData.is_favorite == 1 || noteData.is_favorite === true || noteData.is_favorite === '1';
+    if (isFavorite) {
+        favoriteBtn.classList.add('favorited');
+        favoriteBtn.textContent = '⭐';
+    }
+
+    const updateTabPreview = (title, content, favorite) => {
+        const tabName = noteTab.querySelector('.NoteTabNamee');
+        const tabContent = noteTab.querySelector('.NoteTabContent');
+        if (tabName) {
+            tabName.textContent = favorite ? `⭐ ${title}` : title;
+        }
+        if (tabContent) {
+            const preview = content ? (content.length > 100 ? content.substring(0, 100) + '...' : content) : "No content";
+            tabContent.textContent = preview;
+        }
+        noteTab.setAttribute('data-is-favorite', favorite ? '1' : '0');
+    };
+
+    const saveNote = async (showStatus = true) => {
+        const userEmail = localStorage.getItem('userEmail');
+        if (!userEmail) {
+            console.warn('Cannot save note: userEmail missing.');
+            return;
+        }
+
+        const payload = {
+            userEmail,
+            noteId: state.noteId,
+            title: titleEl.textContent || '',
+            content: contentEl.value || '',
+            categoryId: categorySelect && categorySelect.value ? parseInt(categorySelect.value) : null,
+            isFavorite: favoriteBtn.classList.contains('favorited')
+        };
+
+        if (state.isSaving) return;
+        state.isSaving = true;
+        if (statusText && showStatus) {
+            statusText.textContent = 'Saving...';
+            statusText.style.color = '#ffa500';
+        }
+
+        try {
+            const response = await fetch('../save_note.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const text = await response.text();
+            const data = JSON.parse(text);
+            if (data.success) {
+                state.noteId = data.noteId || state.noteId;
+                if (state.noteId) {
+                    noteTab.setAttribute('data-note-id', state.noteId);
+                }
+                updateTabPreview(payload.title, payload.content, payload.isFavorite);
+                if (statusText && showStatus) {
+                    statusText.textContent = 'Saved!';
+                    statusText.style.color = '#4caf50';
+                    setTimeout(() => {
+                        if (statusText.textContent === 'Saved!') {
+                            statusText.textContent = 'Auto-saved';
+                            statusText.style.color = '#666';
+                        }
+                    }, 1500);
+                }
+            } else {
+                throw new Error(data.error || 'Failed to save note');
+            }
+        } catch (error) {
+            console.error('Error saving note:', error);
+            if (statusText && showStatus) {
+                statusText.textContent = 'Save failed';
+                statusText.style.color = '#f44336';
+            }
+        } finally {
+            state.isSaving = false;
+        }
+    };
+
+    const scheduleSave = () => {
+        if (state.saveTimer) {
+            clearTimeout(state.saveTimer);
+        }
+        state.saveTimer = setTimeout(() => saveNote(false), 500);
+    };
+
+    titleEl.addEventListener('input', scheduleSave);
+    contentEl.addEventListener('input', scheduleSave);
+    categorySelect.addEventListener('change', () => saveNote(true));
+
+    favoriteBtn.addEventListener('click', () => {
+        const wasFavorite = favoriteBtn.classList.contains('favorited');
+        if (wasFavorite) {
+            favoriteBtn.classList.remove('favorited');
+            favoriteBtn.textContent = '☆';
+        } else {
+            favoriteBtn.classList.add('favorited');
+            favoriteBtn.textContent = '⭐';
+        }
+        saveNote(true);
+    });
+
+    closeBtn.addEventListener('click', async () => {
+        await saveNote(true);
+        if (state.saveTimer) {
+            clearTimeout(state.saveTimer);
+        }
+        el.remove();
+        openNoteWindows.delete(windowId);
+    });
+}
+
 // ========== NOTE CREATION FUNCTIONS ==========
 
 function OpenCreationSETUP() {
@@ -235,38 +472,18 @@ function GettingINFOEntered() {
             NoteTab.style.opacity = "0";
             NoteTab.style.scale = "0.5";
             setTimeout(() => {
-                const NoteInterfaceCodeMainID = document.getElementById('NoteInterfaceCodeMainID');
                 NoteTab.style.opacity = "0";
                 NoteTab.style.scale = "0.7";
                 NoteTab.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.0)";
-                if (NoteInterfaceCodeMainID) {
-                    NoteInterfaceCodeMainID.style.scale = "1";
-                    NoteInterfaceCodeMainID.style.opacity = "1";
-                    NoteInterfaceCodeMainID.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.1)";
-                }
                 CloseCreationSETUP();
                 setTimeout(() => {
                     NoteTab.style.opacity = "1";
                     NoteTab.style.scale = "1.0";
                     NoteTab.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.0)";
-                    if (NoteInterfaceCodeMainID) {
-                        NoteInterfaceCodeMainID.style.scale = "1";
-                        NoteInterfaceCodeMainID.style.opacity = "1";
-                        NoteInterfaceCodeMainID.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.1)";
-                    }
                     CloseCreationSETUP();
-                    
-                    // Start auto-save after note interface is fully opened
-                    setTimeout(() => {
-                        const NoteCodeNameID = document.getElementById('NoteCodeNameID');
-                        const NoteCodeContent = document.getElementById('NoteCodeContentID');
-                        if (NoteCodeNameID && NoteCodeContent) {
-                            const title = NoteCodeNameID.textContent || '';
-                            const content = NoteCodeContent.value || '';
-                            // Start auto-save (noteId will be set after first save)
-                            startAutoSave(null, title, content);
-                        }
-                    }, 500);
+
+                    // Automatically open the new note in a floating editor window
+                    openNoteWindowForTab(NoteTab, NoteTabNamee, NoteTabContent);
                 }, 400);
             }, 300);
             
@@ -421,91 +638,9 @@ function createNoteTab(noteId, title, content, isFavorite = false) {
         }, 300);
     });
 
-    // Add open functionality (uses the existing note interface, now draggable)
+    // Add open functionality (now spawns a floating editor window; up to 3 at once)
     NoteTabOpenButton.addEventListener('click', async () => {
-        stopAutoSave();
-
-        const NoteCodeNameID = document.getElementById('NoteCodeNameID');
-        const NoteCodeContent = document.getElementById('NoteCodeContentID');
-        const NoteInterfaceCodeMainID = document.getElementById('NoteInterfaceCodeMainID');
-        const favoriteButton = document.getElementById('NoteFavoriteButton');
-        const categorySelect = document.getElementById('NoteCategorySelect');
-
-        const rawTitle = NoteTabNamee.textContent || '';
-        const cleanTitle = rawTitle.replace(/^⭐\s*/, '');
-        const existingNoteId = NoteTab.getAttribute('data-note-id');
-        const tabNoteId = existingNoteId ? parseInt(existingNoteId) : null;
-        const tabIsFavorite = NoteTab.getAttribute('data-is-favorite') === '1';
-
-        currentNoteTab = NoteTab;
-        currentNoteId = tabNoteId;
-
-        const applyNoteToUI = (noteObj) => {
-            if (NoteCodeNameID) {
-                NoteCodeNameID.textContent = (noteObj.title || '').replace(/^⭐\s*/, '');
-            }
-            if (NoteCodeContent) {
-                NoteCodeContent.value = noteObj.content || '';
-            }
-            loadCategoriesIntoDropdown().then(() => {
-                if (categorySelect) {
-                    const noteCategoryId = noteObj.category_id ? parseInt(noteObj.category_id) : null;
-                    categorySelect.value = noteCategoryId || '';
-                    if (typeof window.updateOldCategoryId === 'function') {
-                        window.updateOldCategoryId();
-                    }
-                }
-            });
-            if (favoriteButton) {
-                const isFavorite = noteObj.is_favorite == 1 || noteObj.is_favorite === true || noteObj.is_favorite === '1';
-                if (isFavorite) {
-                    favoriteButton.classList.add('favorited');
-                    favoriteButton.textContent = '⭐';
-                } else {
-                    favoriteButton.classList.remove('favorited');
-                    favoriteButton.textContent = '☆';
-                }
-                if (typeof window.updateOriginalFavoriteState === 'function') {
-                    window.updateOriginalFavoriteState();
-                }
-            }
-        };
-
-        if (tabNoteId) {
-            const userEmail = localStorage.getItem('userEmail');
-            if (userEmail) {
-                try {
-                    const response = await fetch(`../save_note.php?userEmail=${encodeURIComponent(userEmail)}`, {
-                        method: 'GET',
-                        headers: { 'Content-Type': 'application/json' }
-                    });
-                    const data = await response.json();
-                    if (data.success && data.notes) {
-                        const fullNote = data.notes.find(n => n.id === tabNoteId);
-                        if (fullNote) {
-                            applyNoteToUI(fullNote);
-                        } else {
-                            applyNoteToUI({ title: cleanTitle, content: NoteTabContent.textContent, category_id: null, is_favorite: tabIsFavorite });
-                        }
-                    }
-                } catch (error) {
-                    console.error('Error loading note content:', error);
-                    applyNoteToUI({ title: cleanTitle, content: NoteTabContent.textContent, category_id: null, is_favorite: tabIsFavorite });
-                }
-            }
-        } else {
-            applyNoteToUI({ title: cleanTitle, content: NoteTabContent.textContent, category_id: currentCategoryFilter || null, is_favorite: tabIsFavorite });
-        }
-
-        if (NoteInterfaceCodeMainID) {
-            NoteInterfaceCodeMainID.style.scale = "1";
-            NoteInterfaceCodeMainID.style.opacity = "1";
-            NoteInterfaceCodeMainID.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1.1)";
-        }
-
-        const titleForSave = NoteCodeNameID ? NoteCodeNameID.textContent : cleanTitle;
-        const contentForSave = NoteCodeContent ? NoteCodeContent.value : '';
-        startAutoSave(tabNoteId, titleForSave, contentForSave);
+        await openNoteWindowForTab(NoteTab, NoteTabNamee, NoteTabContent);
     });
 
     // Add go back button functionality
@@ -1357,6 +1492,48 @@ function makeNoteInterfaceDraggable() {
         noteEl.style.left = `${rect.left}px`;
         noteEl.style.top = `${rect.top}px`;
         noteEl.style.translate = '0 0';
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+    });
+}
+
+// Reusable drag helper for floating windows
+function makeWindowDraggable(windowEl) {
+    if (!windowEl) return;
+
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    const onMouseMove = (e) => {
+        if (!isDragging) return;
+        const newLeft = e.clientX - offsetX;
+        const newTop = e.clientY - offsetY;
+        windowEl.style.left = `${newLeft}px`;
+        windowEl.style.top = `${newTop}px`;
+        windowEl.style.translate = '0 0';
+    };
+
+    const onMouseUp = () => {
+        isDragging = false;
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+    };
+
+    windowEl.addEventListener('mousedown', (e) => {
+        const target = e.target;
+        if (target && (target.tagName === 'TEXTAREA' || target.isContentEditable || target.tagName === 'SELECT' || target.tagName === 'BUTTON' || target.tagName === 'OPTION' || target.tagName === 'INPUT' || target.closest('.CategorySelect'))) {
+            return;
+        }
+        bringWindowToFront(windowEl);
+        isDragging = true;
+        const rect = windowEl.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+        windowEl.style.position = 'fixed';
+        windowEl.style.left = `${rect.left}px`;
+        windowEl.style.top = `${rect.top}px`;
+        windowEl.style.translate = '0 0';
         document.addEventListener('mousemove', onMouseMove);
         document.addEventListener('mouseup', onMouseUp);
     });

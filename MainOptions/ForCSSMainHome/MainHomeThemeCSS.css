@@ -3,9 +3,6 @@
     width: 650px;
     height: 500px;
     background-color: var(--bg-primary);
-    top: 53%;
-    left: 50%;
-    translate: -50% -50%;
     border: 2px solid rgba(156, 156, 156, 0.4);
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
@@ -13,7 +10,12 @@
     z-index: 1;
     overflow-y: scroll;
     opacity: 0;
-    scale: 1
+}
+
+.NoteThemeHomeWindowElements {
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
 }
 
 .NoteThemeHomeWindowElements::-webkit-scrollbar {

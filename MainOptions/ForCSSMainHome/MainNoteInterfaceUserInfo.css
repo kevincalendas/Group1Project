@@ -37,7 +37,9 @@
 .UserProfileEmail {
     position: absolute;
     top: 47px;
-    translate: -270px;
+    text-align: left;
+    translate: -170px;
+    background-color: transparent;
 }
 
 .UserProfileStats {

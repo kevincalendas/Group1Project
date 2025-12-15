@@ -22,6 +22,7 @@ $createTableSQL = "CREATE TABLE IF NOT EXISTS user_settings (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL UNIQUE,
     theme VARCHAR(255) DEFAULT 'theme1',
+    mode VARCHAR(20) DEFAULT 'dark',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
@@ -30,11 +31,18 @@ $createTableSQL = "CREATE TABLE IF NOT EXISTS user_settings (
 
 $conn->query($createTableSQL);
 
+// Ensure 'mode' column exists for older installations
+$checkModeColumn = $conn->query("SHOW COLUMNS FROM user_settings LIKE 'mode'");
+if ($checkModeColumn && $checkModeColumn->num_rows === 0) {
+    $conn->query("ALTER TABLE user_settings ADD COLUMN mode VARCHAR(20) DEFAULT 'dark'");
+}
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data = json_decode(file_get_contents('php://input'), true);
     
     $userEmail = isset($data['userEmail']) ? trim($data['userEmail']) : '';
     $theme = isset($data['theme']) ? trim($data['theme']) : 'theme1';
+    $mode  = isset($data['mode']) ? trim($data['mode']) : null;
     
     if (empty($userEmail)) {
         http_response_code(400);
@@ -68,19 +76,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $userId = $userRow['id'];
     $userStmt->close();
     
-    // Insert or update theme
-    $upsertStmt = $conn->prepare("INSERT INTO user_settings (user_id, theme) VALUES (?, ?) ON DUPLICATE KEY UPDATE theme = ?, updated_at = CURRENT_TIMESTAMP");
-    if (!$upsertStmt) {
-        http_response_code(500);
-        echo json_encode(["success" => false, "error" => "Prepare failed: " . $conn->error]);
-        $conn->close();
-        exit();
+    // Insert or update theme and mode
+    if ($mode !== null && $mode !== '') {
+        $upsertStmt = $conn->prepare("INSERT INTO user_settings (user_id, theme, mode) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE theme = ?, mode = ?, updated_at = CURRENT_TIMESTAMP");
+        if (!$upsertStmt) {
+            http_response_code(500);
+            echo json_encode(["success" => false, "error" => "Prepare failed: " . $conn->error]);
+            $conn->close();
+            exit();
+        }
+        
+        $upsertStmt->bind_param("issss", $userId, $theme, $mode, $theme, $mode);
+    } else {
+        $upsertStmt = $conn->prepare("INSERT INTO user_settings (user_id, theme) VALUES (?, ?) ON DUPLICATE KEY UPDATE theme = ?, updated_at = CURRENT_TIMESTAMP");
+        if (!$upsertStmt) {
+            http_response_code(500);
+            echo json_encode(["success" => false, "error" => "Prepare failed: " . $conn->error]);
+            $conn->close();
+            exit();
+        }
+        
+        $upsertStmt->bind_param("iss", $userId, $theme, $theme);
     }
     
-    $upsertStmt->bind_param("iss", $userId, $theme, $theme);
-    
     if ($upsertStmt->execute()) {
-        echo json_encode(["success" => true, "theme" => $theme, "message" => "Theme saved successfully"]);
+        echo json_encode([
+            "success" => true,
+            "theme"   => $theme,
+            "mode"    => $mode,
+            "message" => "Settings saved successfully"
+        ]);
     } else {
         http_response_code(500);
         echo json_encode(["success" => false, "error" => "Save failed: " . $upsertStmt->error]);
@@ -122,7 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $userStmt->close();
     
     // Get user settings
-    $settingsStmt = $conn->prepare("SELECT theme FROM user_settings WHERE user_id = ? LIMIT 1");
+    $settingsStmt = $conn->prepare("SELECT theme, mode FROM user_settings WHERE user_id = ? LIMIT 1");
     if (!$settingsStmt) {
         http_response_code(500);
         echo json_encode(["success" => false, "error" => "Prepare failed: " . $conn->error]);
@@ -136,10 +161,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
     if ($settingsResult->num_rows > 0) {
         $settingsRow = $settingsResult->fetch_assoc();
-        echo json_encode(["success" => true, "theme" => $settingsRow['theme']]);
+        $theme = $settingsRow['theme'];
+        $mode  = isset($settingsRow['mode']) && $settingsRow['mode'] !== '' ? $settingsRow['mode'] : 'dark';
+        echo json_encode(["success" => true, "theme" => $theme, "mode" => $mode]);
     } else {
-        // Return default theme if no settings found
-        echo json_encode(["success" => true, "theme" => "theme1"]);
+        // Return default theme/mode if no settings found
+        echo json_encode(["success" => true, "theme" => "theme1", "mode" => "dark"]);
     }
     $settingsStmt->close();
 } else {

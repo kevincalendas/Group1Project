@@ -1,3 +1,7 @@
+let themeEventsInitialized = false;
+let currentThemeKey = 'theme1';
+let currentMode = 'dark';
+
 function ThemeChoose() {
     const BodyoftheMainHome = document.getElementById('pagebody');
     const ThemeButtonChange1 = document.getElementById('ThemeButton1');
@@ -65,16 +69,20 @@ function ThemeChoose() {
             ThemeWindow.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1.2)";
         }
 
-    ThemeWindowCloseButton.addEventListener("click", () => {
-        NoteWindowButtonExec.disabled = false;
-        ThemeWindow.style.scale = "0.5";
-        ThemeWindow.style.opacity = "0";
-        ThemeWindow.style.zIndex = "1";
-        ThemeWindow.style.transition = "all 0.2s cubic-bezier(0.4, 0, 0.2, 1.2)"
-        ThemeWindow.style.zIndex = "1";
-    })
+    // Initialize theme button events only once
+    if (!themeEventsInitialized) {
+        themeEventsInitialized = true;
 
-    ThemeButtonChange1.addEventListener("click", async () => {
+        ThemeWindowCloseButton.addEventListener("click", () => {
+            NoteWindowButtonExec.disabled = false;
+            ThemeWindow.style.scale = "0.5";
+            ThemeWindow.style.opacity = "0";
+            ThemeWindow.style.zIndex = "1";
+            ThemeWindow.style.transition = "all 0.2s cubic-bezier(0.4, 0, 0.2, 1.2)"
+            ThemeWindow.style.zIndex = "1";
+        });
+
+        ThemeButtonChange1.addEventListener("click", async () => {
         const themeUrl = 'https://i.pinimg.com/736x/b2/bc/13/b2bc13d8b2d37fbaee9c503d0d6c1279.jpg';
         BodyoftheMainHome.style.backgroundImage = `url('${themeUrl}')`;
         BodyoftheMainHome.style.backgroundSize = "cover";
@@ -82,7 +90,7 @@ function ThemeChoose() {
         BodyoftheMainHome.style.backgroundPosition = "center";
         BodyoftheMainHome.style.transition = "all 0.4s cubic-bezier(0.100, 0.82, 0.110, 1.1)";
 
-        ThemeButtonChange1.innerText = "In use ✅";
+        ThemeButtonChange1.innerText = "In use";
         ThemeButtonChange2.innerText = "Select Theme";
         ThemeButtonChange3.innerText = "Select Theme";
         ThemeButtonChange4.innerText = "Select Theme";
@@ -104,10 +112,11 @@ function ThemeChoose() {
             ThemeButtonChange1.classList.add("ButtonClicked");
         }, 100);
 
-        // Save theme to database
-        await saveThemeToDatabase('theme1', themeUrl);
-    });
-    ThemeButtonChange2.addEventListener("click", async () => {
+            // Save theme to database
+            await saveThemeToDatabase('theme1', themeUrl);
+        });
+
+        ThemeButtonChange2.addEventListener("click", async () => {
         const themeUrl = 'https://i.pinimg.com/1200x/4f/d7/ce/4fd7ce13e677485ec2849de64473c258.jpg';
         BodyoftheMainHome.style.backgroundImage = `url('${themeUrl}')`;
         BodyoftheMainHome.style.backgroundSize = "cover";
@@ -125,7 +134,7 @@ function ThemeChoose() {
 
         
         ThemeButtonChange1.innerText = "Select Theme";
-        ThemeButtonChange2.innerText = "In use ✅";
+        ThemeButtonChange2.innerText = "In use";
         ThemeButtonChange3.innerText = "Select Theme";
         ThemeButtonChange4.innerText = "Select Theme";
         ThemeButtonChange5.innerText = "Select Theme";
@@ -138,11 +147,11 @@ function ThemeChoose() {
         ThemeButtonChange5.disabled = false;
         ThemeButtonChange6.disabled = false;
 
-        // Save theme to database
-        await saveThemeToDatabase('theme2', themeUrl);
-    });
+            // Save theme to database
+            await saveThemeToDatabase('theme2', themeUrl);
+        });
 
-    ThemeButtonChange3.addEventListener("click", async () => {
+        ThemeButtonChange3.addEventListener("click", async () => {
         const themeUrl = 'https://i.pinimg.com/1200x/76/64/1b/76641b53502d4ca601ecd3c240ad6245.jpg';
         BodyoftheMainHome.style.backgroundImage = `url('${themeUrl}')`;
         BodyoftheMainHome.style.backgroundSize = "cover";
@@ -161,7 +170,7 @@ function ThemeChoose() {
         
         ThemeButtonChange1.innerText = "Select Theme";
         ThemeButtonChange2.innerText = "Select Theme";
-        ThemeButtonChange3.innerText = "In use ✅";
+        ThemeButtonChange3.innerText = "In use";
         ThemeButtonChange4.innerText = "Select Theme";
         ThemeButtonChange5.innerText = "Select Theme";
         ThemeButtonChange6.innerText = "Select Theme";
@@ -174,11 +183,11 @@ function ThemeChoose() {
         ThemeButtonChange6.disabled = false;
 
 
-        // Save theme to database
-        await saveThemeToDatabase('theme3', themeUrl);
-    });
+            // Save theme to database
+            await saveThemeToDatabase('theme3', themeUrl);
+        });
 
-    ThemeButtonChange4.addEventListener("click", async () => {
+        ThemeButtonChange4.addEventListener("click", async () => {
         const themeUrl = 'https://i.pinimg.com/1200x/31/ba/7c/31ba7cc779eb847b2231c27ba7b2be40.jpg';
         BodyoftheMainHome.style.backgroundImage = `url('${themeUrl}')`;
         BodyoftheMainHome.style.backgroundSize = "cover";
@@ -198,7 +207,7 @@ function ThemeChoose() {
         ThemeButtonChange1.innerText = "Select Theme";
         ThemeButtonChange2.innerText = "Select Theme";
         ThemeButtonChange3.innerText = "Select Theme";
-        ThemeButtonChange4.innerText = "In use ✅"
+        ThemeButtonChange4.innerText = "In use"
         ThemeButtonChange5.innerText = "Select Theme";
         ThemeButtonChange6.innerText = "Select Theme";
 
@@ -209,11 +218,11 @@ function ThemeChoose() {
         ThemeButtonChange5.disabled = false;
         ThemeButtonChange6.disabled = false;
 
-        // Save theme to database
-        await saveThemeToDatabase('theme4', themeUrl);
-    });
+            // Save theme to database
+            await saveThemeToDatabase('theme4', themeUrl);
+        });
 
-    ThemeButtonChange5.addEventListener("click", async () => {
+        ThemeButtonChange5.addEventListener("click", async () => {
         const themeUrl = 'https://i.pinimg.com/736x/09/b5/9c/09b59c2b5f192b2d1a0ffa45c75525b1.jpg';
         BodyoftheMainHome.style.backgroundImage = `url('${themeUrl}')`;
         BodyoftheMainHome.style.backgroundSize = "cover";
@@ -233,7 +242,7 @@ function ThemeChoose() {
         ThemeButtonChange1.innerText = "Select Theme";
         ThemeButtonChange2.innerText = "Select Theme";
         ThemeButtonChange3.innerText = "Select Theme";
-        ThemeButtonChange5.innerText = "In use ✅";
+        ThemeButtonChange5.innerText = "In use";
         ThemeButtonChange4.innerText = "Select Theme"
         ThemeButtonChange6.innerText = "Select Theme";
 
@@ -244,11 +253,11 @@ function ThemeChoose() {
         ThemeButtonChange5.disabled = true;
         ThemeButtonChange6.disabled = false;
 
-        // Save theme to database
-        await saveThemeToDatabase('theme5', themeUrl);
-    });
+            // Save theme to database
+            await saveThemeToDatabase('theme5', themeUrl);
+        });
 
-    ThemeButtonChange6.addEventListener("click", async () => {
+        ThemeButtonChange6.addEventListener("click", async () => {
         const themeUrl = 'https://i.pinimg.com/1200x/c1/7c/d8/c17cd8ede2fb830173adac23344595d8.jpg';
         BodyoftheMainHome.style.backgroundImage = `url('${themeUrl}')`;
         BodyoftheMainHome.style.backgroundSize = "cover";
@@ -270,7 +279,7 @@ function ThemeChoose() {
         ThemeButtonChange3.innerText = "Select Theme";
         ThemeButtonChange5.innerText = "Select Theme";
         ThemeButtonChange4.innerText = "Select Theme";
-        ThemeButtonChange6.innerText = "In use ✅";
+        ThemeButtonChange6.innerText = "In use";
 
         ThemeButtonChange1.disabled = false;
         ThemeButtonChange2.disabled = false;
@@ -279,11 +288,12 @@ function ThemeChoose() {
         ThemeButtonChange5.disabled = false;
         ThemeButtonChange6.disabled = true;
 
-        // Save theme to database
-        await saveThemeToDatabase('theme5', themeUrl);
-    });
+            // Save theme to database
+            await saveThemeToDatabase('theme6', themeUrl);
+        });
+    }
 
-    // Load saved theme on page load
+    // Ensure saved theme is applied when opening the theme window
     loadSavedTheme();
 }
 
@@ -295,6 +305,11 @@ async function saveThemeToDatabase(themeName, themeUrl) {
         return;
     }
 
+    // Track current theme & mode
+    currentThemeKey = themeName || currentThemeKey || 'theme1';
+    const body = document.body;
+    currentMode = body.classList.contains('Toggle-Light-Mode-Window') ? 'light' : 'dark';
+
     try {
         const response = await fetch('../user_settings.php', {
             method: 'POST',
@@ -303,7 +318,8 @@ async function saveThemeToDatabase(themeName, themeUrl) {
             },
             body: JSON.stringify({
                 userEmail: userEmail,
-                theme: themeName
+                theme: themeName,
+                mode: currentMode
             })
         });
 
@@ -375,12 +391,15 @@ async function loadSavedTheme() {
                 BodyoftheMainHome.style.backgroundAttachment = "fixed";
                 BodyoftheMainHome.style.backgroundPosition = "center";
 
+                // Track current theme
+                currentThemeKey = data.theme;
+
                 // Update button states
                 Object.keys(themes).forEach((themeKey, index) => {
                     const theme = themes[themeKey];
                     if (theme.button) {
                         if (themeKey === data.theme) {
-                            theme.button.innerText = "In use ✅";
+                            theme.button.innerText = "In use";
                             theme.button.disabled = true;
                         } else {
                             theme.button.innerText = "Select Theme";
@@ -388,7 +407,43 @@ async function loadSavedTheme() {
                         }
                     }
                 });
+
+                // Apply saved light/dark mode if present
+                const body = document.body;
+                const ColorModeButton1 = document.getElementById('ColorModeButton1');
+                const savedMode = data.mode === 'light' ? 'light' : 'dark';
+                currentMode = savedMode;
+
+                if (savedMode === 'light') {
+                    body.classList.add('Toggle-Light-Mode-Window');
+                    body.classList.remove('Toggle-Dark-Mode-Window');
+                    if (ColorModeButton1) {
+                        ColorModeButton1.textContent = " Switch to Dark Mode ";
+                    }
+                } else {
+                    body.classList.remove('Toggle-Light-Mode-Window');
+                    body.classList.add('Toggle-Dark-Mode-Window');
+                    if (ColorModeButton1) {
+                        ColorModeButton1.textContent = " Switch to Light Mode ";
+                    }
+                }
             }
+        } else if (data.success && !data.theme) {
+            // No theme saved yet for this user: apply and save a default theme
+            const BodyoftheMainHome = document.getElementById('pagebody');
+            const defaultThemeKey = 'theme1';
+            const defaultThemeUrl = 'https://i.pinimg.com/736x/b2/bc/13/b2bc13d8b2d37fbaee9c503d0d6c1279.jpg';
+
+            if (BodyoftheMainHome) {
+                BodyoftheMainHome.style.backgroundImage = `url('${defaultThemeUrl}')`;
+                BodyoftheMainHome.style.backgroundSize = "cover";
+                BodyoftheMainHome.style.backgroundAttachment = "fixed";
+                BodyoftheMainHome.style.backgroundPosition = "center";
+            }
+
+            // Persist default theme for this new user so that on next login
+            // it is already stored in user_settings
+            await saveThemeToDatabase(defaultThemeKey, defaultThemeUrl);
         }
     } catch (error) {
         console.error('Error loading theme:', error);
@@ -402,20 +457,62 @@ function ColorModeWindowChooseLight() {
     const isDarkModeActive = body.classList.contains('Toggle-Dark-Mode-Window');
     const isLightModeActive = body.classList.contains('Toggle-Light-Mode-Window');
 
-    body.classList.toggle('Toggle-Light-Mode-Window');
-
-    if (isDarkModeActive) {
+    if (isDarkModeActive || !isLightModeActive) {
         body.classList.add('Toggle-Light-Mode-Window');
         body.classList.remove('Toggle-Dark-Mode-Window');
         ColorModeButton1.textContent = " Switch to Dark Mode ";
-
+        currentMode = 'light';
     } else  {
         body.classList.remove('Toggle-Light-Mode-Window');
         body.classList.add('Toggle-Dark-Mode-Window');
         ColorModeButton1.textContent = " Switch to Light Mode ";
+        currentMode = 'dark';
     }
 
-
+    // Save color mode + current theme in database
+    saveColorModeToDatabase(currentMode);
 }
 
+async function saveColorModeToDatabase(mode) {
+    const userEmail = localStorage.getItem('userEmail');
+    if (!userEmail) {
+        console.warn('Cannot save color mode: userEmail not found');
+        return;
+    }
 
+    const themeToPersist = currentThemeKey || 'theme1';
+    currentMode = mode === 'light' ? 'light' : 'dark';
+
+    try {
+        await fetch('../user_settings.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userEmail: userEmail,
+                theme: themeToPersist,
+                mode: currentMode
+            })
+        });
+    } catch (error) {
+        console.error('Error saving color mode:', error);
+    }
+}
+
+// Apply saved theme automatically when the page loads,
+// and refresh it periodically so changes from the database
+// reflect in "real time" (e.g. if changed from another device/tab).
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        if (typeof loadSavedTheme === 'function') {
+            loadSavedTheme();
+        }
+    }, 300);
+
+    setInterval(() => {
+        if (typeof loadSavedTheme === 'function') {
+            loadSavedTheme();
+        }
+    }, 15000); // every 15 seconds
+});
