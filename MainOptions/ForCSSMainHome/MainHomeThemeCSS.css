@@ -9,7 +9,7 @@
     backdrop-filter: blur(10px);
     z-index: 1;
     overflow-y: scroll;
-    opacity: 0;
+    opacity: 0; 
 }
 
 .NoteThemeHomeWindowElements {
