@@ -4,6 +4,29 @@
   <meta charset="UTF-8">
   <title>Login | Note#Code</title>
   <link rel="stylesheet" href="LoginAnimation.css">
+  
+  <!-- Firebase SDK from CDN (compat build for globals) -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
+  
+  <!-- Firebase Configuration -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyB7Eac47fswoK0xVKhL1_RHKX6xjSAysWE",
+      authDomain: "beatrix-core-database.firebaseapp.com",
+      databaseURL: "https://beatrix-core-database-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "beatrix-core-database",
+      storageBucket: "beatrix-core-database.firebasestorage.app",
+      messagingSenderId: "444256156441",
+      appId: "1:444256156441:web:7b3aa0ca4041bed0a52388",
+      measurementId: "G-0ERX0XVSYC"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const database = firebase.database();
+  </script>
+  
   <style>
     body {
       background: #fff8dc; 
@@ -109,13 +132,23 @@
       right: 25px;
     }
 
-    /* Thiungszx*/
+    .error-message {
+      color: #d32f2f;
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .success-message {
+      color: #388e3c;
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+    }
 
   </style>
 </head>
 <body>
-  <!-- for calling the login java thingz-->
-  <script src="Login.js"></script>
   <div class="InsideImagesPreviews">
     <img class="LOGOICON21" src="../2ndpageIcons/LOGOICON2.1.png" alt="">
     <img class="IMGPREVIEW2" src="./LoginIcons/NOTEICON1.png" alt="">
@@ -127,27 +160,54 @@
     <h1 style="font-family: arial; font-weight: bolder; font-size: 28px; color: #FFBF00">Login to Note#Code</h1>
     <h5 style="font-family: georgia; font-weight: bold;">Come and try the newest and innovative Note#Code Pad!</h5>
 
-    <form action="login.php" method="POST">
-      <input id="Email" type="email" name="email" placeholder="Email"  required>
-      <input id="password" type="password" name="password" placeholder="Password" required>
+    <form id="loginForm">
+      <input id="Email" type="email" placeholder="Email" required>
+      <input id="password" type="password" placeholder="Password" required>
 
       <div>
         <input type="checkbox" id="remember" class="Rememberme1" name="remember">
         <label for="remember" class="Rememberme2">Remember Me</label>
       </div>
 
-      <button id="button1" class="button1" type="submit" onclick="ifloginempty()">Login</button></a>
+      <div class="error-message" id="errorMessage"></div>
+      <div class="success-message" id="successMessage"></div>
 
-    
+      <button id="button1" class="button1" type="submit">Login</button>
     </form>
 
     <button class="button2" onclick="window.location.href='./signup.html'">New here? Create Account</button>
-
-     
   </div>
 
   <footer>
     <p>"2025 Note#Code | All rights reserved."</p>
   </footer>
+
+  <script>
+    // Firebase Login Handler
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = document.getElementById('Email').value;
+      const password = document.getElementById('password').value;
+      const errorDiv = document.getElementById('errorMessage');
+      const successDiv = document.getElementById('successMessage');
+      
+      errorDiv.style.display = 'none';
+      successDiv.style.display = 'none';
+
+      try {
+        const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
+        successDiv.textContent = 'Login successful! Redirecting...';
+        successDiv.style.display = 'block';
+        
+        setTimeout(() => {
+          window.location.href = '../MainOptions/MainHomeSection.html';
+        }, 1000);
+      } catch (error) {
+        errorDiv.textContent = 'Error: ' + error.message;
+        errorDiv.style.display = 'block';
+      }
+    });
+  </script>
 </body>
 </html>

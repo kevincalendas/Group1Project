@@ -3,6 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <title>Sign Up | Note#Code</title>
+  
+  <!-- Firebase SDK from CDN (compat build for globals) -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
+  
+  <!-- Firebase Configuration -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyB7Eac47fswoK0xVKhL1_RHKX6xjSAysWE",
+      authDomain: "beatrix-core-database.firebaseapp.com",
+      databaseURL: "https://beatrix-core-database-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "beatrix-core-database",
+      storageBucket: "beatrix-core-database.firebasestorage.app",
+      messagingSenderId: "444256156441",
+      appId: "1:444256156441:web:7b3aa0ca4041bed0a52388",
+      measurementId: "G-0ERX0XVSYC"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const database = firebase.database();
+  </script>
+  
   <style>
     body {
       margin: 0;
@@ -30,15 +53,11 @@
       margin-bottom: 15px;
       font-family:  Georgia, Times, 'Times New Roman', serif;
       font-size: 27px;
-
-
       animation-name: animatethings;
       animation-duration: 5s;
       animation-iteration-count: infinite;
       animation-fill-mode: forwards;
     }
-
-   
 
     .signup-box button {
       width: 95%;
@@ -63,6 +82,7 @@
       text-decoration: none;
       color: #e6ac00;
     }
+
     .signup-box input, .button1.sign, .button2{
       width: 90%;
       padding: 8px; 
@@ -71,8 +91,6 @@
       border-radius: 3px;
       transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.0);
     }
-
-    .sign
 
     .button1:hover, .button2:hover {
       scale: 1.03;
@@ -83,7 +101,20 @@
       box-shadow: 0 0 5px rgba(36, 39, 0, 0.616);
       transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.5);
     }
-    
+
+    .error-message {
+      color: #d32f2f;
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .success-message {
+      color: #388e3c;
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+    }
 
     footer {
       position: absolute;
@@ -93,29 +124,98 @@
       color: #e6ac00;
     }
 
-
     @media (max-width: 600px) {
       .signup-box {
         width: 80%;
       }
     }
-    
   </style>
 </head>
 <body>
   <div class="signup-box">
     <h2>Create Account</h2>
 
-    <form action="signup.php" method="POST">
-      <input type="text" name="fullname" placeholder="Full Name" required>
-      <input type="text" name="username" placeholder="Username" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <input type="password" name="confirmpassword" placeholder="Confirm Password" required>
+    <form id="signupForm">
+      <input id="fullname" type="text" placeholder="Full Name" required>
+      <input id="username" type="text" placeholder="Username" required>
+      <input id="email" type="email" placeholder="Email" required>
+      <input id="password" type="password" placeholder="Password" required>
+      <input id="confirmpassword" type="password" placeholder="Confirm Password" required>
+      
+      <div class="error-message" id="errorMessage"></div>
+      <div class="success-message" id="successMessage"></div>
+      
       <button type="submit">Sign Up</button>
     </form>
 
     <p style = "font-weight: bolder;"> <a href="index.html">Already have an account? Login</a> </p>
   </div>
+
+  <footer>
+    <p>"2025 Note#Code | All rights reserved."</p>
+  </footer>
+
+  <script>
+    // Firebase Sign Up Handler
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const fullname = document.getElementById('fullname').value;
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmpassword = document.getElementById('confirmpassword').value;
+      const errorDiv = document.getElementById('errorMessage');
+      const successDiv = document.getElementById('successMessage');
+      
+      errorDiv.style.display = 'none';
+      successDiv.style.display = 'none';
+
+      // Validate passwords match
+      if (password !== confirmpassword) {
+        errorDiv.textContent = 'Passwords do not match!';
+        errorDiv.style.display = 'block';
+        return;
+      }
+
+      try {
+        // Check if username already exists
+        const snapshot = await firebase.database().ref('users').get();
+        if (snapshot.exists()) {
+          const users = snapshot.val();
+          for (const uid in users) {
+            if (users[uid].username === username) {
+              errorDiv.textContent = 'Username already exists!';
+              errorDiv.style.display = 'block';
+              return;
+            }
+          }
+        }
+
+        // Create user with Firebase Authentication
+        const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+
+        // Store user data in Realtime Database
+        await firebase.database().ref(`users/${user.uid}`).set({
+          uid: user.uid,
+          email: email,
+          fullname: fullname,
+          username: username,
+          createdAt: new Date().toISOString()
+        });
+
+        successDiv.textContent = 'Account created successfully! Redirecting...';
+        successDiv.style.display = 'block';
+        
+        setTimeout(() => {
+          window.location.href = 'login-firebase.html';
+        }, 1500);
+      } catch (error) {
+        errorDiv.textContent = 'Error: ' + error.message;
+        errorDiv.style.display = 'block';
+      }
+    });
+  </script>
 </body>
 </html>

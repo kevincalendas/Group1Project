@@ -28,6 +28,64 @@
     background-color: rgba(255, 255, 255, 0 );
 }
 
+.NoteTabsBar {
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    right: 70px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    overflow-x: auto;
+    padding-bottom: 6px;
+}
+
+.NoteTabsBar .tab {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-family: Arial;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.NoteTabsBar .tab.active {
+    background: rgba(255,255,255,0.9);
+    border-color: rgba(0,0,0,0.3);
+    font-weight: bold;
+}
+
+/* Global tabs bar (outside editor) */
+.NoteTabsBarGlobal {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    overflow-x: auto;
+    padding: 10px 12px;
+    margin: 8px 10px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+}
+
+.NoteTabsBarGlobal .tab {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-family: Arial;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.NoteTabsBarGlobal .tab.active {
+    background: rgba(255,255,255,0.95);
+    border-color: rgba(0,0,0,0.18);
+    font-weight: bold;
+}
+
 
 
 .NoteCodeContent {
@@ -83,5 +141,58 @@
 .GoBackButton:hover {
     scale: 1.1;
     transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+/* Floating editor styles */
+.FloatingNote {
+    position: absolute;
+    width: 520px;
+    height: 360px;
+    background: rgba(255,255,255,0.95);
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    z-index: 1200;
+    overflow: hidden;
+}
+
+.FloatingHeader {
+    height: 40px;
+    padding: 6px 10px;
+    background: linear-gradient(90deg, rgba(240,240,240,1), rgba(250,250,250,1));
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: grab;
+}
+
+.FloatingHeader .title {
+    font-weight: bold;
+    font-family: Arial;
+    font-size: 14px;
+}
+
+.FloatingHeader .close-btn {
+    margin-left: auto;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.FloatingContent {
+    padding: 10px;
+}
+
+.FloatingContent textarea {
+    width: 100%;
+    height: calc(100% - 10px);
+    resize: none;
+    border: none;
+    font-family: Arial;
+    font-size: 13px;
 }
  

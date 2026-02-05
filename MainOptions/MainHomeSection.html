@@ -2,27 +2,63 @@
 <html>
     <head>
         <title> Home | Note#Code </title>
-        <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeSection.css">
-        <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeThemeCSS.css">
-        <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainNotesList.css">
-        <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainNoteCreationCSS.css">
-        <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeSectionFixDevices.css">
-        <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeNoteListTabs.css">
+        <link rel="stylesheet" href="ForCSSMainHome/MainHomeSection.css">
+        <link rel="stylesheet" href="ForCSSMainHome/MainHomeThemeCSS.css">
+        <link rel="stylesheet" href="ForCSSMainHome/MainNotesList.css">
+        <link rel="stylesheet" href="ForCSSMainHome/MainNoteCreationCSS.css">
+        <link rel="stylesheet" href="ForCSSMainHome/MainHomeSectionFixDevices.css">
+        <link rel="stylesheet" href="ForCSSMainHome/MainHomeNoteListTabs.css">
         <link rel="stylesheet" href="ForCSSMainHome/MainHomeOrganizedWindow.css">
         <link rel="stylesheet" href="ForCSSMainHome/MainCodeInterface.css">
         <meta name="viewport" content="width=device-width, initial-scale=0.9">
+        <!-- Firebase SDK (compat) -->
+        <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
+        <script>
+            const firebaseConfig = {
+                apiKey: "AIzaSyB7Eac47fswoK0xVKhL1_RHKX6xjSAysWE",
+                authDomain: "beatrix-core-database.firebaseapp.com",
+                databaseURL: "https://beatrix-core-database-default-rtdb.asia-southeast1.firebasedatabase.app",
+                projectId: "beatrix-core-database",
+                storageBucket: "beatrix-core-database.firebasestorage.app",
+                messagingSenderId: "444256156441",
+                appId: "1:444256156441:web:7b3aa0ca4041bed0a52388",
+                measurementId: "G-0ERX0XVSYC"
+            };
+            firebase.initializeApp(firebaseConfig);
+            const auth = firebase.auth();
+            const database = firebase.database();
+
+            auth.onAuthStateChanged((user) => {
+                const profileName = document.getElementById('ProfileName');
+                const profileEmail = document.querySelector('.ProfileEmail');
+                if (user) {
+                    if (profileName) profileName.textContent = user.displayName || user.email || 'User';
+                    if (profileEmail) profileEmail.textContent = user.email || '';
+                    localStorage.setItem('currentUid', user.uid);
+                } else {
+                    if (profileName) profileName.textContent = 'Guest';
+                    if (profileEmail) profileEmail.textContent = '';
+                    localStorage.removeItem('currentUid');
+                }
+            });
+        </script>
     </head>
     <body id="pagebody">
         <!--For JAVA-->
-        <script src="../MainOptions/MainHomeJava/MainHomeSection.js"></script>
-        <script src="../MainOptions/MainHomeJava/MainHomeThemeChange.js"></script>
-        <script src="../MainOptions/MainHomeJava/MainHomeNoteCreation.js"></script>
-        <script src="../MainOptions/MainHomeJava/MainHomeOrganize.js"></script>
+        <script src="MainHomeJava/MainHomeSection.js"></script>
+        <script src="MainHomeJava/MainHomeThemeChange.js"></script>
+        <script src="MainHomeJava/MainHomeNoteCreation.js"></script>
+        <script src="MainHomeJava/MainHomeOrganize.js"></script>
         <!--Main Dock at the top of the Main webpage--> 
         <div class="MainHomeDockSection">
             <!--MainTopDockSections-->
             <img class="MainLogoo" src="..\2ndpageIcons\LogoIcon.png">
             <h1 class="TitleMain">Note#Code</h1>
+
+            <!-- Tabs bar (shows when an editor is open) -->
+            <div class="NoteTabsBarGlobal" id="NoteTabsBarGlobal" style="display:none"></div>
 
             <!--CreateFileSectionButton(Critical)-->
             <button class="MainButtonCreateFileExecute" id="MainButtonCreateFileExecute" onclick="OpenCreationSETUP()"> + </button>
@@ -110,6 +146,7 @@
         </div>
 
         <div class="MainNoteOrganizedTabs" id="MainNoteOrganizedTabsID">
+            <div class="NoteTabsBarOrganized" id="NoteTabsBarOrganized"></div>
             <h1 class="OpenOrganizedWindowText"> Organize your note tabs </h1>
             <button class="CreateOrganizedTab" onclick="OpenCloseOrganizedSetup()"> + </button>
             <button class="ExitOrganizedWindow" onclick="OrganizedWindowOpen()"> X </button>

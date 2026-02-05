@@ -1,9 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "notecode");
-
-if (!$conn) {
-    die("Failed to connect: " . mysqli_connect_error());
-}
+require_once __DIR__ . '/../firebase.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $fullname = isset($_POST['fullname']) ? trim($_POST['fullname']) : '';
@@ -20,39 +16,34 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("Passwords do not match!");
     }
 
-    $checkStmt = $conn->prepare("SELECT id FROM users WHERE username = ? OR email = ? LIMIT 1");
-    if ($checkStmt === false) {
-        die("Prepare failed: " . $conn->error);
+    // Fetch existing users and check duplicates
+    $users = firebase_get('users');
+    if ($users && is_array($users)) {
+        foreach ($users as $u) {
+            if (isset($u['username']) && $u['username'] === $username) {
+                die("Username or Email already exists!");
+            }
+            if (isset($u['email']) && $u['email'] === $email) {
+                die("Username or Email already exists!");
+            }
+        }
     }
-    $checkStmt->bind_param("ss", $username, $email);
-    $checkStmt->execute();
-    $checkStmt->store_result();
-
-    if ($checkStmt->num_rows > 0) {
-        die("Username or Email already exists!");
-    }
-    $checkStmt->close();
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    $stmt = $conn->prepare("INSERT INTO users (fullname, username, email, password) VALUES (?, ?, ?, ?)");
-    if ($stmt === false) {
-        die("Prepare failed: " . $conn->error);
-    }
+    $userData = [
+        'fullname' => $fullname,
+        'username' => $username,
+        'email' => $email,
+        'password' => $hashedPassword
+    ];
 
-    $stmt->bind_param("ssss", $fullname, $username, $email, $hashedPassword);
-
-    if ($stmt->execute()) {
+    $res = firebase_post('users', $userData);
+    if (isset($res['name'])) {
         echo "Account created successfully!";
-        echo "<script>window.location = 'index.html'
-        alert('Account created successfully!')
-        </script>";
+        echo "<script>window.location = 'index.html'; alert('Account created successfully!');</script>";
     } else {
-        echo "Error: " . $stmt->error;
+        echo "Error creating account.";
     }
-
-    $stmt->close();
 }
-
-$conn->close();
 ?>

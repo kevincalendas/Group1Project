@@ -1,9 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "notecode");
-
-if (!$conn) {
-    die("Failed to connect: " . mysqli_connect_error());
-}
+require_once __DIR__ . '/../firebase.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = isset($_POST['email']) ? trim($_POST['email']) : '';
@@ -13,31 +9,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("All fields are required!");
     }
 
-    $sql = "SELECT id, username, password FROM users WHERE email = ? OR username = ?";
-    $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        die("Prepare failed: " . $conn->error);
+    // Fetch users and find by email or username
+    $users = firebase_get('users');
+    $found = null;
+    if ($users && is_array($users)) {
+        foreach ($users as $u) {
+            if ((isset($u['email']) && $u['email'] === $email) || (isset($u['username']) && $u['username'] === $email)) {
+                $found = $u;
+                break;
+            }
+        }
     }
 
-    $stmt->bind_param("ss", $email, $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows === 0) {
+    if (!$found) {
         die("Username or Email doesn't exist!");
     }
 
-    $row = $result->fetch_assoc();
-
-    if (password_verify($password, $row['password'])) {
-        echo "Login successful! Welcome, " . htmlspecialchars($row['username']) . "!";
+    if (isset($found['password']) && password_verify($password, $found['password'])) {
+        echo "Login successful! Welcome, " . htmlspecialchars($found['username']) . "!";
         header("Location: ../MainOptions/MainHomeSection.html");
     } else {
         die("Incorrect password!");
     }
-
-    $stmt->close();
 }
-
-$conn->close();
 ?>
