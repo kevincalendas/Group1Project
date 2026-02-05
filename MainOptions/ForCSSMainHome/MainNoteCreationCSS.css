@@ -1,11 +1,11 @@
 .NoteCreationWindowSetup {
     position: fixed;
     width: 500px;
-    height: 225px;
+    min-height: 225px;
     top: 50%;
     left: 50%;
     translate: -50% -50%;
-    background-color: rgb(255, 255, 255, 0.3);
+    background-color: var(--bg-primary);
     backdrop-filter: blur(25px);
     z-index: 300;
     border: 2px solid rgba(0, 0, 0, 0.3);
@@ -14,6 +14,10 @@
     opacity: 0;
     transition: all 0.5s ease-out;
     filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .NoteNameCreationSetup1A {
@@ -26,28 +30,29 @@
     z-index: 100;
 }
 
-.NoteInputHeading1 {
-    position: relative;
-    font-size: 28px;
-    font-family: Arial;
-    font-weight: bold;
-    left: 200px;
-    top: 20px;
-}
 
 .NoteInputSaveData {
-    position: relative;
-    width: 55%;
+    position: absolute;
+    width: 68%;
     height: 35px;
+    top: 80px;
+    right: 0;
     border: 2px solid rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     z-index: 1000;
-    left: 200px;
-    top: 20px;
+    margin-top: auto;
     transition: all 0.3s ease-out;
     font-size: 16px;
     font-weight: bold;
-    background-color: white;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+
+.NoteInputSaveData::placeholder {
+    color: var(--text-secondary);
 }
 
 .NoteInputSaveData:hover {
@@ -56,32 +61,40 @@
 }
 
 .NoteCreationSetupButton1 {
-    background-color: white;
-    position: fixed;
+    background-color: var(--bg-third);
+    color: var(--text-primary);
+    position: absolute;
     width: 150px;
     height: 37px;
-    right: 10px;
-    bottom: 35px;
-    background-color: rgb(255, 230, 0);
+    bottom: -50px;
+    right: 160px;
     border: none;
     border-radius: 15px;
     font-size: 15px;
     font-weight: bold;
     transition: all 0.3s ease-out;
+    cursor: pointer;
+}
+
+.NoteInputHeading1 {
+    position: absolute;
+    right: 50px;
+    font-family: Arial;
 }
 
 .NoteCreationSetupButton2 {
-    background-color: white;
-    position: fixed;
+    background-color: var(--bg-secondary);
+    position: absolute;
+    bottom: -50px;
     width: 125px;
     height: 37px;
-    right: 175px;
-    bottom: 35px;
+    right: 20px;
     border: 2px solid rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     transition: all 0.3s ease-out;
     font-size: 15px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .NoteCreationSetupButton1:hover, .NoteCreationSetupButton2:hover {
@@ -91,13 +104,13 @@
 }
 
 .NoteIconPreviewCreationNote {
-    position: fixed;
-    top: 18%;
-    left: 30px;
+    position: relative;
     width: 125px;
     height: 125px;
+    top: 50%;
     border-radius: 20px;
-    box-shadow: 5px 5px 5px rgb(243, 219, 1);
+    box-shadow: 5px 5px 5px var(--bg-third);
+    flex-shrink: 0;
 }
 
 .animateFUNCTIONPreview1 {
@@ -175,6 +188,23 @@
     opacity: 1;
     z-index: 1;
     transition: all 0.3s ease-in;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+}
+
+.NoteCreationTopRow {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.NoteCreationButtonsContainer {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
 }
 
 /* Creating Window Tags CSS */
@@ -219,12 +249,12 @@
 @media (max-width: 625px) {
     .NoteCreationWindowSetup {
         position: fixed;
-        width: 400px;
+        width: 350px;
+        scale: 0.9;
         height: 450px;
         top: 50%;
         left: 50%;
         translate: -50% -50%;
-        background-color: rgb(255, 255, 255, 0.3);
         backdrop-filter: blur(25px);
         z-index: 300;
         border: 2px solid rgba(0, 0, 0, 0.3);
@@ -235,14 +265,20 @@
         filter: blur(5px);
     }
 
+    .NoteInputHeading1 {
+        position: absolute;
+        top: 160px;
+        text-align: center;
+        right: 2%;
+        width: 100%;
+    }
+
     .NoteCreationSetupButton1 {
-        background-color: white;
         position: fixed;
         width: 90%;
         height: 40px;
         left: 5%;
-        bottom: 60px;
-        background-color: rgb(255, 230, 0);
+        bottom: 70px;
         border: none;
         border-radius: 15px;
         font-size: 15px;
@@ -251,12 +287,11 @@
     }
 
     .NoteCreationSetupButton2 {
-        background-color: white;
         position: fixed;
         width: 90%;
         height: 40px;
         left: 5%;
-        bottom: 10px;
+        bottom: 20px;
         border: 2px solid rgba(0, 0, 0, 0.5);
         border-radius: 15px;
         transition: all 0.3s ease-out;
@@ -265,34 +300,38 @@
     }
 
     .NoteIconPreviewCreationNote {
-        position: fixed;
-        top: 7%;
-        left: 35%;
+        position: absolute;
+        top: 10px;
+        left: 27%;
         width: 150px;
         height: 150px;
         border-radius: 20px;
         box-shadow: 5px 5px 5px rgb(243, 219, 1);
-    }
-    .NoteInputHeading1 {
-        position: relative;
-        font-size: 28px;
-        font-family: Arial;
-        font-weight: bold;
-        left: 28%;
-        top: 190px;
+        flex-shrink: 0;
     }
     .NoteInputSaveData {
-        position: relative;
-        width: 80%;
-        height: 35px;
+        position: absolute;
+        width: 90%;
+        left: 5%;
+        height: 40px;
         border: 2px solid rgba(0, 0, 0, 0.5);
         border-radius: 10px;
+        bottom: 125px;
         z-index: 1000;
-        left: 10%;
-        top: 200px;
+        margin-top: auto;
         transition: all 0.3s ease-out;
         font-size: 16px;
         font-weight: bold;
-        background-color: white;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+    .NoteCreationTopRow {
+        flex-direction: column;
+        align-items: center;
+    }
+    .NoteCreationButtonsContainer {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
     }
 }

@@ -1,31 +1,60 @@
 .NoteInterfaceCodeMain {
     position: absolute;
-    width: 60%;
-    height: 70%;
-    background-color: rgb(255, 255, 255, 0.5);
-    top: 18%;
+    width: 70%;
+    max-width: 800px;
+    height: 75%;
+    min-height: 500px;
+    background: var(--bg-primary);
+    top: 15%;
     left: 50%;
-    translate: -50% -10%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    translate: -50% -5%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(20px);
-    border: 2px solid rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
+    border: 2px solid rgba(255, 230, 0, 0.3);
+    border-radius: 15px;
     z-index: 1;
     opacity: 0;
     scale: 0;
+    padding: 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1.1);
+}
+
+.NoteWindowInstance {
+    opacity: 1;
+    scale: 1;
+    translate: 0 0;
+    position: fixed;
+    width: 65%;
+    max-width: 820px;
+    height: 70%;
+    min-height: 420px;
+    top: 120px;
+    left: 120px;
 }
 
 .NoteCodeName {
     position: absolute;
     resize: none;
-    top: 0px;
+    top: -3px;
     height: 30px;
+    width: 80%;
     left: 20px;
+    right: 60px;
     font-weight: bold;
-    font-family: Arial;
-    font-size: 25px;
+    font-family: Arial, sans-serif;
+    font-size: 28px;
     border: none;
-    background-color: rgba(255, 255, 255, 0 );
+    background-color: rgba(255, 255, 255, 0);
+    color: #333;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.NoteCodeName:focus {
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .NoteTabsBar {
@@ -88,18 +117,82 @@
 
 
 
+.NoteCategorySelector {
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.CategoryLabel {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+    white-space: nowrap;
+}
+
+.CategorySelect {
+    flex: 1;
+    padding: 8px 12px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    background-color: var(--bg-secondary);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.CategorySelect::placeholder {
+    color: var(--text-primary);
+}
+
+.CategorySelect:hover {
+    border-color: rgba(255, 230, 0, 0.5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.CategorySelect:focus {
+    border-color: rgba(255, 230, 0, 0.8);
+    box-shadow: 0 0 12px rgba(255, 230, 0, 0.3);
+}
+
 .NoteCodeContent {
     position: absolute;
     resize: none;
-    top: 60px;
-    left: 20px;
-    width: 97%;
-    height: 80%;
-    font-weight: bold;
-    font-family: Arial;
-    font-size: 15px;
-    border: none;
-    background-color: rgba(255, 255, 255, 0 );
+    top: 110px;
+    left: 3%;
+    right: 20px;
+    width: calc(95% - 40px);
+    height: calc(100% - 180px);
+    font-weight: normal;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: var(--bg-secondary);
+    padding: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.NoteCodeContent::placeholder {
+    color: var(--text-primary);
+}
+
+.NoteCodeContent:focus {
+    border-color: rgba(255, 230, 0, 0.5);
+    background-color: var(--bg-secondary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .NoteCodeServerStatus {
@@ -115,34 +208,72 @@
 
 .NoteCodeStatush1 {
     position: absolute;
-    bottom: 0px;
-    left: 35px;
-    font-size: 15px;
-    font-family: Arial;
+    bottom: 8px;
+    left: 40px;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    color: #666;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
 .NoteFavoriteButton {
-    top: 10px;
-    right: 10px;
+    position: absolute;
+    right: 60px;
+    top: 15px;
+    width: 35px;
+    height: 35px;
+    background: var(--bg-secondary);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.NoteFavoriteButton:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(255, 200, 0, 0.4);
+    background: rgba(255, 255, 200, 0.9);
+}
+
+.NoteFavoriteButton.favorited {
+    background: rgba(255, 230, 0, 0.9);
+    border-color: rgba(255, 200, 0, 0.5);
+    box-shadow: 0 4px 12px rgba(255, 200, 0, 0.5);
 }
 
 .GoBackButton {
     position: absolute;
     right: 15px;
     top: 15px;
-    width: 30px;
-    height: 30px;
-    background-color: red;
-    border: none;
-    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--bg-primary);
+    border-radius: 50%;
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
     transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .GoBackButton:hover {
-    scale: 1.1;
-    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transform: scale(1.15) rotate(90deg);
+    box-shadow: 0 4px 12px rgba(255, 68, 68, 0.4);
+    background: linear-gradient(135deg, #ff6666 0%, #ff0000 100%);
 }
 
+<<<<<<< HEAD
 /* Floating editor styles */
 .FloatingNote {
     position: absolute;
@@ -196,3 +327,31 @@
     font-size: 13px;
 }
  
+=======
+.GoBackButton:active {
+    transform: scale(1.05) rotate(90deg);
+}
+
+@media (max-width: 600px) {
+    .NoteInterfaceCodeMain {
+        width: 90%;
+        height: 80%;
+        left: 50%;
+        top: 14%;
+        border-radius: 0;
+    }
+
+    .NoteCodeName {
+        width: 70%;
+        font-size: 24px;
+    }
+
+    .NoteCodeContent {
+        top: 100px;
+        height: calc(100% - 170px);
+    }
+}
+
+/* Floating note windows (draggable, up to 3 instances) */
+/* Floating note UI removed per request; existing interface is now draggable */
+>>>>>>> 3be5c333bc6f77801ee7e3f8b1b5a2d9a4468afd

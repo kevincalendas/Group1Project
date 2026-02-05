@@ -1,5 +1,13 @@
 <?php
+<<<<<<< HEAD
 require_once __DIR__ . '/../firebase.php';
+=======
+$conn = mysqli_connect("localhost", "nick", "nick2025", "notecode");
+
+if (!$conn) {
+    die("Failed to connect: " . mysqli_connect_error());
+}
+>>>>>>> 3be5c333bc6f77801ee7e3f8b1b5a2d9a4468afd
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $fullname = isset($_POST['fullname']) ? trim($_POST['fullname']) : '';

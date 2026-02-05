@@ -10,6 +10,10 @@
         <link rel="stylesheet" href="ForCSSMainHome/MainHomeNoteListTabs.css">
         <link rel="stylesheet" href="ForCSSMainHome/MainHomeOrganizedWindow.css">
         <link rel="stylesheet" href="ForCSSMainHome/MainCodeInterface.css">
+        <link rel="stylesheet" href="../MainOptions/ForCSSMainHome/MainHomeAbout.css">
+
+        <!-- for MainNoteInterfaceUserInfoCSS-->
+        <link rel="stylesheet" href="ForCSSMainHome/MainNoteInterfaceUserInfo.css">
         <meta name="viewport" content="width=device-width, initial-scale=0.9">
         <!-- Firebase SDK (compat) -->
         <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
@@ -45,12 +49,73 @@
             });
         </script>
     </head>
-    <body id="pagebody">
+    <body id="pagebody" class="Toggle-Dark-Mode-Window">
         <!--For JAVA-->
+<<<<<<< HEAD
         <script src="MainHomeJava/MainHomeSection.js"></script>
         <script src="MainHomeJava/MainHomeThemeChange.js"></script>
         <script src="MainHomeJava/MainHomeNoteCreation.js"></script>
         <script src="MainHomeJava/MainHomeOrganize.js"></script>
+=======
+        <script>
+            // Initialize user data from URL parameters (set after login)
+            // This must run immediately, before other scripts
+            (function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const email = urlParams.get('email');
+                const username = urlParams.get('username');
+                
+                if (email) {
+                    localStorage.setItem('userEmail', email);
+                }
+                if (username) {
+                    localStorage.setItem('profileName', username);
+                }
+                
+                // Clean up URL by removing query parameters
+                if (email || username) {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+            })();
+        </script>
+        <!-- Load scripts after DOM is ready to ensure elements exist -->
+        <script>
+            // Ensure DOM is loaded before running scripts
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    loadScripts();
+                });
+            } else {
+                loadScripts();
+            }
+            
+            function loadScripts() {
+                // Update profile displays after DOM is ready
+                const email = localStorage.getItem('userEmail');
+                const username = localStorage.getItem('profileName');
+                
+                if (username) {
+                    const profileNameElement = document.getElementById('ProfileName');
+                    if (profileNameElement) {
+                        profileNameElement.textContent = username;
+                    }
+                }
+                
+                if (email) {
+                    const profileEmailElement = document.querySelector('.ProfileEmail');
+                    if (profileEmailElement) {
+                        profileEmailElement.textContent = email;
+                    }
+                }
+            }
+        </script>
+        <script src="../MainOptions/MainHomeJava/MainHomeSection.js"></script>
+        <script src="../MainOptions/MainHomeJava/MainHomeThemeChange.js"></script>
+        <script src="../MainOptions/MainHomeJava/MainHomeNoteCreation.js"></script>
+        <script src="../MainOptions/MainHomeJava/MainHomeOrganize.js"></script>
+        <script src="../MainOptions/MainHomeJava/MainHomeOtherFunction.js"></script>
+        <script src="../MainOptions/MainHomeJava/MainHomeProfile.js"></script>
+>>>>>>> 3be5c333bc6f77801ee7e3f8b1b5a2d9a4468afd
         <!--Main Dock at the top of the Main webpage--> 
         <div class="MainHomeDockSection">
             <!--MainTopDockSections-->
@@ -86,7 +151,7 @@
                         <button class="OptionButton1" id="OptionButton1" onclick="ThemeChoose()"> Theme </button>
                         <button class="OptionButton2" id="OptionButton2ID" onclick="OrganizedWindowOpen()"> Organize Note#Code </button>
                         <button class="OptionButton3"> Checklist </button>
-                        <button class="OptionButton4"> About </button>
+                        <button class="OptionButton4" onclick="MainOpenWindowAbout()"> About </button>
                          <button class="OptionButton5" onclick="window.location.href='../Login/index.html'"> Logout </button>
                     </div>
                 </div>         
@@ -112,12 +177,15 @@
         </div>
 
 
-
-
         <!--NoteThemeHomeWindow-->
         <div class="NoteThemeHomeWindowElements" id="NoteThemeHomeWindowElements">
-            <button class="GobackOptionButton1" id="GobackOptionButton1" onclick="ThemeChoose()">  </button>
+            <button class="GobackOptionButton1" id="GobackOptionButton1" onclick="ThemeChoose()"> Go back </button>
             <h1 class="ThemeWindowh1">Choose your Themes</h1>
+            <div class="List-of-Color-Modes-Window">
+                <h1 class="ColorWindowText" id="ColorWindowText">Choose your default UI color mode</h1>
+                <button class="ColorModeButton1" id="ColorModeButton1" onclick="ColorModeWindowChooseLight()"> Switch to Light Mode </button>
+            </div>
+
             <div class="ListsofThemesWindow">
                 <div class="Theme1">
                     <img class="Theme1IMG" src="https://i.pinimg.com/736x/b2/bc/13/b2bc13d8b2d37fbaee9c503d0d6c1279.jpg">
@@ -133,15 +201,30 @@
                     <img class="Theme3IMG" src="https://i.pinimg.com/1200x/76/64/1b/76641b53502d4ca601ecd3c240ad6245.jpg">
                     <button class="ThemeButton3" id="ThemeButton3" onclick="ThemeChoose()">Select Theme</button>
                 </div>
+
                 <div class="Theme4">
-                    <img class="Theme4IMG" src="https://i.pinimg.com/1200x/47/82/3a/47823a30f1bba5c3a9351e2bc137b9b2.jpg">
+                    <img class="Theme4IMG" src="https://i.pinimg.com/1200x/31/ba/7c/31ba7cc779eb847b2231c27ba7b2be40.jpg">
                     <button class="ThemeButton4" id="ThemeButton4" onclick="ThemeChoose()">Select Theme</button>
                 </div>
+                
+                <div class="Theme5">
+                    <img class="Theme5IMG" src="https://i.pinimg.com/736x/09/b5/9c/09b59c2b5f192b2d1a0ffa45c75525b1.jpg">
+                    <button class="ThemeButton5" id="ThemeButton5" onclick="ThemeChoose()">Select Theme</button>
+                </div>
+                
+                <div class="Theme6">
+                    <img class="Theme6IMG" src="https://i.pinimg.com/1200x/c1/7c/d8/c17cd8ede2fb830173adac23344595d8.jpg    ">
+                    <button class="ThemeButton6" id="ThemeButton6" onclick="ThemeChoose()">Select Theme</button>
+                </div>
             </div>
+            
 
+            <br>
             <!--ThemeStyle-->
 
-            <h1 class="ThemeWindowh2"> More Customized Themes (Ongoing) </h1>
+            <h1 class="ThemeWindowh2"> Choose your mode </h1>
+
+            <h1 class="TextCategory3"> GIF Background (Coming soon) </h1>
 
         </div>
 
@@ -173,21 +256,75 @@
             <button class="OrganizedListCreationCancelButton" id="OrganizedListCreationCancelButton" onclick="OpenCloseOrganizedSetup()"> Cancel </button>
         </div>
 
-        <div style="font-family:Arial; background:linear-gradient(to bottom right,); height:80vh; display:flex; justify-content:center; align-items:center; flex-direction:column; color:#333;">
-        <div style="font-size:32px; font-weight:bold;">Note#Code</div>
-        <div style="font-size:14px; margin-top:5px;"> Create. Save. Organize. </div>  
+        <div class="AboutWindow" id="AboutWindow">
+            <img class="NoteIcon" src="../Login/LoginIcons/NOTEICON1.png" alt="notepad with a pencil">
+            <h1 class="AboutWindowH1"> About Note#Code </h1>
+            <button class="AboutWindowCloseButton" id="AboutWindowCloseButton" onclick="MainCloseWindowAbout()"> Close </button>
+            <div class="AboutWindow1">
+                <p class="AboutWindowP1"> It is a project developed by Group 1 ICT grade 12 students at Sumulong College of Arts and Sciences (SCAS) and is part of a research study titled "Typing Without Worry"
+                    <br><br>The main goal of Note#Code is to lessen the stress and wasted time that overcomes from losing files because you forgot to save or due to accidental 
+                    app closures. <br><br>By using this tool, users especially to ICT students can focus better on their notecode creation without worrying about technical issues.</p>
+                
+                    <h1 class="MainTitlesA1"> Key Functions & Goals </h1>
+                <p class="AboutWindowsP2">The application is being developed to be a free web-based application tool and a reliable, easy-to-use platform for both note-taking and code writing.
+                    <br><br>Some of the key functions and goals of Note#Code include:
+                    <br><br> 1. Auto-Save Functionality: The application automatically saves notes and code snippets in real-time, reducing the risk of data loss.
+                    <br><br> 2. Organized Note Management: Users can create, categorize, and manage their notes and code snippets efficiently through an intuitive interface.
+                    <br><br> 3. User-Friendly Interface: The application features a clean and beautiful interface that is easy to navigate, making it accessible to users of all technical levels.
+                    <br><br><br>
+                </p>
+            </div>
+        </div>
+
+        <!--User Profile Window-->
+        <div class="UserProfileWindow" id="UserProfileWindow">
+            <button class="UserProfileCloseButton" onclick="closeUserProfile()">X</button>
+            <div class="UserProfileContent">
+                <img class="UserProfileIcon" src="../2ndpageIcons/LOGOICON2.1.png" alt="Profile Icon">
+                <div class="UserProfileInfo">
+                    <h2 class="User" id="ProfileWindowUsername">User</h2>
+                    <p class="UserProfileEmail" id="ProfileWindowEmail">user@email.com</p>
+                    <div class="UserProfileStats">
+                        <div class="UserProfileStat">
+                            <span class="StatLabel">Notes:</span>
+                            <span class="StatValue" id="ProfileWindowNoteCount">0</span>
+                        </div>
+                        <div class="UserProfileStat">
+                            <span class="StatLabel">Categories:</span>
+                            <span class="StatValue" id="ProfileWindowCategoryCount">0</span>
+                        </div>
+                        <div class="UserProfileStat">
+                            <span class="StatLabel">Joined:</span>
+                            <span class="StatValue" id="ProfileWindowJoinDate">-</span>
+                        </div>
+                    </div>
+                    <button class="UserProfileDeleteButton" onclick="deleteUserAccount()">Delete Account</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div style="font-family:Arial; background:transparent; height:80vh; display:flex; justify-content:center; align-items:center; flex-direction:column; color:#333;">
+        <div style="font-size:32px; font-weight:bold; color: var(--text-primary)">Note#Code</div>
+        <div style="font-size:14px; margin-top:5px; color: var(--text-primary);"> Create. Save. Organize. </div>  
         </div>
 
         <div class="NoteInterfaceCodeMain" id="NoteInterfaceCodeMainID">
-            <h1 class="NoteCodeName" id="NoteCodeNameID">Title</h1>
-            <textarea class="NoteCodeContent" id="NoteCodeContentID" rows="5" cols="50"></textarea>
-            <button class="GoBackButton" id="GoBackButtonNoteInterfaceID"></button>
+            <h1 class="NoteCodeName" id="NoteCodeNameID" contenteditable="true">Title</h1>
+            <button class="NoteFavoriteButton" id="NoteFavoriteButton" aria-label="Toggle favorite">☆</button>
+            <div class="NoteCategorySelector" id="NoteCategorySelectorID">
+                <label for="NoteCategorySelect" class="CategoryLabel">Category:</label>
+                <select id="NoteCategorySelect" class="CategorySelect">
+                    <option value="">Uncategorized</option>
+                </select>
+            </div>
+            <textarea class="NoteCodeContent" id="NoteCodeContentID" rows="5" cols="50" placeholder="Start typing your note here..."></textarea>
+            <button class="GoBackButton" id="GoBackButtonNoteInterfaceID" aria-label="Close note">✕</button>
             <div class="NoteCodeServerStatus" id="NoteInterfaceCodeMainID"></div>
             <h1 class="NoteCodeStatush1" id="NoteCodeStatush1ID">Saved!</h1>
         </div>
 
 
-        
 
         <!--NoteTabMainSections(Critical)-->
 

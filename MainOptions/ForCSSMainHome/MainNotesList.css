@@ -148,7 +148,7 @@
     position: absolute;
     width: 100px;
     height: 35px;
-    background-color: rgb(255, 0, 0);
+    background-color: var(--bg-secondary);
     border: 2px solid rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     font-size: 15px;
@@ -160,11 +160,16 @@
     cursor: pointer;
 }
 
+.NoteTabDeleteButton:hover {
+    background-color: rgba(255, 0, 0); 
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
 .NoteTabOpenButton {
     position: absolute;
     width: 100px;
     height: 35px;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-secondary);
     border: 2px solid rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     font-size: 15px;
@@ -174,6 +179,37 @@
     box-shadow: 0 0 0;
     transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
     cursor: pointer;
+}
+
+.NoteTabFavoriteButton {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.NoteTabFavoriteButton:hover {
+    transform: scale(1.2);
+    background-color: rgba(255, 255, 200, 0.9);
+    box-shadow: 0 2px 8px rgba(255, 200, 0, 0.4);
+}
+
+.NoteTabFavoriteButton.favorited {
+    background-color: rgba(255, 230, 0, 0.9);
+    border-color: rgba(255, 200, 0, 0.5);
+    box-shadow: 0 2px 8px rgba(255, 200, 0, 0.5);
 }
 
 .NoteTabDeleteButton:hover, .NoteTabOpenButton:hover {
@@ -197,7 +233,6 @@
         width: 100%;
         top: 65px;
         left: 0%;
-        background-color: rgb(46, 123, 190, 0);
         transition: grid-template-columns 0.5s ease-in-out, grid-template-rows 0.5s ease-in-out;
         scale: 0;
     }
@@ -212,7 +247,6 @@
         width: 98%;
         top: 60px;
         left: 0%;
-        background-color: rgb(46, 123, 190, 0);
         grid-template-columns: repeat( 1, 370px);
         grid-template-rows: repeat(infinite, 0);
         row-gap: 10px;
@@ -233,7 +267,6 @@
         position: flex;
         width: 100%;
         height: 250px;
-        background-color: rgba(255, 255, 255, 0.5);
         text-align: center;
         border:2px solid rgba(0, 0, 0, 0.5);
         border-radius: 10px;
@@ -261,7 +294,7 @@
         text-align: left;
         overflow-anchor:auto;
         font-size: 15px;
-        background-color: rgb(0, 136, 255, 1);
+        background-color: transparent;
         width: 90%;
         left: 25px;
         min-height: 10px;
@@ -277,7 +310,6 @@
         position: fixed;
         width: 100px;
         height: 35px;
-        background-color: rgb(255, 0, 0);
         border: 2px solid rgba(0, 0, 0, 0.5);
         border-radius: 10px;
         font-size: 15px;
@@ -292,7 +324,6 @@
         position: fixed;
         width: 100px;
         height: 35px;
-        background-color: rgb(255, 255, 255);
         border: 2px solid rgba(0, 0, 0, 0.5);
         border-radius: 10px;
         font-size: 15px;
