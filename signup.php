@@ -1,13 +1,5 @@
 <?php
-<<<<<<< HEAD
 require_once __DIR__ . '/firebase.php';
-=======
-$conn = mysqli_connect("localhost", "nick", "nick2025", "notecode");
-
-if (!$conn) {
-    die("Failed to connect: " . mysqli_connect_error());
-}
->>>>>>> 3be5c333bc6f77801ee7e3f8b1b5a2d9a4468afd
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $fullname = isset($_POST['fullname']) ? trim($_POST['fullname']) : '';
@@ -15,9 +7,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = isset($_POST['email']) ? trim($_POST['email']) : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
     $confirmpassword = isset($_POST['confirmpassword']) ? $_POST['confirmpassword'] : '';
+    // optional category (e.g., user preference or default folder)
+    $category = isset($_POST['category']) ? trim($_POST['category']) : 'Uncategorized';
 
     if (empty($fullname) || empty($username) || empty($email) || empty($password) || empty($confirmpassword)) {
         die("All fields are required!");
+    }
+
+    // basic formatting/validation
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        die("Invalid email address.");
+    }
+
+    if (!preg_match('/^[A-Za-z0-9_.-]{3,30}$/', $username)) {
+        die("Username must be 3-30 characters and contain only letters, numbers, dot, underscore or hyphen.");
     }
 
     if ($password !== $confirmpassword) {
@@ -26,12 +29,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Fetch existing users and check duplicates (small-scale projects)
     $users = firebase_get('users');
+    $username_lc = strtolower($username);
+    $email_lc = strtolower($email);
     if ($users && is_array($users)) {
         foreach ($users as $u) {
-            if (isset($u['username']) && $u['username'] === $username) {
+            if (isset($u['username']) && strtolower($u['username']) === $username_lc) {
                 die("Username or Email already exists!");
             }
-            if (isset($u['email']) && $u['email'] === $email) {
+            if (isset($u['email']) && strtolower($u['email']) === $email_lc) {
                 die("Username or Email already exists!");
             }
         }
@@ -39,11 +44,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
+    // sanitize a few fields before saving
+    $fullname = htmlspecialchars($fullname, ENT_QUOTES, 'UTF-8');
+    $category = substr($category, 0, 64);
+
     $userData = [
         'fullname' => $fullname,
         'username' => $username,
         'email' => $email,
-        'password' => $hashedPassword
+        'password' => $hashedPassword,
+        'category' => $category,
+        // small metadata fields
+        'createdAt' => time(),
+        'updatedAt' => time()
     ];
 
     $res = firebase_post('users', $userData);

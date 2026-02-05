@@ -132,7 +132,6 @@
       right: 25px;
     }
 
-<<<<<<< HEAD
     .error-message {
       color: #d32f2f;
       font-size: 12px;
@@ -146,9 +145,6 @@
       margin-top: 5px;
       display: none;
     }
-=======
-    /* Additional styles */
->>>>>>> 3be5c333bc6f77801ee7e3f8b1b5a2d9a4468afd
 
   </style>
 </head>
@@ -173,23 +169,13 @@
         <label for="remember" class="Rememberme2">Remember Me</label>
       </div>
 
-<<<<<<< HEAD
-      <div class="error-message" id="errorMessage"></div>
-      <div class="success-message" id="successMessage"></div>
-=======
-      <button id="button1" class="button1" type="submit">Login</button>
->>>>>>> 3be5c333bc6f77801ee7e3f8b1b5a2d9a4468afd
-
-      <button id="button1" class="button1" type="submit">Login</button>
+  <div class="error-message" id="errorMessage"></div>
+  <div class="success-message" id="successMessage"></div>
+  <button id="button1" class="button1" type="submit">Login</button>
+  <button id="resetPasswordBtn" type="button" style="position:absolute; left:10px; bottom:90px; background:transparent; border:none; color:#333; cursor:pointer; font-size:12px;">Forgot password?</button>
     </form>
 
-<<<<<<< HEAD
-    <button class="button2" onclick="window.location.href='./signup.html'">New here? Create Account</button>
-=======
-    <button id="signup-button" class="button2" type="button" aria-label="Navigate to signup page">New here? Create Account</button>
-
-     
->>>>>>> 3be5c333bc6f77801ee7e3f8b1b5a2d9a4468afd
+  <button id="signup-button" class="button2" type="button" onclick="window.location.href='./signup.html'">New here? Create Account</button>
   </div>
 
   <footer>
@@ -221,6 +207,33 @@
         errorDiv.textContent = 'Error: ' + error.message;
         errorDiv.style.display = 'block';
       }
+    });
+
+    // Password reset handler using Firebase Auth
+    document.getElementById('resetPasswordBtn').addEventListener('click', async () => {
+      const email = document.getElementById('Email').value;
+      const errorDiv = document.getElementById('errorMessage');
+      const successDiv = document.getElementById('successMessage');
+      errorDiv.style.display = 'none';
+      successDiv.style.display = 'none';
+      if (!email) {
+        errorDiv.textContent = 'Please enter your email address to reset password.';
+        errorDiv.style.display = 'block';
+        return;
+      }
+      try {
+        await firebase.auth().sendPasswordResetEmail(email);
+        successDiv.textContent = 'Password reset email sent. Check your inbox.';
+        successDiv.style.display = 'block';
+      } catch (err) {
+        errorDiv.textContent = 'Reset failed: ' + err.message;
+        errorDiv.style.display = 'block';
+      }
+    });
+
+    // Signup button navigation (for the variant that was previously missing onclick)
+    document.getElementById('signup-button').addEventListener('click', () => {
+      window.location.href = './signup.html';
     });
   </script>
 </body>
